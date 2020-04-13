@@ -141,6 +141,19 @@ class SolutionTest {
         int[] a = {1,2,3,4,5};
         s.testthreepoin(a);
     }
+    @Test
+    void testmaxHeap(){
+       Solution8 s =new Solution8();
+       s.Insert(1);
+       s.Insert(2);
+       s.Insert(3);
+       s.Insert(4);
+       Double res=s.GetMedian();
+        System.out.println(res);
+        System.out.printf(res+"");
+       // System.out.printf(s.GetMedian());
+       assert s.GetMedian()==2.5;
+    }
 
 
 }
