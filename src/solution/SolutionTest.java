@@ -2,6 +2,8 @@ package solution;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SolutionTest {
@@ -177,6 +179,26 @@ class SolutionTest {
         TreeNode treeNode = serializeTree.Deserialize(str);
 
 
+
+
+    }
+    @Test
+    void testP(){
+        Solution8 s = new Solution8();
+        int a =7;
+        int b=10;
+        int [][] intB=new int[a][b];
+        for(int i=0;i<a;i++){
+            for(int j=0;j<b;j++){
+                intB[i][j]=i*b+j;
+                System.out.print("\t" +intB[i][j]);
+            }
+            System.out.println();
+        }
+        ArrayList<Integer> res =s.printMatrix(intB);
+        for(Integer i :res){
+            System.out.print("\t"+i);
+        }
 
 
     }
