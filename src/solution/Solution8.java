@@ -6,6 +6,53 @@ import java.util.*;
  * create at 20200413
  */
 public class Solution8 {
+    int[] dx={0,1,0,-1};
+    int[] dy={1,0,-1,0};
+    public boolean hasPath(char[] matrix, int rows, int cols, char[] str)
+    {
+        //先去matrix 中找str[0],matric给的还是一维数组
+        //还要有标记数组，只能访问一次
+        //还要记得回溯
+        boolean visited[][] = new boolean[rows][cols];
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                //如果这个数字等于str[0]
+                if(matrix[i*cols+j]==str[0]&& dg(matrix,rows,cols,i,j,str,1,visited)){
+                    return true;
+
+                }
+                visited[i][j]=false;
+
+            }
+        }
+        return false;
+
+    }
+
+
+    private boolean dg(char[] matrix,int rows, int cols,int x,int y,char[] str,int index,boolean[][] visited) {
+        //判断能不能达到下一个位置,index 为下一个要判断的位置
+        if(index>=str.length){
+            return true;
+        }
+        //先标记这个为true
+        visited[x][y]=true;
+        int nextX;
+        int nextY;
+        boolean res=false;
+        for (int i=0;i<4;i++){
+            nextX=x+dx[i];
+            nextY=y+dy[i];
+            if(nextX>=0 && nextX<rows && nextY>=0 &&nextY<cols && !visited[nextX][nextY]&&matrix[nextX*cols+nextY]==str[index]){//可能会有两条路线,这里会有越界
+                res=res||dg(matrix,rows,cols,nextX,nextY,str,index+1,visited);
+                visited[nextX][nextY]=false;
+            }
+        }
+        return res;
+
+
+    }
+
     public ArrayList<Integer> printMatrix2(int [][] matrix){
         //顺时针打印
         ArrayList<Integer> res=new ArrayList<Integer>();

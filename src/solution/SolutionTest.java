@@ -202,6 +202,14 @@ class SolutionTest {
 
 
     }
+    @Test
+    void testfind(){
+        Solution8 s = new Solution8();
+        char[] matix={'a','b','c','e','s','f','c','s','a','d','e','e'};
+        char[] str= {'a','b','c','b'};
+        System.out.println(s.hasPath(matix,3,4,str));
+
+    }
 
 
 }
