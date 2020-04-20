@@ -6,6 +6,54 @@ import java.util.*;
  * create at 20200413
  */
 public class Solution8 {
+//    机器人的运动范围,得要递归吧
+    private int res=0;
+    int[] dx={0,1,0,-1};
+    int[] dy={1,0,-1,0};
+
+    public int movingCount(int threshold, int rows, int cols)
+    {
+       if(threshold<0)return res;
+        boolean visited[][] = new boolean[rows][cols];
+
+
+        dgmove(threshold,0,0,rows,cols,visited);
+        return res;
+
+    }
+
+    private void dgmove(int threshold,int x,int y,int row,int cols,boolean[][] visited) {
+
+        if(x>=row ||y>=cols||x<0||y<0) return;
+        if(judgeCan(threshold,x,y)&&!visited[x][y]){
+            System.out.println(x+" "+y);
+            res++;
+            visited[x][y]=true;
+        }else {
+            return;
+        }
+        int nextX;
+        int nextY;
+        for(int i=0;i<4;i++){
+            nextX=x+dx[i];
+            nextY=y+dy[i];
+            dgmove(threshold,nextX,nextY,row,cols,visited);
+        }
+    }
+    public boolean judgeCan(int threshold,int x,int y){
+//        judge if can enter the place
+        int a =0;
+        int b=0;
+        while(x>0){
+            a+=x%10;
+            x/=10;
+        }
+        while(y>0){
+            b+=y%10;
+            y/=10;
+        }
+        return a+b<=threshold;
+    }
 
 
     public ArrayList<Integer> maxInWindows3(int[] num, int size) {
@@ -98,8 +146,7 @@ public class Solution8 {
         return res;
 
     }
-    int[] dx={0,1,0,-1};
-    int[] dy={1,0,-1,0};
+
     public boolean hasPath(char[] matrix, int rows, int cols, char[] str)
     {
         //先去matrix 中找str[0],matric给的还是一维数组

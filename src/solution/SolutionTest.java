@@ -210,8 +210,8 @@ class SolutionTest {
         System.out.println(s.hasPath(matix,3,4,str));
 
     }
-    @Test
 
+    @Test
     void testHuadong(){
         Solution8 s = new Solution8();
         ArrayList<Integer> res=s.maxInWindows(new int[]{2, 3, 4, 2, 6, 2, 5, 1},3);
@@ -220,6 +220,15 @@ class SolutionTest {
             System.out.println(e);
 
         }
+
+    }
+    @Test
+    void testRobot(){
+        Solution8 s = new Solution8();
+//        for(int i=0;i<30;i++){
+//            System.out.println(i+" "+s.judgeCan(5,2,i));
+//        }
+        System.out.println(s.movingCount(12,15,15));
 
     }
 
