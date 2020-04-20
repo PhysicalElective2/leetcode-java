@@ -210,6 +210,18 @@ class SolutionTest {
         System.out.println(s.hasPath(matix,3,4,str));
 
     }
+    @Test
+
+    void testHuadong(){
+        Solution8 s = new Solution8();
+        ArrayList<Integer> res=s.maxInWindows(new int[]{2, 3, 4, 2, 6, 2, 5, 1},3);
+        for (int e:res
+             ) {
+            System.out.println(e);
+
+        }
+
+    }
 
 
 }

@@ -6,6 +6,98 @@ import java.util.*;
  * create at 20200413
  */
 public class Solution8 {
+
+
+    public ArrayList<Integer> maxInWindows3(int[] num, int size) {
+        //这个代码才叫有水平，其实和我一样，他化简了 ,关键是java linklist 这个数据结构太灵活
+
+
+        ArrayList<Integer> res = new ArrayList<>();
+        if(size<1||num.length==0)return res;
+        LinkedList<Integer> list = new LinkedList<>();
+        for (int i = 0; i < num.length ; i++) {
+
+            while(!list.isEmpty()&&num[list.peekLast()]<num[i]){
+                list.pollLast();
+            }
+            //双端队列add ,默认add 到后面
+            list.add(i);
+            //判断左边是否失效
+            if(list.peekFirst()<=i-size){
+                list.pollFirst();
+            }
+            if(i>=size-1)
+                res.add(num[list.peekFirst()]);
+
+        }
+        return  res;
+    }
+    public ArrayList<Integer> maxInWindows2(int [] num, int size)
+    {
+        ArrayList<Integer> result = new ArrayList<>();
+        // 排除特殊情况，窗口的长度为0
+        if (size==0) return result;
+
+        // 滑动窗口最左边数的index
+        int begin;
+        // 建立一个双端队列
+        ArrayDeque<Integer> q = new ArrayDeque<>();
+        for(int i=0;i<num.length;i++){
+            // begin是窗口起始位置
+            begin = i-size+1;
+            // 队列空，直接加入
+            if(q.isEmpty())
+                q.add(i);
+                // 若队列最左边值已经不在窗口内，直接删除
+            else if(begin > q.peekFirst())
+                q.pollFirst();
+
+            // 从队尾开始比较，把所有比他小的值丢掉
+            while((!q.isEmpty()) && num[q.peekLast()] <= num[i])
+                q.pollLast();
+            // 随后再把它放进去
+            q.add(i);
+
+            // 若窗口起始位置在数组的0位置上或者之后（窗口是完整大小的），才计算窗口的有效最大值
+            if(begin>=0){
+                // 永远是队列最左边最大，加入结果集
+                result.add(num[q.peekFirst()]);
+            }
+        }
+        return result;
+    }
+    //滑动窗口最大值
+
+    public ArrayList<Integer> maxInWindows(int [] num, int size)
+    {
+        // 所要的窗口中的最大值
+        //又是只通过百分之五十，哎
+
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        Deque<Integer> deque = new LinkedList<>();
+        //那么deque 还是存位置吧
+        if (num.length < size || size==0) {
+            return res;
+        }
+        for (int i = 0; i < num.length; i++) {
+            //num[i]小,也得有合适的位置,把比他小的全部删掉,不区分大小了，为什么
+            //总是加到最后，消除所有比他大的。
+            while ((!deque.isEmpty()) && num[deque.peekLast()] <= num[i])
+                deque.pollLast();
+            deque.addLast(i);
+
+            if (i - deque.getFirst() >= size) {
+                deque.removeFirst();
+            }
+
+
+            if (i >= size - 1) {
+                res.add(num[deque.getFirst()]);
+            }
+        }
+        return res;
+
+    }
     int[] dx={0,1,0,-1};
     int[] dy={1,0,-1,0};
     public boolean hasPath(char[] matrix, int rows, int cols, char[] str)
