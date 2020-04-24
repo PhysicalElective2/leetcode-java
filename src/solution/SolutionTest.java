@@ -2,6 +2,7 @@ package solution;
 
 import org.junit.jupiter.api.Test;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -228,7 +229,24 @@ class SolutionTest {
 //        for(int i=0;i<30;i++){
 //            System.out.println(i+" "+s.judgeCan(5,2,i));
 //        }
-        System.out.println(s.movingCount(12,15,15));
+       // System.out.println(s.movingCount(12,15,15));
+        String num="123456789";
+        char[] ar=num.toCharArray();
+        for(int i=0;i<ar.length;i++){
+            System.out.println(i<48);
+        }
+        // 常用Integer.M
+//        Integer.MAX_VALUE判断溢出
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(Integer.MIN_VALUE);
+
+    }
+    @Test
+    void testReverPair(){
+        Solution9 s =new Solution9();
+        int[] nums={1,3,5,2,4};
+        System.out.println(  s.reversePairs(nums));
+
 
     }
 
