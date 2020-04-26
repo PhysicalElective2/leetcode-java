@@ -56,6 +56,33 @@ public class Solution9 {
 
 
     }
+    public int maxProfit(int[] prices) {
+        //买入股票的最佳时机
+        int res=0;
+        for(int i=0;i<prices.length;i++){
+            int resOne=0;
+            for(int j=i+1;j<prices.length;j++){
+                if(prices[j]-prices[i]>resOne) resOne=prices[j]-prices[i];
+            }
+            res= res>=resOne?res:resOne;
+
+        }
+        return res;
+
+
+    }
+    public int maxProfit2(int prices[]) {
+        //厉害了，先找到最低点，然后再线性遍历，肯定先找到最低点，以后再买才能盈利
+        int minprice = Integer.MAX_VALUE;
+        int maxprofit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minprice)
+                minprice = prices[i];
+            else if (prices[i] - minprice > maxprofit)
+                maxprofit = prices[i] - minprice;
+        }
+        return maxprofit;
+    }
 
 
 }

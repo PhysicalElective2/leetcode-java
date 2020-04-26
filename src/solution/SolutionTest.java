@@ -245,7 +245,8 @@ class SolutionTest {
     void testReverPair(){
         Solution9 s =new Solution9();
         int[] nums={1,3,5,2,4};
-        System.out.println(  s.reversePairs(nums));
+
+        System.out.println(s.maxProfit(new int[]{1,2,3,5,6}));
 
 
     }
