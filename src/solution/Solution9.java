@@ -4,6 +4,30 @@ public class Solution9 {
     /*
     剑指示offer刷完了，每天一题刷leetcode
      */
+    public static void main(String[] args) {
+        Solution9 s=new Solution9();
+        int[] a ={1,2,3,4};
+        System.out.println(s.rob(a));
+    }
+    public int rob(int[] nums) {
+        //打家劫舍
+        if(nums.length==0){
+            return 0;
+        }
+        if (nums.length==1){
+            return nums[0];
+        }
+        int[] s=new int[nums.length];
+        s[0]=nums[0];
+        s[1]=Math.max(nums[0],nums[1]);
+
+        for(int i=2;i<nums.length;i++){
+            //
+            s[i]=Math.max(s[i-1],s[i-2]+nums[i]);
+        }
+        return s[nums.length-1];
+
+    }
     int count=0;
     public int reversePairs(int[] nums) {
         //归并排序，分治法
