@@ -6,8 +6,44 @@ public class Solution9 {
      */
     public static void main(String[] args) {
         Solution9 s=new Solution9();
-        int[] a ={1,2,3,4};
-        System.out.println(s.rob(a));
+//        int[] a ={1,2,3,4};
+//        System.out.println(s.rob(a));
+        String b="A";
+        System.out.println(s.convert(b,1));
+    }
+    public String convert(String s, int numRows) {
+        //Z 字变换
+       // String res;
+        StringBuilder res = new StringBuilder("");
+        int row=0;
+        while(row<numRows){
+            StringBuilder thisRow = new StringBuilder("");
+            for(int i=0;i<s.length();i++){
+                if(judge(i,numRows)==row){
+                    thisRow.append(s.charAt(i));
+
+                }
+            }
+            res.append(thisRow.toString());
+            row++;
+        }
+        return res.toString();
+
+    }
+    public int judge(int index,int row){
+        //根据index 和总共的row 判断这是第几row,index 从0开始
+        if(row==1){
+            return 0;
+        }
+        index=index%(2*row-2);
+        int res;
+        if(index<row){
+            res=index;
+
+        }else {
+            res=(2*row-2)-index;
+        }
+        return res;
     }
     public int rob(int[] nums) {
         //打家劫舍
