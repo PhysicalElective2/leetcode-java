@@ -8,8 +8,38 @@ public class Solution9 {
         Solution9 s=new Solution9();
 //        int[] a ={1,2,3,4};
 //        System.out.println(s.rob(a));
-        String b="A";
-        System.out.println(s.convert(b,1));
+//        String b="A";
+//        System.out.println(s.convert(b,1));
+        int[] ff={1,8,6,2,5,4,8,3,2};
+        System.out.println(s.maxArea(ff));
+
+    }
+    public int maxArea(int[] height) {
+        //最多水的容器
+        int max=-1;
+        int p =0;
+        int q =height.length-1;
+        int thisArea;
+        while (p<q){
+            thisArea=Math.min(height[p],height[q]) * (q-p);
+//            System.out.println(thisArea+" "+p+" "+q);
+            if(thisArea>max){
+                max=thisArea;
+            }
+            //怎么更新
+            if(height[p]<height[q]){
+                p++;
+            }else{
+                q--;
+            }
+
+
+        }
+        return max;
+
+
+
+
     }
     public String convert(String s, int numRows) {
         //Z 字变换
