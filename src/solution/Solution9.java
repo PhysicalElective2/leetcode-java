@@ -1,8 +1,17 @@
 package solution;
 
+/**
+ * @author admin
+ */
+
 public class Solution9 {
     /*
     剑指示offer刷完了，每天一题刷leetcode
+     */
+
+    /**
+     * 这是注解
+     * @param args
      */
     public static void main(String[] args) {
         Solution9 s=new Solution9();
@@ -14,6 +23,12 @@ public class Solution9 {
         System.out.println(s.maxArea(ff));
 
     }
+
+    /**
+     *
+     * @param height 高度数组
+     * @return 返回值
+     */
     public int maxArea(int[] height) {
         //最多水的容器
         int max=-1;
