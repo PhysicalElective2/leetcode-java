@@ -49,10 +49,36 @@ public class Solution10 {
 
 
     }
+    public int threeSumClosest(int[] nums, int target) {
+        //最接近的三数之和,排序后遍历
+        //可以打表
+        Arrays.sort(nums);
+        int res=nums[0]+nums[1]+nums[2];
+        for(int i=0;i<nums.length-2;i++){
+            int j=i+1;
+            int k=nums.length-1;
+            int thisRes=res;
+            while (j<k){
+                thisRes=nums[i]+nums[j]+nums[k];
+                if(thisRes==target){
+                    return target;
+                }else if(thisRes<target){
+                    j++;
+                }else {
+                    k--;
+                }
+                res=Math.abs(res-target)<Math.abs(thisRes-target)?res:thisRes;
+
+            }
+        }
+        return res;
+
+    }
 
     public static void main(String[] args) {
         Solution10 s =new Solution10();
-        System.out.println(s.threeSum(new int[]{0,0,0}));
+//        System.out.println(s.threeSum(new int[]{0,0,0}));
+        System.out.println(s.threeSumClosest(new int[]{1,2,5,10,11},12));
     }
 
 
