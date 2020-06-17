@@ -5,12 +5,6 @@ import java.util.*;
 public class Solution10 {
     //整数转化为罗马数字
     public String intToRoman(int num) {
-//        if(num==4) return "IV";
-//        if(num==9) return "IX";
-//        if(num==40) return "XL";
-//        if(num==90) return "XC";
-//        if(num==400) return "CD";
-//        if(num==900) return "CM";
         StringBuilder res =new StringBuilder();
         int[] nums={1000,900,500,400,100,90,50,40,10,9,5,4,1};
         String[] strs={"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
