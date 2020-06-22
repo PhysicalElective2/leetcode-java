@@ -8,6 +8,33 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class TencentSolution {
+    //最长公共前缀，编写一个函数来查找字符串数组中的最长公共前缀。
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length==0) return "";
+        if(strs.length==1) return strs[0];
+        if(strs[0].length()==0) return "";
+        //还得二重遍历
+        boolean continuFlag=true;
+        int index=0;
+        while(continuFlag){
+            for(int i=1;i<strs.length;i++){
+                if(index>=strs[0].length()||index>=strs[i].length()||strs[i].charAt(index)!=strs[0].charAt(index)){
+                    continuFlag=false;
+                    break;
+                }
+
+            }
+            index++;
+        }
+        index--;
+        StringBuilder res=new StringBuilder();
+        for (int i=0;i<index;i++){
+            res.append(strs[0].charAt(i));
+        }
+        return  res.toString();
+    }
+
+
     // 字符串转换整数 (atoi)
     public int myAtoi(String str) {
         if(str.length()==0){
@@ -160,6 +187,7 @@ public class TencentSolution {
         System.out.println(t.findMedianSortedArrays(new int[]{1,2},new int[]{3,4}));
 
         System.out.println("res"+t.myAtoi("2147483646"));
+        System.out.println(t.longestCommonPrefix(new String[]{"C","C"}));
 //        System.out.println(t.myAtoi("   542"));
     }
 
