@@ -2,12 +2,47 @@ package company;
 
 import org.omg.PortableInterceptor.INACTIVE;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class TencentSolution {
+    //三数之和,别人的思路更加严谨
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> res= new ArrayList<>();
+        Arrays.sort(nums);
+        for (int i = 0; i <nums.length-2; i++) {
+            //去重复
+            if(i>=1&&nums[i]==nums[i-1]){
+                continue;
+            }
+            int target=-nums[i];
+            int j=i+1;
+            int k=nums.length-1;
+            while (j<k){
+                if(nums[j]+nums[k]==target){
+                    ArrayList<Integer> oneRes= new ArrayList<Integer>();
+                    oneRes.add(nums[i]);
+                    oneRes.add(nums[j]);
+                    oneRes.add(nums[k]);
+                    res.add(oneRes);
+                    j++;
+                    k--;
+                    while (j < k & nums[j] == nums[j - 1]) j++;
+                    while (k > j & nums[k] == nums[k + 1]) k--;
+                }
+                if(nums[j]+nums[k]<target){
+                    j++;
+                }
+                if(nums[j]+nums[k]>target){
+                    k--;
+                }
+
+
+                }
+
+        }
+        return res;
+
+    }
     //最长公共前缀，编写一个函数来查找字符串数组中的最长公共前缀。
     public String longestCommonPrefix(String[] strs) {
         if(strs.length==0) return "";
@@ -178,17 +213,19 @@ public class TencentSolution {
     public static void main(String[] args) {
         TencentSolution t =new TencentSolution();
 
-        int[]  res=t.twoSum(new int[]{2, 7, 11, 15},9);
-        for (int i = 0; i <res.length; i++) {
-            System.out.println(res[i]);
-        }
-        System.out.println(Integer.MIN_VALUE);
-        System.out.println(t.longestPalindrome("cdbbdccc"));
-        System.out.println(t.findMedianSortedArrays(new int[]{1,2},new int[]{3,4}));
-
-        System.out.println("res"+t.myAtoi("2147483646"));
-        System.out.println(t.longestCommonPrefix(new String[]{"C","C"}));
+//        int[]  res=t.twoSum(new int[]{2, 7, 11, 15},9);
+//        for (int i = 0; i <res.length; i++) {
+//            System.out.println(res[i]);
+//        }
+//        System.out.println(Integer.MIN_VALUE);
+//        System.out.println(t.longestPalindrome("cdbbdccc"));
+//        System.out.println(t.findMedianSortedArrays(new int[]{1,2},new int[]{3,4}));
+//
+//        System.out.println("res"+t.myAtoi("2147483646"));
+//        System.out.println(t.longestCommonPrefix(new String[]{"C","C"}));
+        t.threeSum(new int[]{-1,0,1,2,-1,-4});
 //        System.out.println(t.myAtoi("   542"));
+        System.out.println(t.threeSum(new int[]{-1,0,1,2,-1,-4}).toString());
     }
 
 }
