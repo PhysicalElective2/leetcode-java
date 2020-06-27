@@ -5,6 +5,33 @@ import org.omg.PortableInterceptor.INACTIVE;
 import java.util.*;
 
 public class TencentSolution {
+    //最接近的三数之和
+    public int threeSumClosest(int[] nums, int target) {
+        Arrays.sort(nums);
+        //直接遍历并不ok 答案不连续
+        int res =nums[0]+nums[1]+nums[2];
+        for(int i =0;i<nums.length-2;i++){
+            int thisRes;
+            int j=i+1;
+            int k=nums.length-1;
+            while(j<k){
+                thisRes=nums[i]+nums[j]+nums[k];
+                if(thisRes==target){
+                    return target;
+                }
+                if(thisRes<target){
+                    j++;
+                }
+                if(thisRes>target){
+                    k--;
+                }
+                res=Math.abs(res-target)<Math.abs(thisRes-target)?res:thisRes;
+
+            }
+        }
+        return  res;
+
+    }
     //三数之和,别人的思路更加严谨
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> res= new ArrayList<>();
@@ -223,9 +250,10 @@ public class TencentSolution {
 //
 //        System.out.println("res"+t.myAtoi("2147483646"));
 //        System.out.println(t.longestCommonPrefix(new String[]{"C","C"}));
-        t.threeSum(new int[]{-1,0,1,2,-1,-4});
+//        t.threeSum(new int[]{-1,0,1,2,-1,-4});
 //        System.out.println(t.myAtoi("   542"));
-        System.out.println(t.threeSum(new int[]{-1,0,1,2,-1,-4}).toString());
+//        System.out.println(t.threeSum(new int[]{-1,0,1,2,-1,-4}).toString());
+        System.out.println(t.threeSumClosest(new int[]{0,2,1,-3},1));
     }
 
 }
