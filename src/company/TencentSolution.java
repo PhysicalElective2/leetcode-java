@@ -1,10 +1,40 @@
 package company;
 
-import org.omg.PortableInterceptor.INACTIVE;
-
 import java.util.*;
 
 public class TencentSolution {
+    //有效的括号
+    //给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+    public boolean isValid(String s) {
+        Stack<Character> stack=new Stack<>();
+        Map m1 = new HashMap();
+        m1.put(')', '(');
+        m1.put('}', '{');
+        m1.put(']', '[');
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='('||s.charAt(i)=='{'||s.charAt(i)=='['){
+                //如果是，直接进入
+                stack.push(s.charAt(i));
+            } else {
+                if(stack.empty()){
+                    return false;
+                }
+                Character temp = stack.pop();
+                if(m1.get(s.charAt(i))!=temp){//并不是相等，而是匹配.g
+                    return false;
+                }
+            }
+
+        }
+        if(stack.empty()){
+            return true;
+        }else {
+            return false;
+        }
+
+
+    }
+
     //最接近的三数之和
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
@@ -53,8 +83,8 @@ public class TencentSolution {
                     res.add(oneRes);
                     j++;
                     k--;
-                    while (j < k & nums[j] == nums[j - 1]) j++;
-                    while (k > j & nums[k] == nums[k + 1]) k--;
+                    while (j < k && nums[j] == nums[j - 1]) j++;
+                    while (k > j && nums[k] == nums[k + 1]) k--;
                 }
                 if(nums[j]+nums[k]<target){
                     j++;
@@ -254,6 +284,7 @@ public class TencentSolution {
 //        System.out.println(t.myAtoi("   542"));
 //        System.out.println(t.threeSum(new int[]{-1,0,1,2,-1,-4}).toString());
         System.out.println(t.threeSumClosest(new int[]{0,2,1,-3},1));
+        System.out.println(t.isValid(""));
     }
 
 }
