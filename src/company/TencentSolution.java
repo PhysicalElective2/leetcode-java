@@ -1,8 +1,52 @@
 package company;
 
+import sun.rmi.runtime.Log;
+
 import java.util.*;
 
 public class TencentSolution {
+    //数组中的第K 个最大的元素
+    public int findKthLargest(int[] nums, int k) {
+        int k1=k;
+//        int lastNumK=nums[nums.length-k];
+        while(k>0){
+            //找个最大的
+//            冒泡法
+            int temp;
+            for(int i=0;i<nums.length;i++){
+                if(i+1<nums.length && nums[i+1]<nums[i]){
+                    temp=nums[i];
+                    nums[i]=nums[i+1];
+                    nums[i+1]=temp;
+
+                }
+            }
+            k--;
+            for (int i=0;i<nums.length;i++){
+                System.out.print(nums[i]);
+            }
+            System.out.println();
+//            if(nums[nums.length-k1]==lastNumK){
+//                break;
+//            }else {
+//                lastNumK=nums[nums.length-k1];
+//            }
+        }
+        return nums[nums.length-k1];
+
+    }
+
+    //字符串相乘,大整数乘法。。。
+//    public String multiply(String num1, String num2) {
+//        int n1=StringtoNum(num1);
+//        int n2=StringtoNum(num2);
+//
+//    }
+//
+//    private int StringtoNum(String num1) {
+//
+//    }
+
     //盛最多水的容器
     public int maxArea(int[] height) {
         int res =0;
@@ -322,6 +366,9 @@ public class TencentSolution {
         }
         int height[] ={1,8,6,2,5,4,8,3,7};
         System.out.println(t.maxArea(height));
+        int numms[] ={3,2,3,1,2,4,5,5,6};
+        System.out.println(t.findKthLargest(numms,9));
+
     }
 
 }
