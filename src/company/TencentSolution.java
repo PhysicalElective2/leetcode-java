@@ -3,6 +3,23 @@ package company;
 import java.util.*;
 
 public class TencentSolution {
+    //盛最多水的容器
+    public int maxArea(int[] height) {
+        int res =0;
+        int i=0;
+        int j=height.length-1;
+        while (i<j){
+            int area=Math.min(height[i],height[j])*(j-i);
+            res=Math.max(area,res);
+            if(height[i]>height[j]){
+                j--;
+            }else {
+                i++;
+            }
+        }
+        return res;
+
+    }
     //删除重复
     public int removeDuplicates(int[] nums) {
         int index=0;
@@ -303,6 +320,8 @@ public class TencentSolution {
         for(int i=0;i<res;i++){
             System.out.println(nums[i]);
         }
+        int height[] ={1,8,6,2,5,4,8,3,7};
+        System.out.println(t.maxArea(height));
     }
 
 }
