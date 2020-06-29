@@ -3,6 +3,18 @@ package company;
 import java.util.*;
 
 public class TencentSolution {
+    //删除重复
+    public int removeDuplicates(int[] nums) {
+        int index=0;
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]!=nums[i-1]){
+                nums[++index]=nums[i];
+
+            }
+        }
+        return index+1;
+
+    }
     //有效的括号
     //给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
     public boolean isValid(String s) {
@@ -283,8 +295,14 @@ public class TencentSolution {
 //        t.threeSum(new int[]{-1,0,1,2,-1,-4});
 //        System.out.println(t.myAtoi("   542"));
 //        System.out.println(t.threeSum(new int[]{-1,0,1,2,-1,-4}).toString());
-        System.out.println(t.threeSumClosest(new int[]{0,2,1,-3},1));
-        System.out.println(t.isValid(""));
+//        System.out.println(t.threeSumClosest(new int[]{0,2,1,-3},1));
+//        System.out.println(t.isValid(""));
+        int nums[]={1,2,2,3,4,4,5,5,5};
+        int res=t.removeDuplicates(nums);
+       //System.out.println();
+        for(int i=0;i<res;i++){
+            System.out.println(nums[i]);
+        }
     }
 
 }
