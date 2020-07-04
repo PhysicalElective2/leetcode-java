@@ -5,6 +5,101 @@ import sun.rmi.runtime.Log;
 import java.util.*;
 
 public class TencentSolution {
+    //有序矩阵中第K小的元素
+    //思路，
+    public String addStrings(String num1, String num2) {
+        //大整数加法
+        if(num1.length()<num2.length()){
+            //用于保证num1长
+            String temp=num1;
+            num1=num2;
+            num2=temp;
+
+        }
+        //用短的
+        int temp;
+        int add=0;
+        StringBuilder res=new StringBuilder();
+        int i;
+        //位数不对
+        for(i=0;i<num2.length();i++){
+            //
+            temp=num1.charAt(num1.length()-1-i)-'0'+num2.charAt(num2.length()-1-i)-'0'+add;
+            add=temp/10;
+            res.append(temp%10);
+
+        }
+        //可能还剩了
+        while(i<num1.length()){
+            temp=num1.charAt(num1.length()-1-i)-'0'+add;
+            add=temp/10;
+            res.append(temp%10);
+            i++;
+        }
+        if(add>0){
+            res.append(add);
+        }
+
+        res.reverse();
+        return res.toString();
+
+    }
+    public String multiply(String num1, String num2) {
+        //大整数乘法
+        for(int i=0;i<num1.length();i++){
+
+        }
+        return null;
+
+    }
+
+     class MyNum {
+        int x;
+        int y;
+        int val;
+        public MyNum(int x,int y,int val){
+            this.x=x;
+            this.y=y;
+            this.val=val;
+        }
+    }
+    public int kthSmallest(int[][] matrix, int k) {
+        List mynums=new ArrayList<MyNum>();
+//        ArrayList<Integer> oneRes= new ArrayList<Integer>();
+        int sum=0;
+        for(int i=0;i<matrix.length&&sum<k;i++){
+            for(int j=0;j<matrix[i].length&&sum<k;j++){
+                if(sum<k){
+                    mynums.add(new MyNum(i,j,matrix[i][j]));
+                    sum++;
+                }
+
+            }
+
+        }
+        return 0;
+
+
+    }
+    public int kthSmallest2(int[][] matrix, int k) {
+         //显然是深度优先搜索啊,定义一个visit[][]
+        boolean[][] visited=new boolean[matrix.length][matrix[0].length];
+        int sum=0;
+        while(sum<k){
+            dfs(matrix,visited);
+        }
+        return 0;
+
+
+
+    }
+    public int dfs(int[][] matrix, boolean[][] visited){
+         //返回进入空间的val吧
+        //每一个都可以扩展啊。。
+        return 0;
+
+    }
+
     //数组中的第K 个最大的元素
     public int findKthLargest(int[] nums, int k) {
         int k1=k;
@@ -13,11 +108,15 @@ public class TencentSolution {
             //找个最大的
 //            冒泡法
             int temp;
+            boolean change=false;
             for(int i=0;i<nums.length;i++){
                 if(i+1<nums.length && nums[i+1]<nums[i]){
                     temp=nums[i];
                     nums[i]=nums[i+1];
                     nums[i+1]=temp;
+                    if(i+1>=nums.length-k1){
+                        change=true;
+                    }
 
                 }
             }
@@ -26,11 +125,9 @@ public class TencentSolution {
                 System.out.print(nums[i]);
             }
             System.out.println();
-//            if(nums[nums.length-k1]==lastNumK){
-//                break;
-//            }else {
-//                lastNumK=nums[nums.length-k1];
-//            }
+            if(!change){
+                break;
+            }
         }
         return nums[nums.length-k1];
 
@@ -358,16 +455,17 @@ public class TencentSolution {
 //        System.out.println(t.threeSum(new int[]{-1,0,1,2,-1,-4}).toString());
 //        System.out.println(t.threeSumClosest(new int[]{0,2,1,-3},1));
 //        System.out.println(t.isValid(""));
-        int nums[]={1,2,2,3,4,4,5,5,5};
-        int res=t.removeDuplicates(nums);
-       //System.out.println();
-        for(int i=0;i<res;i++){
-            System.out.println(nums[i]);
-        }
-        int height[] ={1,8,6,2,5,4,8,3,7};
-        System.out.println(t.maxArea(height));
-        int numms[] ={3,2,3,1,2,4,5,5,6};
-        System.out.println(t.findKthLargest(numms,9));
+//        int nums[]={1,2,2,3,4,4,5,5,5};
+//        int res=t.removeDuplicates(nums);
+//       //System.out.println();
+//        for(int i=0;i<res;i++){
+//            System.out.println(nums[i]);
+//        }
+//        int height[] ={1,8,6,2,5,4,8,3,7};
+//        System.out.println(t.maxArea(height));
+//        int numms[] ={3,2,3,1,2,4,5,5,6};
+//        System.out.println(t.findKthLargest(numms,9));
+        System.out.println(t.addStrings("1","9"));
 
     }
 
