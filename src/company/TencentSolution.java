@@ -5,6 +5,28 @@ import sun.rmi.runtime.Log;
 import java.util.*;
 
 public class TencentSolution {
+    //跳水版
+    public int[] divingBoard(int shorter, int longer, int k) {
+        if(k==0){
+            return new int[0];
+        }
+        if(shorter==longer){
+            return new int[]{shorter*k};
+        }
+        int[] res=new int[k+1];
+        for(int i=0;i<=k;i++){
+            res[i]=shorter * (k - i) + longer * i;
+
+        }
+        return res;
+
+    }
+
+    //反转字符串
+    public void reverseString(char[] s) {
+        
+
+    }
     //有序矩阵中第K小的元素
     //思路，
     public String addStrings(String num1, String num2) {
@@ -466,6 +488,10 @@ public class TencentSolution {
 //        int numms[] ={3,2,3,1,2,4,5,5,6};
 //        System.out.println(t.findKthLargest(numms,9));
         System.out.println(t.addStrings("1","9"));
+        int[] ww=t.divingBoard(2,5,6);
+        for(int i=0;i<ww.length;i++){
+            System.out.println(ww[i]);
+        }
 
     }
 
