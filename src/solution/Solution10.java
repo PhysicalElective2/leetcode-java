@@ -3,6 +3,27 @@ package solution;
 import java.util.*;
 
 public class Solution10 {
+    //恢复空格 把文章断开，要求未识别的字符最少，返回未识别的字符数
+    //这都得动态规划
+    public int respace(String[] dictionary, String sentence) {
+        Set<String> dict =new HashSet<>(Arrays.asList(dictionary));
+        int n =sentence.length();
+        int dp[] = new int[n+1];
+        // 状态转移，dp[i] 表示字符串的前 i 个字符的最少未匹配数
+        for(int i=1;i<=n;i++){
+            dp[i]=dp[i-1]+1;
+            for(int idx=0;idx<i;idx++){
+                if(dict.contains(sentence.substring(idx,i))){
+                    //不能减一，因为，可能过了好几个才匹配的
+                    dp[i] = Math.min(dp[i], dp[idx]);
+
+
+                }
+            }
+        }
+        return dp[n];
+
+    }
     //整数转化为罗马数字
     public String intToRoman(int num) {
         StringBuilder res =new StringBuilder();
@@ -94,6 +115,7 @@ public class Solution10 {
         Solution10 s =new Solution10();
 //        System.out.println(s.threeSum(new int[]{0,0,0}));
         System.out.println(s.intToRoman(1994));
+        System.out.println(s.respace(new String[]{"looked","just","like","her","brother"},"jesslookedjustliketimherbrother"));
     }
 
 

@@ -4,7 +4,9 @@ import sun.rmi.runtime.Log;
 
 import java.util.*;
 
+
 public class TencentSolution {
+
     //跳水版
     public int[] divingBoard(int shorter, int longer, int k) {
         if(k==0){
