@@ -3,6 +3,38 @@ package solution;
 import java.util.*;
 
 public class Solution10 {
+    //两个数组的交集
+    public int[] intersect(int[] nums1, int[] nums2) {
+        if(nums1.length> nums2.length){
+            //use  recursion
+            return intersect(nums2,nums1);
+        }
+        Map<Integer,Integer> map =new HashMap<Integer,Integer>();
+        for(int num:nums1){
+            //if there is value in map use its value ,else use default value -0
+            int count =map.getOrDefault(num,0)+1;
+            map.put(num,count);
+        }
+        int[] res= new int[nums1.length];
+        int index=0;
+        for(int num:nums2){
+            // the getOrDefault funtion is good
+            int count =map.getOrDefault(num,0);
+            if(count>0){
+                res[index++]=num;
+                count--;
+                if(count>0){
+                    map.put(num,count);
+                }else {
+                    map.remove(num);
+                }
+            }
+        }
+        //good funtion to copy Array
+        return Arrays.copyOfRange(res,0,index);
+
+    }
+
     //恢复空格 把文章断开，要求未识别的字符最少，返回未识别的字符数
     //这都得动态规划
     public int respace(String[] dictionary, String sentence) {
@@ -114,8 +146,12 @@ public class Solution10 {
     public static void main(String[] args) {
         Solution10 s =new Solution10();
 //        System.out.println(s.threeSum(new int[]{0,0,0}));
-        System.out.println(s.intToRoman(1994));
-        System.out.println(s.respace(new String[]{"looked","just","like","her","brother"},"jesslookedjustliketimherbrother"));
+//        System.out.println(s.intToRoman(1994));
+//        System.out.println(s.respace(new String[]{"looked","just","like","her","brother"},"jesslookedjustliketimherbrother"));
+        int[] ress=s.intersect(new int[]{1,2,3},new int[]{5,1,2});
+        for(int i=0;i<ress.length;i++){
+            System.out.println(ress[i]);
+        }
     }
 
 
