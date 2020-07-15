@@ -2,10 +2,27 @@ package company;
 
 import sun.rmi.runtime.Log;
 
+
 import java.util.*;
 
 
 public class TencentSolution {
+    //reverse the list
+    //last time I used stack,now i think this method is better
+    public ListNode reverseList(ListNode head) {
+        ListNode pre=null;
+        ListNode cur=head;
+        ListNode temp=null;
+
+        while(cur!=null){
+            temp=cur.next;
+            cur.next=pre;
+            pre=cur;
+            cur=temp;
+        }
+        return pre;
+
+    }
 
     //跳水版
     public int[] divingBoard(int shorter, int longer, int k) {
@@ -26,7 +43,7 @@ public class TencentSolution {
 
     //反转字符串
     public void reverseString(char[] s) {
-        
+
 
     }
     //有序矩阵中第K小的元素
@@ -489,10 +506,26 @@ public class TencentSolution {
 //        System.out.println(t.maxArea(height));
 //        int numms[] ={3,2,3,1,2,4,5,5,6};
 //        System.out.println(t.findKthLargest(numms,9));
-        System.out.println(t.addStrings("1","9"));
-        int[] ww=t.divingBoard(2,5,6);
-        for(int i=0;i<ww.length;i++){
-            System.out.println(ww[i]);
+//        System.out.println(t.addStrings("1","9"));
+//        int[] ww=t.divingBoard(2,5,6);
+//        for(int i=0;i<ww.length;i++){
+//            System.out.println(ww[i]);
+//        }
+        ListNode one = new ListNode(1);
+        ListNode two = new ListNode(2);
+        ListNode three = new ListNode(3);
+        ListNode four = new ListNode(4);
+        ListNode five = new ListNode(5);
+        one.next=two;
+        two.next=three;
+        three.next=four;
+        four.next=five;
+        five.next=null;
+        ListNode res=t.reverseList(one);
+        System.out.println("val"+ res.val);
+        while (res!=null){
+            System.out.println(res.val);
+            res=res.next;
         }
 
     }
