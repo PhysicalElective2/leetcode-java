@@ -3,6 +3,20 @@ package solution;
 import java.util.*;
 
 public class Solution10 {
+    //
+    public int searchInsert(int[] nums, int target) {
+        int res;
+        int i=0;
+        for(;i<nums.length;i++){
+            if(nums[i]>=target){
+                break;
+
+            }
+        }
+
+        return i;
+
+    }
     //两个数组的交集
     public int[] intersect(int[] nums1, int[] nums2) {
         if(nums1.length> nums2.length){
