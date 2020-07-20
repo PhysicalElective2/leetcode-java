@@ -3,6 +3,26 @@ package solution;
 import java.util.*;
 
 public class Solution10 {
+    public int[] twoSum(int[] numbers, int target) {
+      //I haven't get the Connotation ,it's two pointer
+        //before to solve a  problem ,try some Algorithm idea
+        int i =0;
+        int j = numbers.length-1;
+        while (i<j){
+            int sum=numbers[i]+numbers[j];
+            if(sum==target){
+                return new int[]{i+1,j+1};
+            }
+            if(sum<target){
+                i++;
+            }else {
+                j--;
+            }
+        }
+
+        return new int[]{-1,-1};
+
+    }
     //
     public int searchInsert(int[] nums, int target) {
         int res;
@@ -162,10 +182,13 @@ public class Solution10 {
 //        System.out.println(s.threeSum(new int[]{0,0,0}));
 //        System.out.println(s.intToRoman(1994));
 //        System.out.println(s.respace(new String[]{"looked","just","like","her","brother"},"jesslookedjustliketimherbrother"));
-        int[] ress=s.intersect(new int[]{1,2,3},new int[]{5,1,2});
-        for(int i=0;i<ress.length;i++){
-            System.out.println(ress[i]);
-        }
+//        int[] ress=s.intersect(new int[]{1,2,3},new int[]{5,1,2});
+//        for(int i=0;i<ress.length;i++){
+//            System.out.println(ress[i]);
+//        }
+        int[] resss=s.twoSum(new int[]{1,2,3,4,4,9,56,90}
+        ,8);
+        System.out.println(resss[0]+" "+resss[1]);
     }
 
 
