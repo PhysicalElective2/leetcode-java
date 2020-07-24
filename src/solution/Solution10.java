@@ -3,10 +3,17 @@ package solution;
 import java.util.*;
 
 public class Solution10 {
+
+    public boolean divisorGame(int N) {
+        //try to choice the bigger
+        //la ji
+        return N%2==0;
+
+    }
     public int[] twoSum(int[] numbers, int target) {
       //I haven't get the Connotation ,it's two pointer
         //before to solve a  problem ,try some Algorithm idea
-        int i =0;
+        int i = 0;
         int j = numbers.length-1;
         while (i<j){
             int sum=numbers[i]+numbers[j];
@@ -186,9 +193,10 @@ public class Solution10 {
 //        for(int i=0;i<ress.length;i++){
 //            System.out.println(ress[i]);
 //        }
-        int[] resss=s.twoSum(new int[]{1,2,3,4,4,9,56,90}
-        ,8);
-        System.out.println(resss[0]+" "+resss[1]);
+//        int[] resss=s.twoSum(new int[]{1,2,3,4,4,9,56,90}
+//        ,8);
+//        System.out.println(resss[0]+" "+resss[1]);
+        System.out.println(s.divisorGame(4));
     }
 
 
