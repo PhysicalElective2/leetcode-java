@@ -4,6 +4,17 @@ import java.util.*;
 
 public class Solution10 {
 
+    public int maxDepth(TreeNode root) {
+        //Maximum depth of binary tree
+        if(root==null){
+            return 0;
+        }
+        int leftLen=maxDepth(root.left);
+        int rightLen=maxDepth(root.right);
+        return Math.max(leftLen,rightLen)+1;
+    }
+
+
     public boolean divisorGame(int N) {
         //try to choice the bigger
         //la ji
