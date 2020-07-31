@@ -8,6 +8,15 @@ public class SolutionMedium {
     //Meditation, one question a day
     List<String> res=new ArrayList<>();
     String numbersToLetters[] = {"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    public int findMagicIndex(int[] nums) {
+        for(int i=0;i<nums.length;i++){
+            if(i==nums[i]){
+                return i;
+            }
+        }
+        return -1;
+
+    }
 
     public List<String> letterCombinations(String digits) {
         //Depth first traversal
