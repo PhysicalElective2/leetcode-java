@@ -1,6 +1,7 @@
 package solution;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SolutionMedium {
@@ -38,6 +39,56 @@ public class SolutionMedium {
 
         }
 
+
+    }
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> res =new ArrayList<>();
+        Arrays.sort(nums);
+        for(int i=0;i<=nums.length-4;i++){
+            if(i>0&&nums[i]==nums[i-1]){
+                continue;
+            }
+            for(int j=i+1;j<=nums.length-3;j++){
+                if(j>i+1&&nums[j]==nums[j-1]){
+                    continue;
+                }
+                int lastTwoTar=target-nums[i]-nums[j];
+                int m=j+1;
+                int n=nums.length-1;
+                while (m<n){
+                    if(nums[m]+nums[n]==lastTwoTar){
+                        List<Integer> oneres=new ArrayList<>();
+                        oneres.add(nums[i]);
+                        oneres.add(nums[j]);
+                        oneres.add(nums[m]);
+                        oneres.add(nums[n]);
+                        res.add(oneres);
+
+                        m++;
+                        while(m+1>=nums.length&&nums[m]==nums[m-1]){
+                            m++;
+                        }
+                        n--;
+                        while(n-1>=0&&nums[n]==nums[n+1]){
+                            n--;
+                        }
+                        continue;
+                    }
+                    if(nums[m]+nums[n]>lastTwoTar){
+                        n--;
+                        continue;
+                    }
+                    if(nums[m]+nums[n]<lastTwoTar){
+                        m++;
+                        continue;
+                    }
+
+                }
+
+            }
+
+        }
+        return res;
 
     }
 
