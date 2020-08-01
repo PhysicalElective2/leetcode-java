@@ -5,6 +5,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SolutionMedium {
+    //Given a linked list, remove the n-th node from the end of list and return its head.
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        //may the head need to be removed
+        ListNode resPre=new ListNode(-1);
+        resPre.next=head;
+        ListNode fast=resPre;
+        //slow point the preDelete
+        ListNode slow=resPre;
+        while(n>=0){
+            fast=fast.next;
+            n--;
+        }
+        while (fast.next!=null){
+            fast=fast.next;
+            slow=slow.next;
+        }
+        slow.next=slow.next.next;
+        return resPre.next;
+
+
+    }
     //Meditation, one question a day
     List<String> res=new ArrayList<>();
     String numbersToLetters[] = {"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
