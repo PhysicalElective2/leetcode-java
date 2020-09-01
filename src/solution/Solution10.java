@@ -5,6 +5,21 @@ import java.util.*;
 public class Solution10 {
     //same tree
     //how can I judege two tree is same
+    public int removeElement(int[] nums, int val) {
+        int resNum=0; // the sum
+        int testNum=0; //the item need to be test
+        while (testNum<nums.length){
+            if(nums[testNum]==val){
+                testNum++;
+            }else {
+                nums[resNum+1]=nums[testNum+1];
+            }
+
+        }
+
+        return resNum;
+
+    }
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if(p==null&&q==null){
             return true;
