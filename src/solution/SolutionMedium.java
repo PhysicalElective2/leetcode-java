@@ -1,10 +1,46 @@
 package solution;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class SolutionMedium {
+    //k most frequent elements.
+    public int[] topKFrequent(int[] nums, int k) {
+        //count the sum of each element
+        HashMap<Integer,Integer> hash =new HashMap<>();
+
+        for(int num:nums){
+            hash.put(num,hash.getOrDefault(num,0)+1);
+        }
+        //use heap to contain the k most frequent nums;
+        PriorityQueue<Integer> pq =new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {//
+                return hash.get(o1)-hash.get(o2);
+            }
+        });
+        for(Integer key:hash.keySet()){
+            if(pq.size()<k){
+                pq.offer(key);
+            }else {
+                if(hash.get(key)>hash.get(pq.peek())){
+                    pq.remove();
+                    pq.offer(key);
+                }
+
+            }
+
+        }
+        //heap->int[] and return
+        int[] ret = new int[k];
+        for (int i = 0; i < k; ++i) {
+            ret[i] = pq.remove();
+        }
+        return ret;
+
+
+
+    }
+
     //Given a linked list, remove the n-th node from the end of list and return its head.
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
