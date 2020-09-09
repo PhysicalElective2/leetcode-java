@@ -3,6 +3,45 @@ package solution;
 import java.util.*;
 
 public class SolutionMedium {
+    //Combination Sum
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        //here arringlist is better,they are all the Implementation class of List.
+        List<List<Integer>> res=new ArrayList<List<Integer>>();
+        //it is hard to wirte this
+        //Implement ArrrayList class  Directly
+        ArrayList<Integer> path=new ArrayList<Integer>();
+        combinationDfs(candidates,path,0,target,res);
+        return res;
+
+
+
+    }
+
+    private void combinationDfs(int[] candidates, List<Integer> path, int i, int target,List<List<Integer>> res) {
+        if(i>=candidates.length){
+            return;
+        }
+        if(target==0){
+            //shoud use this way to add ArrayList
+            res.add(new ArrayList<Integer>(path));
+           // res.add(path); wrong way
+            return;
+        }
+        //jump over
+        combinationDfs(candidates,path,i+1,target,res);
+        //add
+        if(target>=candidates[i]){
+            target-=candidates[i];
+            path.add(candidates[i]);
+            //number can be  selectedRepeatedly
+            combinationDfs(candidates,path,i,target,res);
+            path.remove(path.size()-1);
+            target+=candidates[i];
+
+
+        }
+    }
+
     //k most frequent elements.
     public int[] topKFrequent(int[] nums, int k) {
         //count the sum of each element
