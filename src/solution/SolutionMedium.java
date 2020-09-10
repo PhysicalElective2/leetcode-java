@@ -3,6 +3,38 @@ package solution;
 import java.util.*;
 
 public class SolutionMedium {
+    //can just be used once
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<List<Integer>> res= new ArrayList<List<Integer>>();
+        ArrayList<Integer> path=new ArrayList<>();
+        combinationDfs2(candidates,res,path,target,0);
+        return res;
+
+
+    }
+
+    private void combinationDfs2(int[] candidates, List<List<Integer>> res, ArrayList<Integer> path, int target, int i) {
+        if(target==0&&res.indexOf(path)<0){
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        if(i>=candidates.length){
+            return;
+        }
+
+        //jump
+        combinationDfs2(candidates,res,path,target,i+1);
+        //add
+        if(target>=candidates[i]){
+            path.add(candidates[i]);
+            combinationDfs2(candidates,res,path,target-candidates[i],i+1);
+            path.remove(path.size()-1);
+        }
+
+    }
+
     //Combination Sum
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         //here arringlist is better,they are all the Implementation class of List.
@@ -22,6 +54,9 @@ public class SolutionMedium {
             return;
         }
         if(target==0){
+            if(path.get(0)==7){
+                System.out.println("i="+i);
+            }
             //shoud use this way to add ArrayList
             res.add(new ArrayList<Integer>(path));
            // res.add(path); wrong way
@@ -201,10 +236,27 @@ public class SolutionMedium {
     public static void main(String[] args) {
         SolutionMedium sm=new SolutionMedium();
 //        System.out.println(sm.letterCombinations(new String("4545")));
-        List<String> ress =sm.letterCombinations(new String("7"));
-        for(int i=0;i<ress.size();i++){
-            System.out.println(ress.get(i));
+
+        List<List<Integer>> py= sm.combinationSum2(new int[]{2,5,2,1,2},5);
+        System.out.println(py.size());
+        for(int h=0;h<py.size();h++){
+//            for(int j=0;j<py.get(h).size();j++){
+//                System.out.print(py.get(h).get(j));
+//            }
+            System.out.println(py.get(h));
+
         }
+        List<List<Integer>> py22= sm.combinationSum(new int[]{2,3,6,7},7);
+        System.out.println(py22.size());
+        for(int h=0;h<py22.size();h++){
+//            for(int j=0;j<py.get(h).size();j++){
+//                System.out.print(py.get(h).get(j));
+//            }
+            System.out.println(py22.get(h));
+
+        }
+
+
 
     }
 
