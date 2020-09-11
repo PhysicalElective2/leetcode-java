@@ -3,6 +3,33 @@ package solution;
 import java.util.*;
 
 public class SolutionMedium {
+    //combinationSun3
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        //n is sum
+        List<List<Integer>> res=new ArrayList<>();
+        ArrayList path =new ArrayList();
+        combinationDfs3(res,path,k,n,1);
+        return res;
+    }
+
+    private void combinationDfs3(List<List<Integer>> res, ArrayList path, int k, int n, int i) {
+        if(n==0&&k==0){
+            //add
+            res.add(new ArrayList<>(path));
+            return;
+
+        }
+        if(n<0||k<0||i>=10){
+            return;
+        }
+        //jump
+        combinationDfs3(res,path,k,n,i+1);
+        //add
+        path.add(i);
+        combinationDfs3(res,path,k-1,n-i,i+1);
+        path.remove(path.size()-1);
+    }
+
     //can just be used once
 
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
@@ -237,22 +264,26 @@ public class SolutionMedium {
         SolutionMedium sm=new SolutionMedium();
 //        System.out.println(sm.letterCombinations(new String("4545")));
 
-        List<List<Integer>> py= sm.combinationSum2(new int[]{2,5,2,1,2},5);
-        System.out.println(py.size());
-        for(int h=0;h<py.size();h++){
-//            for(int j=0;j<py.get(h).size();j++){
-//                System.out.print(py.get(h).get(j));
-//            }
-            System.out.println(py.get(h));
+//        List<List<Integer>> py= sm.combinationSum2(new int[]{2,5,2,1,2},5);
+//        System.out.println(py.size());
+//        for(int h=0;h<py.size();h++){
+//            System.out.println(py.get(h));
+//
+//        }
+//        List<List<Integer>> py22= sm.combinationSum(new int[]{2,3,6,7},7);
+//        System.out.println(py22.size());
+//        for(int h=0;h<py22.size();h++){
+//            System.out.println(py22.get(h));
+//
+//        }
 
-        }
-        List<List<Integer>> py22= sm.combinationSum(new int[]{2,3,6,7},7);
-        System.out.println(py22.size());
-        for(int h=0;h<py22.size();h++){
+        List<List<Integer>> ten= sm.combinationSum3(3,9);
+        System.out.println(ten.size());
+        for(int h=0;h<ten.size();h++){
 //            for(int j=0;j<py.get(h).size();j++){
 //                System.out.print(py.get(h).get(j));
 //            }
-            System.out.println(py22.get(h));
+            System.out.println(ten.get(h));
 
         }
 
