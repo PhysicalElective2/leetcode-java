@@ -1,6 +1,9 @@
 package solution;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Solution11 {
     //today I
@@ -43,5 +46,28 @@ public class Solution11 {
         return node;
 
 
+    }
+    List resPathSum =new ArrayList();
+    LinkedList<Integer> onePath = new LinkedList<>();
+
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        //find the all way that sum == a number
+        dpPath(root,sum);
+        return resPathSum;
+
+    }
+    private void dpPath(TreeNode root,int sum) {
+        if(root==null){
+            return;
+        }
+        onePath.add(root.val);
+        sum-=root.val;
+        if(root.right==null&&root.left==null&&sum==0){
+            //不能直接加进去，为啥来着,第二次遇到了，就得add(new LinkList)
+            resPathSum.add(new LinkedList<>(onePath));
+        }
+        dpPath(root.left,sum);
+        dpPath(root.right,sum);
+        onePath.pollLast();
     }
 }
