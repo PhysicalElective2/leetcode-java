@@ -5,7 +5,34 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+
 public class Solution11 {
+    public int pre=-1;
+    public int res=Integer.MAX_VALUE;
+    public boolean first=true;
+    public int getMinimumDifference(TreeNode root) {
+        preOrder(root);
+        return res;
+
+
+    }
+    public void preOrder(TreeNode root){
+
+        if(root==null){
+            return;
+        }
+        preOrder(root.left);
+
+        if(pre==-1){
+            //the first node
+            pre=root.val;
+        }else {
+            res=Math.min(res,Math.abs(root.val-pre));
+            pre=root.val;
+        }
+        preOrder(root.right);
+    }
+
     public boolean canPartition2(int[] nums) {
         int sum = 0;
         int max = 0;
