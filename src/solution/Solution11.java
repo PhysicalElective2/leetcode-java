@@ -7,6 +7,26 @@ import java.util.List;
 
 
 public class Solution11 {
+    // two node as a loop
+    public ListNode swapPairs(ListNode head) {
+        ListNode pre=new ListNode(0);
+        pre.next=head;
+        ListNode temp=pre;
+
+        while (temp.next!=null&&temp.next.next!=null){
+            ListNode start=temp.next;
+            ListNode end=temp.next.next;
+
+            temp.next=end;
+            start.next=end.next;
+            end.next=start;
+
+            temp=start;
+        }
+        return pre.next;
+
+    }
+
     public int pre=-1;
     public int res=Integer.MAX_VALUE;
     public boolean first=true;
