@@ -1,54 +1,87 @@
 package solution;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 public class Solution11 {
+    public Node connect(Node root) {
+        if (root == null) {
+            return root;
+        }
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.offer(root);
+
+        //need know the end of a line
+        while (!queue.isEmpty()) {
+            int size=queue.size();
+            //size will change
+            for (int i=0;i<size;i++){
+                Node node =queue.poll();
+                if(i<size-1){
+                    node.next=queue.peek();
+                }
+                if(node.left!=null){
+                    queue.offer(node.left);
+                }
+                if(node.right!=null){
+                   queue.offer(node.right);
+                }
+
+            }
+
+        }
+
+        return root;
+
+    }
+
+    public void bfs(Node root) {
+    }
+
     // two node as a loop
     public ListNode swapPairs(ListNode head) {
-        ListNode pre=new ListNode(0);
-        pre.next=head;
-        ListNode temp=pre;
+        ListNode pre = new ListNode(0);
+        pre.next = head;
+        ListNode temp = pre;
 
-        while (temp.next!=null&&temp.next.next!=null){
-            ListNode start=temp.next;
-            ListNode end=temp.next.next;
+        while (temp.next != null && temp.next.next != null) {
+            ListNode start = temp.next;
+            ListNode end = temp.next.next;
 
-            temp.next=end;
-            start.next=end.next;
-            end.next=start;
+            temp.next = end;
+            start.next = end.next;
+            end.next = start;
 
-            temp=start;
+            temp = start;
         }
         return pre.next;
 
     }
 
-    public int pre=-1;
-    public int res=Integer.MAX_VALUE;
-    public boolean first=true;
+    public int pre = -1;
+    public int res = Integer.MAX_VALUE;
+    public boolean first = true;
+
     public int getMinimumDifference(TreeNode root) {
         preOrder(root);
         return res;
 
 
     }
-    public void preOrder(TreeNode root){
 
-        if(root==null){
+    public void preOrder(TreeNode root) {
+
+        if (root == null) {
             return;
         }
         preOrder(root.left);
 
-        if(pre==-1){
+        if (pre == -1) {
             //the first node
-            pre=root.val;
-        }else {
-            res=Math.min(res,Math.abs(root.val-pre));
-            pre=root.val;
+            pre = root.val;
+        } else {
+            res = Math.min(res, Math.abs(root.val - pre));
+            pre = root.val;
         }
         preOrder(root.right);
     }
@@ -63,7 +96,7 @@ public class Solution11 {
         if (sum % 2 == 1) return false;
         int taget = sum / 2;
         if (max > taget) return false;
-        boolean[][] dp = new boolean[nums.length][taget+1];
+        boolean[][] dp = new boolean[nums.length][taget + 1];
         if (nums[0] <= taget) {
             dp[0][nums[0]] = true;
         }
@@ -76,7 +109,7 @@ public class Solution11 {
                     continue;
                 }
                 if (nums[i] < j) {
-                    dp[i][j] = dp[i - 1][j] || dp[i-1][j - nums[i]];
+                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i]];
                 }
 
             }
@@ -86,6 +119,7 @@ public class Solution11 {
         return dp[nums.length - 1][taget];
 
     }
+
     //my way out of time
     public boolean canPartition(int[] nums) {
         int sum = sum(nums);
@@ -186,6 +220,6 @@ public class Solution11 {
     public static void main(String[] args) {
         Solution11 s11 = new Solution11();
 
-        System.out.println(s11.canPartition2(new int[]{2, 2,3, 5}));
+        System.out.println(s11.canPartition2(new int[]{2, 2, 3, 5}));
     }
 }
