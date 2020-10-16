@@ -4,6 +4,22 @@ import java.util.*;
 
 
 public class Solution11 {
+    public int[] sortedSquares(int[] A) {
+        int[] res=new int[A.length];
+        int pos =A.length-1;
+        int p=0;
+        int q=A.length-1;
+        while (pos>=0){
+            if(A[p]*A[p]>A[q]*A[q]){
+                res[pos--]=A[p]*A[p];
+                p++;
+            }else {
+                res[pos--]=A[q]*A[q];
+                q--;
+            }
+        }
+        return res;
+    }
     public Node connect(Node root) {
         if (root == null) {
             return root;

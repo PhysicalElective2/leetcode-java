@@ -3,6 +3,7 @@ package solution;
 import org.junit.jupiter.api.Test;
 
 import java.net.InetAddress;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -248,6 +249,13 @@ class SolutionTest {
 
         System.out.println(s.maxProfit(new int[]{1,2,3,5,6}));
 
+
+    }
+
+    public static void main(String[] args) {
+        LocalDateTime now=LocalDateTime.now();
+        System.out.println(now);
+        System.out.println(System.currentTimeMillis());
 
     }
 
