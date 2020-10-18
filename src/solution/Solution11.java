@@ -4,6 +4,43 @@ import java.util.*;
 
 
 public class Solution11 {
+    //remove the last n-th node
+    public ListNode removeNthFromEnd(ListNode head, int n){
+        //may remove the only one
+        ListNode resPre= new ListNode(-1);
+        resPre.next=head;
+        ListNode deletePre=resPre;
+        while (n>0){
+            head=head.next;
+            n--;
+        }
+        while (head!=null){
+            head=head.next;
+            deletePre=deletePre.next;
+        }
+        deletePre.next=deletePre.next.next;
+        return resPre.next;
+    }
+    public ListNode removeNthFromEnd2(ListNode head, int n) {
+        ListNode resPre=new ListNode(-1);
+        resPre.next=head;
+        ListNode fast=resPre;
+        //slow point the preDelete
+        ListNode slow=resPre;
+        while(n>0){
+            fast=fast.next;
+            n--;
+        }
+        while (fast.next!=null){
+            fast=fast.next;
+            slow=slow.next;
+        }
+        slow.next=slow.next.next;
+        return resPre.next;
+
+    }
+
+
     public int[] sortedSquares(int[] A) {
         int[] res=new int[A.length];
         int pos =A.length-1;
