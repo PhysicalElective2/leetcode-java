@@ -272,6 +272,8 @@ public class Solution11 {
 
     public static void main(String[] args) {
         Solution11 s11 = new Solution11();
+        //Integer a=Class.forName(Integer).newInstance();
+
 
         System.out.println(s11.canPartition2(new int[]{2, 2, 3, 5}));
     }
