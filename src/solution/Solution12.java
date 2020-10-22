@@ -1,8 +1,29 @@
 package solution;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Solution12 {
+    public List<Integer> partitionLabels(String S) {
+        int[] last =new int[26];
+        int length=S.length();
+        for(int i=0;i<length;i++){
+            last[S.charAt(i)-'a']=i;
+        }
+
+        ArrayList<Integer> partition =new ArrayList<>();
+        int start =0,end=0;
+        for(int i=0;i<length;i++){
+            end =Math.max(end,last[S.charAt(i)-'a']);
+            //if the character's index is the end index of all character before the character,can  cut off
+            if(i==end){
+                partition.add(end-start+1);
+                start=end+1;
+            }
+        }
+        return partition;
+
+    }
     public boolean isLongPressedName(String name, String typed) {
         int i=0;
         int j=0;
