@@ -4,6 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Solution12 {
+    public static void main(String[] args) {
+        Solution12 s12=new Solution12();
+        ListNode a=new ListNode(-129);
+        ListNode b=new ListNode(-129);
+        a.next=b;
+        b.next=null;
+        System.out.println(s12.isPalindrome(a));
+    }
+    public boolean isPalindrome(ListNode head) {
+        boolean res=true;
+        List<Integer> array=new ArrayList<Integer>();
+        while (head!=null){
+            array.add(head.val);
+            head=head.next;
+
+
+        }
+        //judge if is palindrom
+        Integer i=0;
+        Integer j=array.size()-1;
+        System.out.println(array.size());
+        while (i<=j){
+
+            if(!(array.get(i).equals(array.get(j)))){
+                System.out.println("is mot equal");
+                System.out.println(array.get(i)+" "+array.get(j));
+                res=false;
+                break;
+            }
+            i++;
+            j--;
+        }
+        return res;
+    }
+
     public List<Integer> partitionLabels(String S) {
         int[] last =new int[26];
         int length=S.length();
