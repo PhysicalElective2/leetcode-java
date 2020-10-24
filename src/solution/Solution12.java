@@ -1,9 +1,26 @@
 package solution;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Solution12 {
+    public int videoStitching(int[][] clips, int T) {
+        //Backpack problem ,no it is dp
+        //dp is hard
+        int t[] =new int[T+1];
+        Arrays.fill(t,Integer.MAX_VALUE-1);
+        t[0]=0;
+        for(int i=0;i<=T;i++){
+            for(int[] ii:clips){
+                if(ii[0]<i && i<=ii[1]){
+                    t[i]=Math.min(t[i],t[ii[0]]+1);
+                }
+            }
+        }
+        return t[T]==Integer.MAX_VALUE-1?-1:t[T];
+
+    }
     public static void main(String[] args) {
         Solution12 s12=new Solution12();
         ListNode a=new ListNode(-129);
@@ -12,6 +29,9 @@ public class Solution12 {
         b.next=null;
         System.out.println(s12.isPalindrome(a));
     }
+
+
+
     public boolean isPalindrome(ListNode head) {
         boolean res=true;
         List<Integer> array=new ArrayList<Integer>();
