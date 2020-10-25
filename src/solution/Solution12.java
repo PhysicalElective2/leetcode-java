@@ -1,10 +1,44 @@
 package solution;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.lang.reflect.Field;
+import java.util.*;
 
 public class Solution12 {
+    public int hh;
+    public int hjj;
+    public int hkk;
+    public int hkkk;
+    public int superEggDrop(int K, int N) {
+        return 0;
+
+
+    }
+    public int longestMountain(int[] A) {
+//just give up
+        int n=A.length;
+        if(n==0)return 0;
+        int[] left=new int[n];
+        int[] right =new int[n];
+        for(int i=1;i<n;i++){
+            left[i]= A[i]>A[i-1]?left[i-1]+1:0;
+        }
+        for(int i=n-2;i>=0;i--){
+            right[i]= A[i]>A[i+1]?right[i+1]+1:0;
+        }
+        int res=0;
+        for(int i=0;i<n;i++){
+            if(left[i]>0&&right[i]>0){
+                res=Math.max(res,left[i]+right[i]+1);
+            }
+        }
+        return res;
+
+
+
+
+    }
+
+
     public int videoStitching(int[][] clips, int T) {
         //Backpack problem ,no it is dp
         //dp is hard
@@ -23,11 +57,9 @@ public class Solution12 {
     }
     public static void main(String[] args) {
         Solution12 s12=new Solution12();
-        ListNode a=new ListNode(-129);
-        ListNode b=new ListNode(-129);
-        a.next=b;
-        b.next=null;
-        System.out.println(s12.isPalindrome(a));
+        for(Field f:s12.getClass().getFields()){
+            System.out.println(f.getName());
+        }
     }
 
 
@@ -129,7 +161,7 @@ public class Solution12 {
     public boolean backspaceCompare(String S, String T) {
         StringBuilder Sa = new StringBuilder();
         StringBuilder Sb = new StringBuilder();
-//        StringBuffer Sb=new StringBuffer();
+        //        StringBuffer Sb=new StringBuffer();
         for (int i = 0; i < S.length(); i++) {
             if (S.charAt(i) == '#') {
                 if (Sa.length() > 0) {
