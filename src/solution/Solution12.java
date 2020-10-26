@@ -13,6 +13,24 @@ public class Solution12 {
 
 
     }
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] count =new int[101];
+        for(int i:nums){
+
+            count[i]++;
+        }
+        for(int i=1;i<count.length;i++){
+            count[i]+=count[i-1];
+        }
+        int[] res =new int[nums.length];
+        for(int i=0;i<res.length;i++){
+            //can not have 0-1
+            res[i]= nums[i]==0? 0:count[nums[i]-1];
+
+        }
+        return res;
+
+    }
     public int longestMountain(int[] A) {
 //just give up
         int n=A.length;
