@@ -4,12 +4,18 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 public class Solution12 {
-    public int hh;
-    public int hjj;
-    public int hkk;
-    public int hkkk;
-    public int superEggDrop(int K, int N) {
-        return 0;
+    public boolean uniqueOccurrences(int[] arr) {
+        //map is key and value
+        //set is unique
+        Map<Integer,Integer> map=new HashMap<>();
+        for(int i:arr){
+            map.put(i,map.getOrDefault(i,0)+1);
+        }
+        Set<Integer> set=new HashSet<>();
+        for(Integer i:map.values()){
+            set.add(i);
+        }
+        return set.size()==map.size();
 
 
     }
