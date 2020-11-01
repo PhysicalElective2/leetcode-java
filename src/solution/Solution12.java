@@ -3,7 +3,25 @@ package solution;
 import java.lang.reflect.Field;
 import java.util.*;
 
+
 public class Solution12 {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String> set= new HashSet<>(wordDict);
+        boolean[] dp =new boolean[s.length()+1];
+        dp[0]=true;
+        for(int i=1;i<=s.length();i++){
+            for(int j=0;j<i;j++){
+                if(dp[j] && set.contains(s.substring(j,i))){
+                    dp[i]=true;
+                    //one can ,then just break
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+
+
     public int islandPerimeter(int[][] grid) {
         //
         int res=0;
@@ -107,9 +125,11 @@ public class Solution12 {
     }
     public static void main(String[] args) {
         Solution12 s12=new Solution12();
-        for(Field f:s12.getClass().getFields()){
-            System.out.println(f.getName());
-        }
+        int i=100;
+        char a='a';
+        String aa="hhh你好";
+        System.out.println(aa.getBytes().length);
+        System.out.println(i>>5);
     }
 
 
