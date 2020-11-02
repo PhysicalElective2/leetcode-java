@@ -5,7 +5,33 @@ import java.util.*;
 
 
 public class Solution12 {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        List<Integer> listNum2 =new ArrayList<Integer>();
+        List<Integer> res =new ArrayList<Integer>();
+        for(int i:nums2){
+            listNum2.add(i);
+        }
+        Arrays.sort(nums1);
+
+        for(int i=0;i<nums1.length;i++){
+            if(i>=1&&nums1[i-1]==nums1[i]){
+                continue;
+            }
+            if(listNum2.contains(nums1[i])){
+                res.add(nums1[i]);
+            }
+        }
+        int[] realRes = new int[res.size()];
+
+        for (int i=0;i<realRes.length;i++){
+            realRes[i]=res.get(i);
+        }
+
+        return realRes;
+
+    }
     public boolean wordBreak(String s, List<String> wordDict) {
+        //can give list value to set 
         Set<String> set= new HashSet<>(wordDict);
         boolean[] dp =new boolean[s.length()+1];
         dp[0]=true;
