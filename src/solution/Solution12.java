@@ -5,6 +5,18 @@ import java.util.*;
 
 
 public class Solution12 {
+    public boolean validMountainArray(int[] A) {
+        int n=A.length;
+        int i=0;
+        while (i+1<n&&A[i]<A[i+1]){
+            i++;
+        }
+        if(i==0&&i==n-1)return false;
+        while (i+1<n||A[i]>A[i+1]){
+            i++;
+        }
+        return i==n-1;
+    }
     public int[] intersection(int[] nums1, int[] nums2) {
         List<Integer> listNum2 =new ArrayList<Integer>();
         List<Integer> res =new ArrayList<Integer>();
