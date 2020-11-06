@@ -5,6 +5,7 @@ import java.util.*;
 
 
 public class Solution12 {
+
     public boolean validMountainArray(int[] A) {
         int n=A.length;
         int i=0;
