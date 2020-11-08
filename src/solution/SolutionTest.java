@@ -1,10 +1,11 @@
 package solution;
 
+import com.sun.istack.internal.NotNull;
 import org.junit.jupiter.api.Test;
 
 import java.net.InetAddress;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -253,9 +254,21 @@ class SolutionTest {
     }
 
     public static void main(String[] args) {
-        LocalDateTime now=LocalDateTime.now();
-        System.out.println(now);
-        System.out.println(System.currentTimeMillis());
+//        LocalDateTime now=LocalDateTime.now();
+//        System.out.println(now);
+//        System.out.println(System.currentTimeMillis());
+        List vector=new Vector();
+        vector.add("ss");
+        vector.add("xxx");
+        Hashtable hs =new Hashtable();
+        hs.elements();
+        Iterator<String> iter = vector.iterator();
+        while ( iter.hasNext()){
+            System.out.println(iter.next());
+        }
+        //get a synchronizedMap();
+        Map m=Collections.synchronizedMap( new HashMap<String,String>());
+
 
     }
 
