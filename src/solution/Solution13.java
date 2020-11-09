@@ -22,6 +22,40 @@ public class Solution13 {
         System.out.println("当前时间："+simpleDateFormattime.format(simpdate));
 
     }
+    public int[][] kClosest(int[][] points, int K) {
+        int[][] res=new int[K][2];
+        int[] lens =new int[points.length];
+        //first get the maxL
+        for(int i=0;i<points.length;i++){
+            lens[i]=(points[i][0]*points[i][0])+(points[i][1]*points[i][1]);
+        }
+        Arrays.sort(lens);
+        int maxL=lens[K-1];
+        int index=0;
+        for(int i=0;i<points.length;i++){
+            if((points[i][0]*points[i][0])+(points[i][1]*points[i][1])<=maxL&&index<K){
+                res[index][0]=points[i][0];
+                res[index][1]=points[i][1];
+                index++;
+            }
+        }
+        return res;
+
+    }
+    //answer
+    public int[][] kClosest2(int[][] points, int K) {
+        Arrays.sort(points, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                //return + ,reverse order;often Ascending
+                //return -; often Ascending
+                return o1[0]*o1[0]+o1[1]*o1[1]-o2[0]*o2[0]+o2[1]*o2[1];
+            }
+        });
+        return Arrays.copyOfRange(points,0,K);
+    }
+
+
 
     public int maxProfit(int[] prices) {
         int n=prices.length;
