@@ -7,21 +7,68 @@ import java.util.*;
 public class Solution13 {
     //since 11.5
     public static void main(String[] args){
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");//注意月份是MM
-            Date date = simpleDateFormat.parse("2020-11-01 23:37:30");
-            System.out.println(date);
-
-        }catch (Exception e){
-            System.out.println("parse Fail");
-        }
-        Date simpdate = new Date();
-
-        SimpleDateFormat simpleDateFormattime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-
-        System.out.println("当前时间："+simpleDateFormattime.format(simpdate));
+//        try {
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");//注意月份是MM
+//            Date date = simpleDateFormat.parse("2020-11-01 23:37:30");
+//            System.out.println(date);
+//
+//        }catch (Exception e){
+//            System.out.println("parse Fail");
+//        }
+//        Date simpdate = new Date();
+//
+//        SimpleDateFormat simpleDateFormattime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//
+//        System.out.println("当前时间："+simpleDateFormattime.format(simpdate));
+        Solution13 s=new Solution13();
+        s.findRotateSteps("godding","gd");
 
     }
+    //wrong ,because choice left and right may have different result
+    public int findRotateSteps(String ring, String key) {
+        int res = 0;
+        int index =0;
+        //point in 0, when start
+        //need find the nearest point,and make to the point
+        for(int i=0;i<key.length();i++){
+            int nearest =findNearest(index,ring,key.charAt(i));
+            //find and turn to
+            int needMove=Math.min((nearest+(ring.length()-index))%ring.length(),(index+(ring.length()-nearest))%ring.length());
+            index=nearest;
+            res+=needMove;
+
+
+            res++;
+
+        }
+        System.out.println(res);
+
+        return res;
+
+    }
+
+    private int findNearest(int index, String ring, char charAt) {
+
+        int[] leftLen =new int[ring.length()];
+        int[] rightLen =new int[ring.length()];
+        int minLen=ring.length()+1;
+        int res=-1;
+        for(int i =0;i<ring.length();i++){
+            rightLen[i]=(i+(ring.length()-index))%ring.length();
+            leftLen[i]=(index+(ring.length()-i))%ring.length();
+            if(ring.charAt(i)==charAt){
+                //is what I need
+                int len =Math.min(rightLen[i],leftLen[i]);
+                if(len<minLen){
+                    minLen=len;
+                    res=i;
+                }
+
+            }
+        }
+        return res;
+    }
+
     public void nextPermutation(int[] nums) {
         int i=nums.length-2;
         while (i>=0&&nums[i]>=nums[i+1]){

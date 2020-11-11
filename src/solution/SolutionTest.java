@@ -252,6 +252,24 @@ class SolutionTest {
 
 
     }
+    @Test
+    void testMatch(){
+        String fileName="https://github.com/CodepediaOrg/demo-rest-jersey-spring.git";
+        String fileName2="https://github.com/CodepediaOrg/demo-rest-jersey-spring";
+        List<String> names =new ArrayList<>();
+        names.add(fileName);
+        names.add(fileName2);
+        for(String s:names){
+            if(s.matches(".*\\.git$")){
+                s= s.substring(0, s.length() - 4);
+
+            }else {
+                System.out.println("Not Match");
+            }
+            System.out.println(s);
+
+        }
+    }
 
     public static void main(String[] args) {
 //        LocalDateTime now=LocalDateTime.now();
