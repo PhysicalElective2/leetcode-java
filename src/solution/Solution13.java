@@ -21,9 +21,80 @@ public class Solution13 {
 //
 //        System.out.println("当前时间："+simpleDateFormattime.format(simpdate));
         Solution13 s=new Solution13();
-        s.findRotateSteps("godding","gd");
+        ListNode l1=new ListNode(1);
+
+
+        ListNode l2=new ListNode(2);
+        ListNode l3=new ListNode(3);
+        ListNode l4=new ListNode(4);
+        ListNode l5=new ListNode(5);
+//        ListNode l6=new ListNode(6);
+        l1.next=l2;
+        l2.next=l3;
+        l3.next=l4;
+        l4.next=l5;
+//        l5.next=l6;
+//        l6.next=null;
+//        while (l1!=null){
+//            System.out.println(l1.val);
+//            l1=l1.next;
+//        }
+        ListNode res=s.oddEvenList(l1);
+        while (res!=null){
+            System.out.println(res.val);
+            res=res.next;
+        }
+
 
     }
+    public ListNode oddEvenList2(ListNode head) {
+        //this kind of question,loop deal with two node
+        if(head==null){
+            return head;
+        }
+        ListNode evenHead=head.next;
+        ListNode odd=head,even=evenHead;
+        while (even!=null&&even.next!=null){
+            odd.next=even.next;
+            odd=odd.next;
+            even.next=odd.next;
+            even=even.next;
+        }
+        odd.next=evenHead;
+        return odd;
+    }
+    public ListNode oddEvenList(ListNode head) {
+        //but I think my code is Rubbish
+        ListNode evenPre=new ListNode(-1);
+        ListNode evenPreFlag=evenPre;
+        ListNode oddPre =new ListNode(-1);
+        oddPre.next=head;
+        int index=1;
+
+        while (oddPre.next!=null){
+            System.out.println(("val: "+oddPre.next.val));
+            if(index%2==1){
+                //save
+                oddPre=oddPre.next;
+
+
+            }else {
+                evenPre.next=oddPre.next;
+                oddPre.next=oddPre.next.next;
+                System.out.println("removed val:"+evenPre.next.val);
+                evenPre=evenPre.next;
+                evenPre.next=null;
+                //then evenPre is the last even
+            }
+            index++;
+
+        }
+        oddPre.next=evenPreFlag.next;
+
+        return head;
+
+    }
+
     //wrong ,because choice left and right may have different result
     public int findRotateSteps(String ring, String key) {
         int res = 0;
