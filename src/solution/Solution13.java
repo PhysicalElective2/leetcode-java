@@ -1,49 +1,70 @@
 package solution;
 
+import java.text.CollationElementIterator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Solution13 {
+
     //since 11.5
     public static void main(String[] args){
-//        try {
-//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");//注意月份是MM
-//            Date date = simpleDateFormat.parse("2020-11-01 23:37:30");
-//            System.out.println(date);
-//
-//        }catch (Exception e){
-//            System.out.println("parse Fail");
-//        }
-//        Date simpdate = new Date();
-//
-//        SimpleDateFormat simpleDateFormattime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//
-//        System.out.println("当前时间："+simpleDateFormattime.format(simpdate));
-        Solution13 s=new Solution13();
-        ListNode l1=new ListNode(1);
+        int[] arr1 = new int[]{28,6,22,8,44,17};
+        int[] arr2 = new int[]{22,28,8,6};
+        System.out.println(new Solution13().relativeSortArray(arr1,arr2));
 
 
-        ListNode l2=new ListNode(2);
-        ListNode l3=new ListNode(3);
-        ListNode l4=new ListNode(4);
-        ListNode l5=new ListNode(5);
-//        ListNode l6=new ListNode(6);
-        l1.next=l2;
-        l2.next=l3;
-        l3.next=l4;
-        l4.next=l5;
-//        l5.next=l6;
-//        l6.next=null;
-//        while (l1!=null){
-//            System.out.println(l1.val);
-//            l1=l1.next;
-//        }
-        ListNode res=s.oddEvenList(l1);
-        while (res!=null){
-            System.out.println(res.val);
-            res=res.next;
+
+    }
+    //there answer is pretty good too
+    public int[] relativeSortArray2(int[] arr1, int[] arr2) {
+        Map<Integer, Integer> map = new HashMap<>();
+        List<Integer> list = new ArrayList<>();
+        for(int num : arr1) list.add(num);
+        for(int i = 0; i < arr2.length; i++) map.put(arr2[i], i);
+        //should use Collection.sort(),but why (x,y) as Comparator()
+
+        Collections.sort(list, (x, y) -> {
+            if(map.containsKey(x) || map.containsKey(y)) return map.getOrDefault(x, 1001) - map.getOrDefault(y, 1001);
+            return x - y;
+        });
+        for(int i = 0; i < arr1.length; i++) arr1[i] = list.get(i);
+        return arr1;
+    }
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+//        int[] res=new int[arr1.length];
+        Integer[] res=new Integer[arr1.length];
+        for(int i=0;i<arr1.length;i++){
+            res[i]=arr1[i];
         }
+        Map indexInArr2 =new HashMap<Integer,Integer>();
+        for(int i=0;i<arr2.length;i++){
+            indexInArr2.put(arr2[i],i);
+        }
+
+        Arrays.sort(res, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+//                return o1-o2;
+                if(indexInArr2.containsKey(o1)&&indexInArr2.containsKey(o2)){
+                    return (Integer) indexInArr2.get(o1)- (Integer)indexInArr2.get(o2);
+                }else if(indexInArr2.containsKey(o1)){
+                    return -1;
+                }else if(indexInArr2.containsKey(o2)){
+                    return +1;
+                }else {
+                    return o1-o2;
+                }
+            }
+        });
+        for(int i=0;i<res.length;i++){
+            System.out.println("\t"+res[i]);
+        }
+        int[] realRes=new int[res.length];
+        for(int i=0;i<realRes.length;i++){
+            realRes[i]=res[i];
+        }
+        return realRes;
 
 
     }
