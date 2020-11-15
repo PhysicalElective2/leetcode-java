@@ -9,13 +9,51 @@ public class Solution13 {
 
     //since 11.5
     public static void main(String[] args){
-        int[] arr1 = new int[]{28,6,22,8,44,17};
-        int[] arr2 = new int[]{22,28,8,6};
-        System.out.println(new Solution13().relativeSortArray(arr1,arr2));
+        List<String>strings = Arrays.asList("abc", "", "bc", "efg", "abcd","", "jkl");
+// 获取空字符串的数量
+        long count = strings.stream().filter(string -> string.length()>=1).count();
+//        Object[] hh= strings.stream().filter(string -> string.length()>=1).;
+//        System.out.println(hh);
+//        int[] arr1 = new int[]{28,6,22,8,44,17};
+//        int[] arr2 = new int[]{22,28,8,6};
+//        System.out.println(new Solution13().relativeSortArray(arr1,arr2));
+
 
 
 
     }
+
+
+    public String removeKdigits(String num, int k) {
+        Deque<Character> deque =new LinkedList<>();
+        int length =num.length();
+        for(int i=0;i<length;i++){
+            char digit = num.charAt(i);
+            while (!deque.isEmpty()&&k>0&&deque.peekLast()>digit){
+                deque.pollLast();
+                k--;
+            }
+            deque.offerLast(digit);
+        }
+        for(int i=0;i<k;i++){
+            deque.pollLast();
+        }
+        StringBuilder ret =new StringBuilder();
+        boolean leadingZero =true;
+        while (!deque.isEmpty()){
+            char digit =deque.pollFirst();
+            if(leadingZero&&digit=='0'){
+                continue;
+            }
+            leadingZero=false;
+            ret.append(digit);
+        }
+        return ret.length()==0?"0":ret.toString();
+
+
+    }
+
+
     //there answer is pretty good too
     public int[] relativeSortArray2(int[] arr1, int[] arr2) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -37,7 +75,8 @@ public class Solution13 {
         for(int i=0;i<arr1.length;i++){
             res[i]=arr1[i];
         }
-        Map indexInArr2 =new HashMap<Integer,Integer>();
+        //notice the "Integer" place
+        Map<Integer,Integer> indexInArr2 =new HashMap<>();
         for(int i=0;i<arr2.length;i++){
             indexInArr2.put(arr2[i],i);
         }
@@ -45,9 +84,10 @@ public class Solution13 {
         Arrays.sort(res, new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-//                return o1-o2;
+//                make -1,keep order
                 if(indexInArr2.containsKey(o1)&&indexInArr2.containsKey(o2)){
-                    return (Integer) indexInArr2.get(o1)- (Integer)indexInArr2.get(o2);
+                    return indexInArr2.get(o1)- indexInArr2.get(o2);
+//                    return indexInArr2.getOrDefault(o1,1001)-indexInArr2.getOrDefault(o2,1001)
                 }else if(indexInArr2.containsKey(o1)){
                     return -1;
                 }else if(indexInArr2.containsKey(o2)){
