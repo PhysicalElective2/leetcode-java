@@ -8,6 +8,30 @@ public class TencentSolution2 {
     public static void main(String[] args) {
         System.out.println(new TencentSolution2().reverseWords("Let's take LeetCode contest"));
     }
+    public ListNode reverseD(ListNode head){
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode p =reverseD(head.next);
+        head.next.next=head;
+        head.next=null;
+        return p;
+    }
+    public ListNode reverseList(ListNode head) {
+        ListNode resPre=new ListNode(-1);
+        resPre.next=null;
+        ListNode temp=new ListNode(-1);
+        while (head!=null){
+            temp=head.next;
+            head.next=resPre.next;
+            resPre.next=head;
+            head=temp;
+        }
+        return resPre.next;
+
+
+    }
+
 
     public boolean containsDuplicate(int[] nums) {
         Arrays.sort(nums);
