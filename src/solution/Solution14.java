@@ -1,19 +1,45 @@
 package solution;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 public class Solution14 {
     public static void main(String[] args) {
        Solution14 s=new Solution14();
-       int[] a=new int[]{3,3,4};
+       int[] a=new int[]{0,1,0,3,12};
        int[] b=new int[]{3,4,4};
-        System.out.println(s.canCompleteCircuit(a,b));
+       s.moveZeroes(a);
+
+       // System.out.println(s.canCompleteCircuit(a,b));
+
 
 //        System.out.println(s.canCompleteCircuit2(a,b));
     }
 
     //since 11.16
+    public void moveZeroes(int[] nums) {
+        List list =new ArrayList<>();
+        for(int i:nums){
+            list.add(i);
+        }
+        Collections.sort(list, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1,Integer o2){
+                if(o1==0){
+                    return 1;
+                }
+                if(o2==0){
+                    return -1;
+                }
+                return 0;
+            }
+        });
+        for(int i=0;i<list.size();i++){
+            nums[i]=(int)list.get(i);
+        }
+
+
+
+    }
     public int canCompleteCircuit3(int[] gas, int[] cost) {
         int n = gas.length;
         int i = 0;
