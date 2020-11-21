@@ -16,6 +16,76 @@ public class Solution14 {
     }
 
     //since 11.16
+    public ListNode sortList(ListNode head) {
+        if(head==null) return null;
+        ListNode resPre =new ListNode(-1);
+        resPre.next=head;
+        return null;
+
+    }
+    public ListNode insertionSortList(ListNode head) {
+        if(head==null) return null;
+        ListNode resPre=new ListNode(-1);
+        resPre.next=null;
+        ListNode tempNext=new ListNode(-1);
+        ListNode pointPre =new ListNode(-1);
+
+        while (head!=null){
+            //find the index to insert the node to resPre
+            pointPre=resPre;
+            ListNode point =resPre.next;
+            if(point==null){
+                tempNext=head.next;
+                resPre.next=head;
+                head.next=null;
+                head=tempNext;
+                continue;
+            }
+            while (point.val<head.val&&point!=null){
+                pointPre=pointPre.next;
+                point=point.next;
+            }
+            //now point.val > =head.val
+            tempNext=head.next;
+            head.next=pointPre.next;
+            pointPre.next=head;
+            head=tempNext;
+        }
+        return resPre.next;
+
+    }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        int add=0;
+        ListNode resPre=new ListNode(-1);
+        ListNode pointPre=resPre;
+        while (l1!=null&&l2!=null){
+            ListNode res=new ListNode((l1.val+l2.val+add)%10);
+            pointPre.next=res;
+            pointPre=pointPre.next;
+            add=(l1.val+l2.val+add)/10;
+            l1=l1.next;
+            l2=l2.next;
+        }
+        while (l1!=null){
+            ListNode res=new ListNode((l1.val+add)%10);
+            pointPre.next=res;
+            pointPre=pointPre.next;
+            add=(l1.val+add)/10;
+            l1=l1.next;
+        }
+        while (l2!=null){
+            ListNode res=new ListNode((l2.val+add)%10);
+            pointPre.next=res;
+            pointPre=pointPre.next;
+            add=(l2.val+add)/10;
+            l2=l2.next;
+        }
+        if(add!=0){
+            ListNode res=new ListNode(add);
+            pointPre.next=res;
+        }
+        return  resPre.next;
+    }
     public void moveZeroes(int[] nums) {
         List list =new ArrayList<>();
         for(int i:nums){
