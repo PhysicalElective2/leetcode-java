@@ -6,7 +6,55 @@ import java.util.*;
 
 public class TencentSolution2 {
     public static void main(String[] args) {
-        System.out.println(new TencentSolution2().reverseWords("Let's take LeetCode contest"));
+//        System.out.println(new TencentSolution2().reverseWords("Let's take LeetCode contest"));
+        int[][] test ={{1,2,3},{4,5,6},{7,8,9}};
+        new TencentSolution2().spiralOrder(test);
+    }
+    public boolean isAnagram(String s, String t) {
+        if(s.length()!=t.length()){
+            return false;
+        }
+        char[] s1=s.toCharArray();
+        char[] s2=t.toCharArray();
+        Arrays.sort(s1);
+        Arrays.sort(s2);
+        return Arrays.equals(s1,s2);
+
+    }
+
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> res=new ArrayList<>();
+        if(matrix==null||matrix.length==0||matrix[0].length==0){
+            return res;
+        }
+
+        int m=matrix.length;
+        int n=matrix[0].length;
+        boolean[][] visited =new boolean[m][n];
+        int total =m*n;
+        int[][] directions ={{0,1},{1,0},{0,-1},{-1,0}};
+        int directionIndex =0;
+        int row =0,column=0;
+        for(int i=0;i<total;i++){
+            res.add(matrix[row][column]);
+            visited[row][column]=true;
+            int nextRow =row+directions[directionIndex][0];
+            int nextColumn =column+directions[directionIndex][1];
+
+                if(nextRow<0||nextColumn<0||nextRow>=m||nextColumn>=n||visited[nextRow][nextColumn]){
+                    directionIndex=(directionIndex+1)%4;
+
+                }
+
+//            if(nextRow<0||nextColumn<0||nextRow>=m||nextColumn>=n||visited[nextRow][nextColumn]){
+//                directionIndex=(directionIndex+1)%4;
+//
+//            }
+            row+=directions[directionIndex][0];
+            column+=directions[directionIndex][1];
+        }
+        return res;
+
     }
     public ListNode reverseD(ListNode head){
         if(head==null||head.next==null){
