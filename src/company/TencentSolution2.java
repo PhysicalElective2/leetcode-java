@@ -6,7 +6,6 @@ import java.util.*;
 
 public class TencentSolution2 {
     public static void main(String[] args) {
-//        System.out.println(new TencentSolution2().reverseWords("Let's take LeetCode contest"));
         int[][] test ={{1,2,3},{4,5,6},{7,8,9}};
         new TencentSolution2().spiralOrder(test);
     }
@@ -19,6 +18,29 @@ public class TencentSolution2 {
         Arrays.sort(s1);
         Arrays.sort(s2);
         return Arrays.equals(s1,s2);
+
+    }
+    public int[][] generateMatrix(int n) {
+        int[][] res=new int[n][n];
+        int total =n*n;
+        int[][] directions={{0,1},{1,0},{0,-1},{-1,0}};
+        boolean[][] visited =new boolean[n][n];
+        int directionIndex =0;
+        int row =0;
+        int column =0;
+        for(int i=0;i<total;i++){
+            res[row][column]=i+1;
+            visited[row][column]=true;
+            int nextRow =row+directions[directionIndex][0];
+            int nextColumn=column+directions[directionIndex][1];
+            if(nextRow<0||nextColumn<0||nextRow>=n||nextColumn>=n||visited[nextRow][nextColumn]){
+                directionIndex=(directionIndex+1)%4;
+
+            }
+            row=row+directions[directionIndex][0];
+            column=column+directions[directionIndex][1];
+        }
+        return res;
 
     }
     public int findMinArrowShots(int[][] points) {
