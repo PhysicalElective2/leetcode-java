@@ -21,6 +21,34 @@ public class TencentSolution2 {
         return Arrays.equals(s1,s2);
 
     }
+    public int findMinArrowShots(int[][] points) {
+        if(points==null||points.length==0||points[0].length==0){
+            return 0;
+        }
+        Arrays.sort(points, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if(o1[1]>o2[1]){
+                    return 1;
+
+                }else if(o1[1] < o2[1]){
+                    return -1;
+
+                }
+                return 0;
+            }
+        });
+        int pos =points[0][1];
+        int ans = 1;
+        for(int[] ballon:points){
+            if(ballon[0]>pos){
+                pos=ballon[1];
+                ++ans;
+            }
+        }
+        return ans;
+
+    }
 
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> res=new ArrayList<>();
