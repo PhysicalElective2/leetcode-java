@@ -16,6 +16,18 @@ public class Solution14 {
     }
 
     //since 11.16
+    public int countNodes(TreeNode root) {
+       if(root==null){
+           return 0;
+       }
+//       if(root.left==null&&root.right==null){
+//           return 1;
+//       }
+
+        return countNodes(root.left)+countNodes(root.right)+1;
+
+    }
+
     public ListNode sortList(ListNode head) {
         if(head==null) return null;
         ListNode resPre =new ListNode(-1);
