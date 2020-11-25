@@ -16,6 +16,34 @@ public class Solution14 {
     }
 
     //since 11.16
+    public String sortString(String s) {
+        //
+        int[] num= new int[26];
+        for(int i=0;i<s.length();i++){
+            num[s.charAt(i)-'a']++;
+        }
+
+        StringBuilder res=new StringBuilder();
+        int length =s.length();
+        while (res.length()<length){
+            for(int i=0;i<26;i++){
+                if(num[i]>0){
+                    res.append((char)(i+'a'));
+                    num[i]--;
+                }
+            }
+            for(int i=25;i>=0;i--){
+                if(num[i]>0){
+                    res.append((char)(i+'a'));
+                    num[i]--;
+                }
+            }
+
+
+        }
+        return res.toString();
+
+    }
     public int countNodes(TreeNode root) {
        if(root==null){
            return 0;

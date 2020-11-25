@@ -13,6 +13,53 @@ public class TencentSolution2 {
         System.arraycopy(nums2, 0, nums1, m, n);
         Arrays.sort(nums1);
     }
+    // a better way
+    public ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
+        } else if (l2 == null) {
+            return l1;
+        } else if (l1.val < l2.val) {
+            l1.next = mergeTwoLists(l1.next, l2);
+            return l1;
+        } else {
+            l2.next = mergeTwoLists(l1, l2.next);
+            return l2;
+        }
+
+    }
+
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode resPre =new ListNode(-1);
+        ListNode pointPre =resPre;
+        ListNode temp=new ListNode(-1);
+        while (l1!=null&&l2!=null){
+            if(l1.val<l2.val){
+                temp=l1.next;
+                pointPre.next=l1;
+                l1.next=null;
+                l1=temp;
+
+            }else {
+                temp=l2.next;
+                pointPre.next=l2;
+                l2.next=null;
+                l2=temp;
+
+
+            }
+            pointPre=pointPre.next;
+
+        }
+        if(l1!=null){
+            pointPre.next=l1;
+        }
+        if(l2!=null){
+            pointPre.next=l2;
+        }
+        return resPre.next;
+
+    }
     public void merge2(int[] nums1, int m, int[] nums2, int n) {
         int p1=m-1;
         int p2=n-1;
