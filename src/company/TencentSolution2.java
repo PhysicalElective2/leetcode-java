@@ -9,6 +9,22 @@ public class TencentSolution2 {
         int[][] test ={{1,2,3},{4,5,6},{7,8,9}};
         new TencentSolution2().spiralOrder(test);
     }
+    public ListNode mergeKLists(ListNode[] lists) {
+        return null;
+
+    }
+    public boolean isPalindrome(int x) {
+       if(x<0||(x%10==0&&x!=0)){
+           return false;
+       }
+       int revertedNum=0;
+       while (x>revertedNum){
+           revertedNum=revertedNum*10+x%10;
+           x/=10;
+       }
+       return x==revertedNum||x==revertedNum/10;
+
+    }
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         System.arraycopy(nums2, 0, nums1, m, n);
         Arrays.sort(nums1);
