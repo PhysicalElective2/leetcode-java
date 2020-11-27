@@ -16,6 +16,45 @@ public class Solution14 {
     }
 
     //since 11.16
+    public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
+        Map<Integer,Integer> map =new HashMap();
+        int res=0;
+        for(int a:A){
+            for(int b:B){
+                map.put(a+b,map.getOrDefault(a+b,0)+1);
+            }
+        }
+        for(int c:C){
+            for(int d:D){
+                res+=map.getOrDefault(-c-d,0);
+            }
+        }
+        return res;
+
+    }
+    public int singleNumber(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for(int i:nums){
+            if(set.contains(i)){
+                set.remove(i);
+            }else {
+                set.add(i);
+            }
+        }
+        return (int) set.toArray()[0];
+        //
+
+
+    }
+    // a better way use  XOR
+    public int singleNumber2(int[] nums) {
+
+        int single = 0;
+        for (int num : nums) {
+            single ^= num;
+        }
+        return single;
+    }
     public int maximumGap(int[] nums) {
         if(nums.length<2) return 0;
         int res=0;
