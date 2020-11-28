@@ -4,18 +4,42 @@ import java.util.*;
 
 public class Solution14 {
     public static void main(String[] args) {
+        // \u00A0 SDFSD
        Solution14 s=new Solution14();
        int[] a=new int[]{0,1,0,3,12};
        int[] b=new int[]{3,4,4};
        s.moveZeroes(a);
+        System.out.println('\u2122');
 
        // System.out.println(s.canCompleteCircuit(a,b));
 
 
 //        System.out.println(s.canCompleteCircuit2(a,b));
     }
+    public int maxDepth(TreeNode root) {
+        //
+        if(root==null){
+            return 0;
+        }
+        return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
+
+    }
+
 
     //since 11.16
+    public int reversePairs(int[] nums) {
+        int res=0;
+        int length =nums.length;
+        int temp[] =new int[length];
+        temp[length-1]=0;
+
+        for(int i=length-1;i>=0;i--){
+            //
+            temp[i]=
+
+        }
+
+    }
     public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
         Map<Integer,Integer> map =new HashMap();
         int res=0;
