@@ -28,17 +28,36 @@ public class Solution14 {
 
     //since 11.16
     public int reversePairs(int[] nums) {
-        int res=0;
-        int length =nums.length;
-        int temp[] =new int[length];
-        temp[length-1]=0;
-
-        for(int i=length-1;i>=0;i--){
-            //
-            temp[i]=
-
+        //
+        return 0;
+    }
+    //  they way is better ,just need keep A[i - 2] + A[i - 1] > A[i]
+    public int largestPerimeter2(int[] A) {
+        Arrays.sort(A);
+        for (int i = A.length - 1; i >= 2; --i) {
+            if (A[i - 2] + A[i - 1] > A[i]) {
+                return A[i - 2] + A[i - 1] + A[i];
+            }
         }
+        return 0;
+    }
+    public int largestPerimeter(int[] A) {
+        Arrays.sort(A);
+        int index= A.length-1;
+        int a=A[index--];
+        int b=A[index--];
+        int c=A[index--];
+        while ((!isTriangle(a,b,c))&&index>=0){
+            a=b;
+            b=c;
+            c=A[index--];
+        }
+        if(isTriangle(a,b,c)) return a+b+c;
+        return 0;
 
+    }
+    public boolean isTriangle(int a,int b,int c){
+        return (a+b)>c&&(a+c)>b&&(b+c)>a;
     }
     public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
         Map<Integer,Integer> map =new HashMap();
