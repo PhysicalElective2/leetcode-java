@@ -6,9 +6,9 @@ public class Solution14 {
     public static void main(String[] args) {
         // \u00A0 SDFSD
        Solution14 s=new Solution14();
-       int[] a=new int[]{0,1,0,3,12};
-       int[] b=new int[]{3,4,4};
-       s.moveZeroes(a);
+
+//       s.reorganizeString("aabb");
+        System.out.println(s.reorganizeString("aaab"));
         System.out.println('\u2122');
 
        // System.out.println(s.canCompleteCircuit(a,b));
@@ -22,6 +22,97 @@ public class Solution14 {
             return 0;
         }
         return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
+
+    }
+
+    //my false way
+    public String reorganizeString2(String S){
+        if(S.length()<2) return S;
+        int[] count =new int[26];
+        int maxCount =0;
+        int length =S.length();
+        for(int i=0;i<length;i++){
+            char c=S.charAt(i);
+            count[c-'a']++;
+            maxCount=Math.max(maxCount,count[c-'a']);
+        }
+        if(maxCount>(length+1)/2){
+            return "";
+        }
+        PriorityQueue<Character> queue =new PriorityQueue<>(new Comparator<Character>() {
+            @Override
+            public int compare(Character o1, Character o2) {
+                return count[o2-'a']-count[o1-'a'];
+            }
+        });
+        for(char c= 'a';c<='z';c++){
+            if(count[c-'a']>0){
+                queue.offer(c);
+            }
+        }
+        StringBuilder sb=new StringBuilder();
+        while (queue.size()>1){
+            char letter1 =queue.poll();
+            char letter2 =queue.poll();
+            sb.append(letter1);
+            sb.append(letter2);
+            count[letter1-'a']--;
+            count[letter2-'a']--;
+            if(count[letter1-'a']>0){
+                queue.offer(letter1);
+            }
+            if(count[letter2-'a']>0){
+                queue.offer(letter2);
+            }
+
+        }
+        if(queue.size()>0){
+            sb.append(queue.poll());
+
+        }
+        return sb.toString();
+
+
+    }
+    public String reorganizeString(String S) {
+        if(S.length()==0) return "";
+        StringBuilder res=new StringBuilder();
+        char[] ss=S.toCharArray();
+        boolean[] visit =new boolean[S.length()];
+
+        Arrays.sort(ss);
+        res.append(ss[0]);
+        visit[0]=true;
+        int index =1;
+        //may  lost in loop
+        while (res.length()<S.length()){
+            if( ss[index]!=res.charAt(res.length()-1)&&!visit[index]){
+                res.append(ss[index]);
+                visit[index] =true;
+
+            }else {
+                index=(index+1)%S.length();
+            }
+
+
+        }
+        boolean can=true;
+        for(int i=1;i<res.length();i++){
+            if(res.charAt(i)==res.charAt(i-1)){
+                can=false;
+                break;
+
+            }
+        }
+        if(can){
+            return res.toString();
+        }else {
+            return "";
+        }
+
+
+
+
 
     }
 
@@ -75,6 +166,7 @@ public class Solution14 {
         return res;
 
     }
+
     public int singleNumber(int[] nums) {
         Set<Integer> set = new HashSet<>();
         for(int i:nums){

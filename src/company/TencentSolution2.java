@@ -1,28 +1,71 @@
 package company;
 
 
+import java.math.BigInteger;
 import java.util.*;
 
 
 public class TencentSolution2 {
+    private static final Object M = "media";
+    private static final Object L = "large";
+    private static final Object S = "small";
+
     public static void main(String[] args) {
-        int[][] test ={{1,2,3},{4,5,6},{7,8,9}};
-        new TencentSolution2().spiralOrder(test);
+//        int[][] test ={{1,2,3},{4,5,6},{7,8,9}};
+//        new TencentSolution2().spiralOrder(test);
+        Throwable able = new Throwable("想吐。。。");
+
+        System.out.println(able.toString()); // 输出该异常的类名
+
+        System.out.println(able.getMessage()); // 输出异常的信息
+
+        able.printStackTrace(); // 打印栈信息
+//        TencentSolution2 t=new TencentSolution2();
+//        t.beautifulArray(6);
+//        enum Size{ M,L,S};
+//        enum Color { RED, GREEN, BLUE }
+
     }
+
+
+    Map<Integer, int[]> memo;
+    public int[] beautifulArray(int N) {
+        memo = new HashMap();
+        return f(N);
+    }
+
+    public int[] f(int N) {
+        if (memo.containsKey(N))
+            return memo.get(N);
+
+        int[] ans = new int[N];
+        if (N == 1) {
+            ans[0] = 1;
+        } else {
+            int t = 0;
+            for (int x: f((N+1)/2))  // odds
+                ans[t++] = 2*x - 1;
+            for (int x: f(N/2))  // evens
+                ans[t++] = 2*x;
+        }
+        memo.put(N, ans);
+        return ans;
+    }
+
     public ListNode mergeKLists(ListNode[] lists) {
         return null;
 
     }
     public boolean isPalindrome(int x) {
-       if(x<0||(x%10==0&&x!=0)){
-           return false;
-       }
-       int revertedNum=0;
-       while (x>revertedNum){
-           revertedNum=revertedNum*10+x%10;
-           x/=10;
-       }
-       return x==revertedNum||x==revertedNum/10;
+        if(x<0||(x%10==0&&x!=0)){
+            return false;
+        }
+        int revertedNum=0;
+        while (x>revertedNum){
+            revertedNum=revertedNum*10+x%10;
+            x/=10;
+        }
+        return x==revertedNum||x==revertedNum/10;
 
     }
     public void merge(int[] nums1, int m, int[] nums2, int n) {
@@ -74,6 +117,11 @@ public class TencentSolution2 {
             pointPre.next=l2;
         }
         return resPre.next;
+
+    }
+    public int reverse(int x) {
+//
+        return 0;
 
     }
     public void merge2(int[] nums1, int m, int[] nums2, int n) {
