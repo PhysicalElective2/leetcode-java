@@ -1,5 +1,6 @@
 package solution;
 
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Solution14 {
@@ -8,8 +9,15 @@ public class Solution14 {
        Solution14 s=new Solution14();
 
 //       s.reorganizeString("aabb");
-        System.out.println(s.reorganizeString("aaab"));
-        System.out.println('\u2122');
+//        System.out.println(s.reorganizeString("aaab"));
+//        System.out.println('\u2122');
+        String sss="sdfsdf sdfsf增高";
+        //have startwith don not need re
+        sss.startsWith("sd");
+        System.out.println(System.getProperty("user.dir"));
+        //Paths.get() get file
+         System.out.println(sss.codePointCount(0,sss.length()));
+         for(int i=10;i>0;i--) System.out.println("sdfsd"+i);
 
        // System.out.println(s.canCompleteCircuit(a,b));
 
