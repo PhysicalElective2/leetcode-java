@@ -11,7 +11,7 @@ public class Solution14 {
 //       s.reorganizeString("aabb");
 //        System.out.println(s.reorganizeString("aaab"));
 //        System.out.println('\u2122');
-        String sss="sdfsdf sdfsf增高";
+        String sss="sdfsdf sdfsf";
         //have startwith don not need re
         sss.startsWith("sd");
         System.out.println(System.getProperty("user.dir"));
@@ -23,6 +23,31 @@ public class Solution14 {
 
 
 //        System.out.println(s.canCompleteCircuit2(a,b));
+    }
+    public int countPrimes(int n) {
+        int[] nums= new int[n];
+        Arrays.fill(nums,1);
+        int ans=0;
+        for(int i =2;i<n;i++){
+            if(nums[i]==1){
+                ans++;
+                if(i*i<n){
+                    for(int j=i+i;j<n;j+=i){
+                        nums[j]=0;
+                    }
+                }
+
+            }
+        }
+        return ans;
+
+    }
+    public int[] maxNumber(int[] nums1, int[] nums2, int k) {
+        //
+        int[] res =new int[k];
+        return  res;
+
+
     }
     public int maxDepth(TreeNode root) {
         //

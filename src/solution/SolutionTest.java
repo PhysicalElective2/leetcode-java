@@ -4,6 +4,7 @@ import com.sun.istack.internal.NotNull;
 import org.junit.jupiter.api.Test;
 
 import java.net.InetAddress;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -13,6 +14,8 @@ class SolutionTest {
 
     @Test
     void findKthToTail() {
+        NumberFormat n =NumberFormat.getCurrencyInstance();
+        NumberFormat j =NumberFormat.getPercentInstance();
         ListNode a=new ListNode(1);
         ListNode b=new ListNode(2);
         ListNode c=new ListNode(3);

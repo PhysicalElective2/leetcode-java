@@ -4,12 +4,18 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 class Solution7Test {
     public static Solution6 s=new Solution6();
 
     @BeforeEach
     void setUp() {
          Solution7 s =new Solution7();
+        LocalDate lo=LocalDate.now();
+        System.out.println(lo);
+        LocalDate ne=lo.plusDays(1001);
+        System.out.println(ne);
 
     }
 
