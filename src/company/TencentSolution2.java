@@ -17,7 +17,47 @@ public class TencentSolution2 {
         return nn==1;
 
     }
+    public ListNode rotateRight2(ListNode head, int k) {
+        if(head==null||head.next==null) return head;
+        ListNode old_tail = head;
+
+        int size=1;
+        while (old_tail.next!=null){
+            old_tail=old_tail.next;
+            size++;
+        }
+        old_tail.next=head;
+        System.out.println("size:"+size);
+        k=k%size;
+        if(k==0) return head;
+        ListNode point = head;
+
+        while (k>0){
+            point=point.next;
+            k--;
+        }
+        ListNode new_head=point.next;
+        point.next=null;
+        return new_head;
+    }
     // a better way
+    public ListNode mergeKLists(ListNode[] lists) {
+//        mergeTwoLists()
+        if(lists.length<=0){
+            return null;
+        }
+        if(lists.length==1){
+            return lists[0];
+        }
+
+        ListNode res=lists[0];
+        for(int i=1;i<lists.length;i++){
+            res=mergeTwoLists(res,lists[i]);
+
+        }
+        return res;
+
+    }
     public boolean isPowerOfTwo2(int n) {
         if (n == 0) return false;
         while (n % 2 == 0) n /= 2;
@@ -181,10 +221,6 @@ public class TencentSolution2 {
         return ans;
     }
 
-    public ListNode mergeKLists(ListNode[] lists) {
-        return null;
-
-    }
 
     public boolean isPalindrome(int x) {
         if (x < 0 || (x % 10 == 0 && x != 0)) {

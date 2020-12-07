@@ -5,6 +5,8 @@ import java.util.*;
 
 public class Solution14 {
     public static void main(String[] args) {
+        System.out.println("   ");
+
         // \u00A0 SDFSD
        Solution14 s=new Solution14();
 
@@ -23,6 +25,53 @@ public class Solution14 {
 
 
 //        System.out.println(s.canCompleteCircuit2(a,b));
+    }
+
+    public int matrixScore(int[][] A) {
+        int m =A.length;
+        int n=A[0].length;
+        int res=m* (1<<(n-1));
+        for(int j=1;j<n;j++){
+            int nOnes = 0;
+            for(int i=0;i<m;i++)
+                if(A[i][0]==1){
+                    nOnes += A[i][j];
+                }else {
+                    nOnes+=(1-A[i][j]);
+                }
+            int k = Math.max(nOnes, m - nOnes);
+            res += k * (1 << (n - j - 1));
+
+
+        }
+        return res;
+
+    }
+
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> res=new ArrayList();
+        if(numRows<=0){
+            return res;
+        }
+        List<Integer> lastLine =new ArrayList<>();
+        lastLine.add(1);
+        res.add(lastLine);
+
+        for(int i=2;i<=numRows;i++){
+            List<Integer> thisLine =new ArrayList<>(i);
+            thisLine.add(0,1);
+            for(int j=1;j<i-1;j++){
+                thisLine.add(j,lastLine.get(j-1)+lastLine.get(j));
+            }
+            thisLine.add(i-1,1);
+            res.add(thisLine);
+            lastLine=thisLine;
+
+
+
+        }
+        return res;
+
     }
     public int countPrimes(int n) {
         int[] nums= new int[n];
