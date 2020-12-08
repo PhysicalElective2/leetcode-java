@@ -17,6 +17,23 @@ public class TencentSolution2 {
         return nn==1;
 
     }
+    // not loop from stat
+    public boolean hasCycle(ListNode head) {
+        if(head==null||head.next==null) return false;
+        boolean res=false;
+        Set<ListNode> set= new HashSet<>();
+
+        while (head!=null){
+            if(!set.add(head)) {
+
+                res=true;
+                break;
+            }
+            head=head.next;
+        }
+        return res;
+
+    }
     public ListNode rotateRight2(ListNode head, int k) {
         if(head==null||head.next==null) return head;
         ListNode old_tail = head;
