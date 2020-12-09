@@ -17,7 +17,80 @@ public class TencentSolution2 {
         return nn==1;
 
     }
+    //have better way
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode pointA=headA;
+        ListNode pointB =headB;
+        int lenA=1;
+        int lenB=1;
+        while (pointA!=null){
+            pointA=pointA.next;
+            lenA++;
+        }
+        while (pointB!=null){
+            pointB=pointB.next;
+            lenB++;
+        }
+        //make A longer
+        if(lenA<lenB){
+            pointA=headB;
+            headB=headA;
+            headA=pointA;
+        }
+        int diff=Math.abs(lenA-lenB);
+        pointA=headA;
+        pointB=headB;
+        while (diff>0){
+            pointA=pointA.next;
+            diff--;
+
+        }
+        while (pointA!=null&&pointB!=null){
+            if(pointA==pointB){
+                return pointA;
+            }
+            pointA=pointA.next;
+            pointB=pointB.next;
+        }
+        return null;
+
+
+    }
     // not loop from stat
+    public ListNode detectCycle(ListNode head) {
+        if(head==null||head.next==null) return null;
+        Set<ListNode> set = new HashSet<>();
+        ListNode point =head;
+        while (point!=null){
+            if(!set.add(point)){
+                return point;
+            }
+            point=point.next;
+        }
+        return null;
+
+    }
+    //md
+    public void deleteNode2(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+
+    public void deleteNode(ListNode node) {
+//        ListNode pre =new ListNode(-1);
+//        pre.next=node;
+//        ListNode point =node;
+        ListNode pre =node;
+        node=node.next;
+        while (node.next!=null){
+            pre.val=node.val;
+            node=node.next;
+            pre=pre.next;
+        }
+        pre.next=null;
+
+
+    }
     public boolean hasCycle(ListNode head) {
         if(head==null||head.next==null) return false;
         boolean res=false;
