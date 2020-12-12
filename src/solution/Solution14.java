@@ -1,32 +1,109 @@
 package solution;
 
+import org.omg.CORBA.IntHolder;
+
 import java.nio.file.Paths;
 import java.util.*;
 
 public class Solution14 {
 
     public static void main(String[] args) {
-        System.out.println("   ");
+        System.out.println("中文");
+        System.out.println(Objects.hashCode(new Solution14()));
+//        Objects.hash(new int[]{1,2,3});
+        int[] a=new int[]{1,5,6,9};
+        System.out.println(Arrays.toString(a));
+      //  System.out.println("%d %s",new Object[]{new Integer(5),"sdfs"});
+        //hardly have use
+        ArrayList<Integer> li=new ArrayList<>(5);
+        for(int i=0;i<7;i++){
+            li.add(i);
+        }
+        li.trimToSize();
+        Integer one =15;
+        Integer two =15;
+        IntHolder i =new IntHolder(45);
+        i.value--;
+        Integer.valueOf("455");
+
+
+        if(one==two){
+            System.out.println("= 等于");
+        }
+        int x=Integer.parseInt("125");
+
+
+        li.ensureCapacity(52);
+        System.out.println(li.size());
+        System.out.println(Arrays.toString(li.toArray()));
+//        System.out.println("fsdf",1,2,3,new Solution8());
+
+//        System.out.println(Arrays.deepToString(a));
+        int aaa=10;
+        int[] aaaa=new int[aaa];
+
 
         // \u00A0 SDFSD
        Solution14 s=new Solution14();
+        System.out.printf(""+s.lemonadeChange(new int[]{5, 5, 5, 10, 5, 5, 10, 20, 20, 20}));
+        System.out.println(s.max(4,5,6,7));
 
-//       s.reorganizeString("aabb");
-//        System.out.println(s.reorganizeString("aaab"));
-//        System.out.println('\u2122');
-        String sss="sdfsdf sdfsf";
-        //have startwith don not need re
-        sss.startsWith("sd");
-        System.out.println(System.getProperty("user.dir"));
-        //Paths.get() get file
-         System.out.println(sss.codePointCount(0,sss.length()));
-         for(int i=10;i>0;i--) System.out.println("sdfsd"+i);
 
        // System.out.println(s.canCompleteCircuit(a,b));
 
 
 //        System.out.println(s.canCompleteCircuit2(a,b));
     }
+    public int max(int... list){
+        int res=-1;
+        for(int i:list){
+            res=Math.max(res,i);
+
+        }
+        return res;
+    }
+    public boolean lemonadeChange(int[] bills) {
+        int[]  wallet =new  int[3];
+//        wallet[0] is 20 wallet[1] is 10 wallet[2] is 5
+        int need;
+        for(int i=0;i<bills.length;i++){
+            switch (bills[i]){
+                case 5:
+                    wallet[2]++;
+                    break;
+                default:
+
+                    need =bills[i]-5;
+                    if(!Get(wallet,need)) {return false;}else {
+                        if(bills[i]==10) wallet[1]++;
+                    }
+
+            }
+        }
+        return true;
+
+
+    }
+
+    private boolean Get(int[] wallet, int i) {
+        if(i==5) {
+            wallet[2]--;
+            return wallet[2]>=0;
+        }else {
+            if(wallet[1]>0){
+                wallet[1]--;
+                wallet[2]--;
+            }else {
+                wallet[2]--;
+                wallet[2]--;
+                wallet[2]--;
+            }
+
+        }
+        return wallet[2]>=0;
+
+    }
+
     public int uniquePaths(int m, int n) {
         int[][] dp= new  int[m][n];
         dp[0][0]=0;
