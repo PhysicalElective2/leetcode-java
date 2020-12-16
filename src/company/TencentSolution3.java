@@ -1,6 +1,40 @@
 package company;
 
+
+import tools.TreeNode;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class TencentSolution3 {
+    public int maxPathSum(TreeNode root) {
+        List<Integer> num =new ArrayList<>();
+        dfs(root,num);
+        int[] dp =new int[num.size()];
+        dp[0] =num.get(0);
+        int res=dp[0];
+
+        for(int i=1;i<dp.length;i++){
+            System.out.println(num.get(i));
+            dp[i]=Math.max(dp[i-1]+num.get(i),num.get(i));
+            res=Math.max(res,dp[i]);
+        }
+        return dp[num.size()-1];
+
+
+    }
+    public void dfs(TreeNode node, List num){
+        num.add(node.val);
+        if(node!=null){
+            num.add(node.val);
+            dfs(node.left, num);
+            dfs(node.right, num);
+        }else {
+            num.add(Integer.MIN_VALUE);
+        }
+
+    }
+
 //    public int search(int[] nums, int target) {
 //        int n= nums.length;
 //        if(n==0){

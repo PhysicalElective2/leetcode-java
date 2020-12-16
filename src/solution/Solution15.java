@@ -1,13 +1,16 @@
 package solution;
 
+import com.sun.org.apache.xerces.internal.xs.StringList;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
-import java.util.Arrays;
+import java.util.*;
 
 public class Solution15 {
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         System.out.println(Size.L.toString());
         Size[] values=Size.values();
+        Arrays.sort(values);
         Size.L.ordinal();
         Class s=Class.forName("S");
         s.newInstance();
@@ -24,6 +27,53 @@ public class Solution15 {
     }
     enum Size{
         S,M,L;
+    }
+    public boolean wordPattern(String pattern, String s) {
+        boolean res=false;
+//        s.substring();
+        String[] ss=s.split(" ");
+        if(ss.length!=pattern.length()) return false;
+        for(int i=0;i<ss.length;i++){
+            if()
+        }
+
+        return  res;
+
+
+    }
+    public int monotoneIncreasingDigits(int N) {
+        char[] strN =Integer.toString(N).toCharArray();
+        int i=1;
+        while (i<strN.length&&strN[i-1]<=strN[i]){
+            i++;
+        }
+        if(i<strN.length){
+            while (i > 0 && strN[i - 1] > strN[i]) {
+                strN[i - 1] -= 1;
+                i -= 1;
+            }
+            for (i += 1; i < strN.length; ++i) {
+                strN[i] = '9';
+            }
+
+        }
+        return Integer.valueOf(strN.toString());
+
+    }
+
+
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String,List<String>> map =new HashMap<String,List<String>>();
+        for(String s:strs){
+            char[] array =s.toCharArray();
+            Arrays.sort(array);
+            String key =new String(array);
+            List<String> list=map.getOrDefault(key,new ArrayList<String>());
+            list.add(s);
+            map.put(key,list);
+
+        }
+        return new ArrayList<List<String>>(map.values());
     }
     public ListNode sortList(ListNode head) {
         return sortList(head, null);
