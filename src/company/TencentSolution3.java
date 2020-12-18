@@ -26,6 +26,9 @@ public class TencentSolution3 {
 
 
     }
+    public List<String> getList(){
+        return null;
+    }
     public void dfs(TreeNode node, List num){
         num.add(node.val);
         if(node!=null){
