@@ -2,11 +2,15 @@ package solution;
 
 import com.sun.org.apache.xerces.internal.xs.StringList;
 
+import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.util.*;
 
 public class Solution15 {
+    public List<String> getList(){
+        return null;
+    }
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         System.out.println(Size.L.toString());
         Size[] values=Size.values();
@@ -30,11 +34,15 @@ public class Solution15 {
     }
     public boolean wordPattern(String pattern, String s) {
         boolean res=false;
+        Boolean ress=false;
+        ActionListener a =e-> System.out.println("ff");
+        Object o;
+//        o.clone();
 //        s.substring();
         String[] ss=s.split(" ");
         if(ss.length!=pattern.length()) return false;
         for(int i=0;i<ss.length;i++){
-            if()
+//            if()
         }
 
         return  res;

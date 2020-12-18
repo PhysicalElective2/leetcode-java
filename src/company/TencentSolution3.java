@@ -10,6 +10,25 @@ public class TencentSolution3 {
     public static void main(String[] args) {
         System.out.println("ff");
     }
+    public int maxSum =Integer.MIN_VALUE;
+    public int maxPathSum2(TreeNode root){
+        maxGain(root);
+        return maxSum;
+
+
+
+    }
+
+    private int maxGain(TreeNode root) {
+        if(root==null) return 0;
+//        if(root.left==null&&root.left==null) return root.val;
+        int leftGain =Math.max(maxGain(root.left),0);
+        int rightGain =Math.max(maxGain(root.right),0);
+        int thisGain =leftGain+rightGain+root.val;
+        maxSum=Math.max(thisGain,maxSum);
+        return root.val+Math.max(leftGain,rightGain);
+    }
+
     public int maxPathSum(TreeNode root) {
         List<Integer> num =new ArrayList<>();
         dfs(root,num);

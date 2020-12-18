@@ -4,12 +4,32 @@ import java.text.CollationElementIterator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Solution13 {
 
     //since 11.5
     public static void main(String[] args){
-        List<String>strings = Arrays.asList("abc", "", "bc", "efg", "abcd","", "jkl");
+        List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd","", "jkl");
+//        strings.removeIf(()-> return true);
+        strings.removeIf(e->e.length()<=1);
+        ArrayList<Integer> names=new ArrayList<>();
+        names.add(1);
+        names.add(2);
+        names.add(3);
+        names.stream().map(Node::new).distinct().collect((Collectors.toList()));
+        strings.removeIf((e)-> {
+            if(e==null)
+                return true;
+            return false;
+        });
+//        Arrays.sort(names, new Comparator<T>() {
+//            @Override
+//            public int compare(T o1, T o2) {
+//                return 0;
+//            }
+//        });
+//        Arrays.sort(names,Comparator.comparing(Integer.bitCount()).thenComparing());
 // 获取空字符串的数量
         long count = strings.stream().filter(string -> string.length()>=1).count();
 //        Object[] hh= strings.stream().filter(string -> string.length()>=1).;
@@ -20,6 +40,18 @@ public class Solution13 {
 
 
 
+
+    }
+    public int maxProfit(int[] prices, int fee) {
+        int[] haveIN =new int[prices.length];
+        int[] haveNot =new int[prices.length];
+        haveIN[0]=-prices[0];
+        haveNot[0]=0;
+        for(int i=1;i<prices.length;i++){
+            haveIN[i]=Math.max(haveIN[i-1],haveNot[i-1]-prices[i]);
+            haveNot[i]=Math.max(haveNot[i-1],haveIN[i-1]+prices[i]-fee);
+        }
+        return haveNot[prices.length-1];
 
     }
 
@@ -61,7 +93,7 @@ public class Solution13 {
         for(int num : arr1) list.add(num);
         for(int i = 0; i < arr2.length; i++) map.put(arr2[i], i);
         //should use Collection.sort(),but why (x,y) as Comparator()
-
+        //lambda 
         Collections.sort(list, (x, y) -> {
             if(map.containsKey(x) || map.containsKey(y)) return map.getOrDefault(x, 1001) - map.getOrDefault(y, 1001);
             return x - y;
