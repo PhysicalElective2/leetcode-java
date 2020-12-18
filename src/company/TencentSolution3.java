@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TencentSolution3 {
+    public static void main(String[] args) {
+        System.out.println("ff");
+    }
     public int maxPathSum(TreeNode root) {
         List<Integer> num =new ArrayList<>();
         dfs(root,num);
