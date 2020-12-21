@@ -32,6 +32,36 @@ public class Solution15 {
     enum Size{
         S,M,L;
     }
+    public int minCostClimbingStairs2(int[] cost) {
+        if(cost.length<=1) return 0;
+        int[] dp=new int[cost.length+1];
+//        int[] dp1=new int[cost.length+1];
+        dp[0] =cost[0];
+        dp[1]=cost[1];
+        for(int i =2;i<dp.length;i++){
+            dp[i]=Math.min(dp[i-1],dp[i-2])+(i==cost.length?0:cost[i]);
+        }
+        return dp[dp.length-1];
+
+
+    }
+
+
+
+    //this over time
+    public int minCostClimbingStairs(int[] cost) {
+        return Math.max(getCost(cost.length-1,cost),getCost(cost.length-2,cost));
+
+    }
+
+    private int getCost(int i, int[] cost) {
+        if(i==0) return cost[0];
+        if(i==1) return cost[1];
+        int cost1=getCost(i-1,cost);
+        int cost2=getCost(i-2,cost);
+        return cost[i]+Math.min(cost1,cost2);
+    }
+
     public void rotate(int[][] matrix) {
         int n=matrix.length;
         int[][] temp=matrix.clone();
