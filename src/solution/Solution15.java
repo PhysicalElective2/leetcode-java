@@ -12,24 +12,7 @@ public class Solution15 {
         return null;
     }
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        System.out.println(Size.L.toString());
-        Size[] values=Size.values();
-        Arrays.sort(values);
-        Size.L.ordinal();
-        Class s=Class.forName("S");
-        s.newInstance();
-        s.getConstructors();
-        s.getModifiers();
-//        Integer
-//        Array.
-        Array.newInstance(s,10);
-        Constructor[]constructors=Class.forName("java.lang.String").getConstructors();
-//        constructors[0].newInstance()
-        int.class.newInstance();
-        System.out.println(Arrays.toString(values));
-        int a=0;
-        a++;
-        a++;
+        int a =10;
 
     }
     enum Size{
