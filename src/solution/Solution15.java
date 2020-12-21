@@ -27,6 +27,8 @@ public class Solution15 {
 //        constructors[0].newInstance()
         int.class.newInstance();
         System.out.println(Arrays.toString(values));
+        int a=0;
+        a++;
 
     }
     enum Size{
