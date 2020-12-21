@@ -13,6 +13,7 @@ public class Solution15 {
     }
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         int a =10;
+        System.out.println(" change but don not save ");
 
     }
     enum Size{
