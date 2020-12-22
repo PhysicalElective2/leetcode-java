@@ -1,5 +1,6 @@
 package solution;
 
+import com.sun.jmx.remote.internal.ArrayQueue;
 import com.sun.org.apache.xerces.internal.xs.StringList;
 
 import java.awt.event.ActionListener;
@@ -14,11 +15,47 @@ public class Solution15 {
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         int a =10;
         a++;
+        a++;
         System.out.println(" change but don not save ");
 
     }
     enum Size{
         S,M,L;
+    }
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res=new ArrayList<>();
+        if(root==null){
+            return res;
+        }
+        Queue<TreeNode> queue =new LinkedList<>();
+        queue.offer(root);
+        boolean orderLeft=true;
+        while (!queue.isEmpty()){
+            // notice one while on line
+            Deque<Integer> levelList = new LinkedList<Integer>();
+            int size=queue.size();
+            for(int i=0;i<size;i++){
+                TreeNode node =queue.poll();
+                if(orderLeft){
+                    levelList.addLast(node.val);
+                }else {
+                    levelList.addFirst(node.val);
+                }
+                if(node.left!=null){
+                    queue.add(node.left);
+                }
+                if(node.right!=null){
+                    queue.add(node.right);
+                }
+            }
+            res.add(new ArrayList<>(levelList));
+            orderLeft=!orderLeft;
+
+        }
+        return res;
+
+
+
     }
     public int minCostClimbingStairs2(int[] cost) {
         if(cost.length<=1) return 0;

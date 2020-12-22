@@ -1,20 +1,179 @@
 package company;
 
 
+import com.sun.java.swing.plaf.windows.WindowsTextAreaUI;
 import tools.TreeNode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class TencentSolution3 {
     public static void main(String[] args) {
-        System.out.println("ff");
         TencentSolution3 t = new TencentSolution3();
 //        char[] nu1 = {'9', '8', '7', '6', '5', '4', '3', '2', '1'};
 //        char nu2 = '9';
 //        t.mul(nu1, nu2);
-        t.multiply("123","456");
+//        t.multiply("123","456");
+//        System.out.println(t.addBinary("11", "1"));
+//        System.out.println(t.permute(new int[]{1, 2, 3}));
+        List<String> res=t.generateParenthesis(4);
+        for(String s:res){
+            System.out.println(s);
+        }
+    }
+    List<String> resGe;
+    public List<String> generateParenthesis(int n) {
+        resGe=new ArrayList<>();
+        StringBuilder oneRes=new StringBuilder();
+        oneRes.append('(');
+        re(1,oneRes,n);
+        return resGe;
+
+    }
+
+    private void re(int i, StringBuilder oneRes, int n) {
+        if(sumChar(oneRes,')')>sumChar(oneRes,'(')){
+            return;
+        }
+        if(i>n*2) return;
+        if(i==n*2&&sumChar(oneRes,')')==sumChar(oneRes,'(')){
+            resGe.add(oneRes.toString());
+            return;
+        }
+        StringBuilder add1=new StringBuilder(oneRes);
+        add1.append('(');
+        StringBuilder add2=new StringBuilder(oneRes);
+        add2.append(')');
+        re(i+1,add1,n);
+        re(i+1,add2,n);
+
+    }
+
+    private int sumChar(StringBuilder oneRes, char c) {
+        int res=0;
+        for(int i=0;i<oneRes.length();i++){
+            if(oneRes.charAt(i)==c) res++;
+        }
+        return  res;
+    }
+
+    List<List<Integer>> res;
+    public List<List<Integer>> permute(int[] nums) {
+        res=new ArrayList<>();
+        boolean[] visit =new boolean[nums.length];
+        List<Integer> oneRes =new ArrayList<>();
+        recursive(nums,0,visit,oneRes);
+        return res;
+
+
+    }
+
+    private void recursive(int[] nums, int i, boolean[] visit, List<Integer> oneRes) {
+        if(i==nums.length){
+            res.add(oneRes);
+        }
+        for(int h=0;h<visit.length;h++){
+            System.out.println(Arrays.toString(visit));
+            if(!visit[h]){
+                visit[h]=true;
+                List<Integer> nextRes =new ArrayList<>(oneRes);
+                nextRes.add(nums[h]);
+                System.out.println("oneRes:"+Arrays.toString(oneRes.toArray()));
+                recursive(nums,i+1,visit,nextRes);
+                visit[h]=false;
+            }
+        }
+    }
+
+    public String addBinary(String a, String b) {
+        char[] sa=a.toCharArray();
+        char[] sb=b.toCharArray();
+        StringBuilder res=new StringBuilder();
+        int add =0;
+        int indexA =sa.length-1;
+        int indexB =sb.length-1;
+        while (indexA>=0&&indexB>=0){
+            int thisSum=sa[indexA]-'0'+sb[indexB]-'0'+add;
+            res.append(thisSum%2);
+            add=thisSum/2;
+            indexA--;
+            indexB--;
+        }
+        while (indexA>=0){
+            int thisSum=sa[indexA]-'0'+add;
+            res.append(thisSum%2);
+
+            add=thisSum/2;
+            indexA--;
+
+        }
+        while (indexB>=0){
+            int thisSum=sa[indexB]-'0'+add;
+            res.append(thisSum%2);
+
+            add=thisSum/2;
+            indexB--;
+        }
+        if(add>0) res.append(add);
+        return res.reverse().toString();
+
+
+    }
+    List<Integer> vals;
+
+    public int kthSmallest(TreeNode root, int k) {
+        vals =new ArrayList<>();
+        midOreder(root);
+        return vals.get(k-1);
+
+    }
+
+    private void midOreder(TreeNode root) {
+        if(root.left!=null){
+            midOreder(root.left);
+        }
+        vals.add(root.val);
+        if(root.right!=null){
+            midOreder(root.right);
+        }
+
+    }
+
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> resWhenZero = new ArrayList<>();
+        resWhenZero.add(new ArrayList<Integer>());
+        if(nums.length==0) {
+            return resWhenZero;
+        }
+        List<List<Integer>> thisRes =resWhenZero;
+//        List<List<Integer>> lastRes=resWhenZero;
+        for(int i=0;i<nums.length;i++){
+//            thisRes=lastRes;
+            int size=thisRes.size();
+            for(int j=0;j<size;j++){
+                List<Integer> add =new ArrayList<>(thisRes.get(j));
+                add.add(nums[i]);
+                thisRes.add(add);
+            }
+
+        }
+        return thisRes;
+
+    }
+    List<Integer> t = new ArrayList<Integer>();
+    List<List<Integer>> ans = new ArrayList<List<Integer>>();
+
+    public List<List<Integer>> subsets2(int[] nums) {
+        int n = nums.length;
+        for (int mask = 0; mask < (1 << n); ++mask) {
+            t.clear();
+            for (int i = 0; i < n; ++i) {
+                if ((mask & (1 << i)) != 0) {
+                    t.add(nums[i]);
+                }
+            }
+            ans.add(new ArrayList<Integer>(t));
+        }
+        return ans;
     }
 
     public int maxSum = Integer.MIN_VALUE;
