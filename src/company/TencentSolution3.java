@@ -15,8 +15,8 @@ public class TencentSolution3 {
 //        t.multiply("123","456");
 //        System.out.println(t.addBinary("11", "1"));
 //        System.out.println(t.permute(new int[]{1, 2, 3}));
-        List<String> res=t.generateParenthesis(4);
-        for(String s:res){
+        List<Integer> res=t.grayCode(4);
+        for(Integer s:res){
             System.out.println(s);
         }
     }
@@ -28,6 +28,133 @@ public class TencentSolution3 {
         re(1,oneRes,n);
         return resGe;
 
+    }
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        ArrayList<TreeNode> wayP=new ArrayList<>();
+        ArrayList<TreeNode> wayQ =new ArrayList<>();
+        find(root,wayP,p);
+        find(root,wayQ,q);
+        System.out.println("wayp.size:"+wayP.size());
+        System.out.println("wayq.size:"+wayQ.size());
+        TreeNode res=root;
+        int i=0;
+        int j=0;
+        while (i<wayP.size()&&j<wayQ.size()){
+            if(wayP.get(i).val==wayQ.get(j).val){
+                res=wayP.get(i);
+                i++;
+                j++;
+            }else {
+                break;
+            }
+        }
+        return res;
+
+
+    }
+
+    private void find(TreeNode root, ArrayList<TreeNode> wayP, TreeNode p) {
+        wayP.add(root);
+        if(root.val==p.val){
+            return;
+        }
+        if(root.val>p.val){
+            find(root.left,wayP,p);
+        }else {
+            find(root.right,wayP,p);
+        }
+
+    }
+    // bettter way
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        TreeNode ancestor = root;
+        while (true) {
+            if (p.val < ancestor.val && q.val < ancestor.val) {
+                ancestor = ancestor.left;
+            } else if (p.val > ancestor.val && q.val > ancestor.val) {
+                ancestor = ancestor.right;
+            } else {
+                break;
+            }
+        }
+        return ancestor;
+    }
+
+
+    public int candy(int[] ratings) {
+        int n =ratings.length;
+        int res=0;
+        int[] left =new int[n];
+        int[] right =new int[n];
+        for(int i=0;i<n;i++){
+            if(i>0&&ratings[i]>ratings[i-1]){
+                left[i]=left[i-1]+1;
+            }else {
+                left[i]=1;
+            }
+        }
+        for(int i=n-1;i>=0;i--){
+            if(i<n-1&&ratings[i]>ratings[i+1]){
+                right[i]=right[i+1]+1;
+            }else {
+                right[i]=1;
+            }
+        }
+        for(int i=0;i<n;i++){
+            res+=Math.max(left[i],right[i]);
+        }
+        return res;
+
+
+    }
+
+    public List<Integer> grayCode(int n) {
+        List<Integer> res=new ArrayList<>();
+        int size = 1<<n;
+        boolean[] visited =new boolean[size];
+        visited[0]=true;
+        res.add(0);
+        while (res.size()<size){
+            for(int i=0;i<n;i++){
+                //find changed index i to get next
+                System.out.println(res.size()+" "+res.get(res.size()-1));
+                int next = res.get(res.size()-1)^(1<<i);
+                if(next>=0&&next<(size)&&!visited[next]){
+//                    System.out.println(i);
+                    res.add(next);
+                    visited[next]=true;
+                    break;
+                }
+
+            }
+
+        }
+        return res;
+
+
+    }
+    public boolean  isNext(int a, int b){
+        int c=a^b;
+        int res=0;
+        while (c!=0){
+            res+=c&1;
+            c=c>>>1;
+        }
+        System.out.println(res==1);
+        return res==1;
+    }
+    public List<List<Integer>> subsets5(int[] nums) {
+        List<List<Integer>> res=new ArrayList<>();
+        int n =nums.length;
+        for(int i=0;i<(2<<n);i++){
+            ArrayList<Integer> oneRes =new ArrayList<>();
+            for(int j=0;j<n;j++){
+                if((1<<j&i)!=0) oneRes.add(nums[j]);
+            }
+            res.add(new ArrayList<>(oneRes));
+
+        }
+        return res;
     }
 
     private void re(int i, StringBuilder oneRes, int n) {
