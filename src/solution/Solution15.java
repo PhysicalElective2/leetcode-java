@@ -1,16 +1,63 @@
 package solution;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
-import com.sun.org.apache.xerces.internal.xs.StringList;
 
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
 import java.util.*;
 
 public class Solution15 {
+    public int maximalRectangle(char[][] matrix) {
+        int m=matrix.length;
+        if(m==0) return 0;
+        int n=matrix[0].length;
+        if(n==0) return 0;
+        int[][] left =new int[m][n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if (matrix[i][j] == '1') {
+                    left[i][j]=(j==0?0:left[i][j-1])+1;
+                }
+            }
+        }
+        int res=0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j]=='0'){
+                    continue;
+                }
+                int width =left[i][j];
+                int area =width;
+                for(int k=i-1;k>=0;k--){
+                    width=Math.min(width,left[k][j]);
+                    area=Math.max(area,(i-k+1)*width);
+                }
+                res=Math.max(res,area);
+            }
+        }
+        return res;
+
+
+
+
+    }
     public List<String> getList(){
         return null;
+    }
+    public int findContentChildren(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int ng=g.length;
+        int ns=s.length;
+        int count =0;
+        for(int i=0,j=0;i<ng&&j<ns;i++,j++){
+            while (j<ns&&g[i]<s[j]){
+                j++;
+            }
+            if(j<ns){
+                count++;
+            }
+        }
+        return count;
+
     }
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         int a =10;

@@ -14,6 +14,7 @@ class SolutionTest {
 
     @Test
     void findKthToTail() {
+        Set<Integer> set=new LinkedHashSet<>();
         NumberFormat n =NumberFormat.getCurrencyInstance();
         NumberFormat j =NumberFormat.getPercentInstance();
         ListNode a=new ListNode(1);

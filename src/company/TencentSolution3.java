@@ -8,6 +8,7 @@ import java.util.*;
 
 public class TencentSolution3 {
     public static void main(String[] args) {
+        Queue<String> q =new LinkedList<>();
         TencentSolution3 t = new TencentSolution3();
 //        char[] nu1 = {'9', '8', '7', '6', '5', '4', '3', '2', '1'};
 //        char nu2 = '9';
@@ -20,6 +21,48 @@ public class TencentSolution3 {
             System.out.println(s);
         }
     }
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        ArrayList<TreeNode> wayP=new ArrayList<>();
+        ArrayList<TreeNode> wayQ =new ArrayList<>();
+
+        find2(root,wayP,p);
+        find2(root,wayQ,q);
+        System.out.println("wayp.size:"+wayP.size());
+        System.out.println("wayq.size:"+wayQ.size());
+        TreeNode res=root;
+        int i=wayP.size()-1;
+        int j=wayQ.size()-1;
+        while (i>=0&&j>=0){
+            if(wayP.get(i).val==wayQ.get(j).val){
+                res=wayP.get(i);
+                i--;
+                j--;
+            }else {
+                break;
+            }
+        }
+        return res;
+
+    }
+
+    private boolean find2(TreeNode root, ArrayList<TreeNode> wayP,TreeNode p) {
+        if(root.val==p.val){
+            wayP.add(root);
+            return true;
+        }
+        if(root.left!=null&&find2(root.left,wayP,p)){
+            wayP.add(root);
+            return true;
+
+        }
+        if(root.right!=null&&find2(root.right,wayP,p)){
+            wayP.add(root);
+            return true;
+        }
+        return false;
+
+    }
     List<String> resGe;
     public List<String> generateParenthesis(int n) {
         resGe=new ArrayList<>();
@@ -29,7 +72,7 @@ public class TencentSolution3 {
         return resGe;
 
     }
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
         ArrayList<TreeNode> wayP=new ArrayList<>();
         ArrayList<TreeNode> wayQ =new ArrayList<>();
         find(root,wayP,p);
@@ -66,7 +109,7 @@ public class TencentSolution3 {
 
     }
     // bettter way
-    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+    public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q) {
         TreeNode ancestor = root;
         while (true) {
             if (p.val < ancestor.val && q.val < ancestor.val) {
