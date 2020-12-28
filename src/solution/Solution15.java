@@ -5,6 +5,15 @@ import java.awt.event.ActionListener;
 import java.util.*;
 
 public class Solution15 {
+//    public int maxProfit(int[] prices) {
+//        int len =prices.length;
+//        if(len<2) return 0;
+//        int[][][] dp = new int[len][3][2];
+//
+//
+//    }
+
+
     public int maximalRectangle(char[][] matrix) {
         int m=matrix.length;
         if(m==0) return 0;

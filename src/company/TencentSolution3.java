@@ -21,6 +21,18 @@ public class TencentSolution3 {
             System.out.println(s);
         }
     }
+    public boolean canWinNim(int n) {
+        if(n<=3) return true;
+        if(n==4) return false;
+        return n%4>0;
+//        if(n==5) return true;
+//        if(n==6) return true;
+//        if(n==7) return true;
+//        if(n==8) return false;
+//        if(n==9) return true;
+
+    }
+
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         ArrayList<TreeNode> wayP=new ArrayList<>();
