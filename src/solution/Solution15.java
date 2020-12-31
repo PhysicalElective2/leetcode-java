@@ -5,13 +5,84 @@ import java.awt.event.ActionListener;
 import java.util.*;
 
 public class Solution15 {
-//    public int maxProfit(int[] prices) {
-//        int len =prices.length;
-//        if(len<2) return 0;
-//        int[][][] dp = new int[len][3][2];
-//
-//
-//    }
+    public static void main(String[] args) {
+        Solution s =new Solution();
+        int[] stones =new int[]{2,2};
+
+    }
+    public int eraseOverlapIntervals(int[][] intervals) {
+        if(intervals.length==0) return 0;
+        Arrays.sort(intervals, (o1, o2) -> o1[0]-o2[0]);
+        int n =intervals.length;
+        int[] f= new int[n];
+        Arrays.fill(f,1);
+        for(int i=1;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(intervals[j][1]<=intervals[i][0]){
+                    f[i]=Math.max(f[i],f[j]+1);
+                }
+
+            }
+        }
+        return n-Arrays.stream(f).max().getAsInt();
+
+    }
+
+
+    public int lastStoneWeight(int[] stones) {
+        int res =0;
+        List<Integer> list =new LinkedList<>();
+        for(int i: stones){
+            list.add(i);
+        }
+        Collections.sort(list);
+        while (list.size()>1){
+            int big1 = list.get(list.size()-1);
+            int big2 = list.get(list.size()-2);
+            list.remove(list.size()-1);
+            list.remove(list.size()-1);
+            int addNum;
+            if(big1==big2){
+                continue;
+            }
+            if(big1>big2){
+                addNum =big1-big2;
+                int addIndex =0;
+//                while (list.get(addIndex)<addNum) addIndex++;
+//                list.add(addIndex,addNum);
+                while (addIndex<list.size()&&list.get(addIndex)<addNum) addIndex++;
+                if(addIndex==list.size()){
+                    list.add(addNum);
+                }else {
+                    list.add(addIndex,addNum);
+
+
+                }
+
+
+            }
+            if(big2>big1){
+                addNum=big2-big1;
+                int addIndex =0;
+                while (addIndex<list.size()&&list.get(addIndex)<addNum) addIndex++;
+                if(addIndex==list.size()){
+                    list.add(addNum);
+                }else {
+                    list.add(addIndex,addNum);
+
+
+                }
+            }
+        }
+        if(list.size()>0) {
+            return list.get(0);
+        }else {
+            return 0;
+        }
+
+    }
+
+
 
 
     public int maximalRectangle(char[][] matrix) {
@@ -68,13 +139,7 @@ public class Solution15 {
         return count;
 
     }
-    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        int a =10;
-        a++;
-        a++;
-        System.out.println(" change but don not save ");
 
-    }
     enum Size{
         S,M,L;
     }
