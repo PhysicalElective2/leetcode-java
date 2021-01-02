@@ -8,6 +8,44 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class S1 {
+    public List<Integer> findDisappearedNumbers2(int[] nums) {
+        for(int i=0;i<nums.length;i++){
+            int nextIndex=Math.abs(nums[i])-1;
+            if(nums[nextIndex]>0){
+                nums[nextIndex]*=-1;
+            }
+        }
+        List<Integer> result = new LinkedList<Integer>();
+
+        // Iterate over the numbers from 1 to N and add all those
+        // that have positive magnitude in the array
+        for (int i = 1; i <= nums.length; i++) {
+
+            if (nums[i - 1] > 0) {
+                result.add(i);
+            }
+        }
+        return result;
+
+
+
+
+    }
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> res=new ArrayList<>();
+        int index=0;
+        while (res.size()<nums.length){
+            res.add(1);
+            index++;
+        }
+        for(Integer i:nums){
+            res.set(i,-1);
+        }
+        res.removeIf(e->e==-1);
+        return res;
+
+
+    }
     public boolean isSymmetric(TreeNode root) {
         return check(root,root);
 
