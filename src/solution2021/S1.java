@@ -1,5 +1,6 @@
 package solution2021;
 
+import tools.ListNode;
 import tools.TreeNode;
 
 import java.util.ArrayList;
@@ -8,6 +9,30 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class S1 {
+    public ListNode partition(ListNode head, int x) {
+        ListNode small =new ListNode(-1);
+        ListNode smallHead =small;
+        ListNode large =new ListNode(-1);
+        ListNode largeHead =large;
+        while (head!=null){
+            if(head.val<x){
+                small.next=head;
+                small=small.next;
+            }else {
+                large.next=head;
+                large =large.next;
+            }
+            head = head.next;
+        }
+        small.next=largeHead.next;
+        large.next=null;
+        return smallHead.next;
+
+
+
+    }
+
+
     public List<Integer> findDisappearedNumbers2(int[] nums) {
         for(int i=0;i<nums.length;i++){
             int nextIndex=Math.abs(nums[i])-1;
