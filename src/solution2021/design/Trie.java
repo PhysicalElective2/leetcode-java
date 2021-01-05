@@ -1,4 +1,4 @@
-package solution2021;
+package solution2021.design;
 
 import tools.TreeNode;
 

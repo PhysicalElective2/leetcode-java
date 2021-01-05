@@ -3,12 +3,60 @@ package solution2021;
 import tools.ListNode;
 import tools.TreeNode;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class S1 {
+    public int fib(int n) {
+        if(n==0) return 0;
+        if(n==1) return 1;
+        return fib(n-1)+fib(n-2);
+
+    }
+    public List<List<Integer>> largeGroupPositions2(String s) {
+        List<List<Integer>> ret = new ArrayList<List<Integer>>();
+        int n = s.length();
+        int num = 1;
+        for (int i = 0; i < n; i++) {
+            if (i == n - 1 || s.charAt(i) != s.charAt(i + 1)) {
+                if (num >= 3) {
+                    ret.add(Arrays.asList(i - num + 1, i));
+                }
+                num = 1;
+            } else {
+                num++;
+            }
+        }
+        return ret;
+    }
+    public List<List<Integer>> largeGroupPositions(String s) {
+        List<List<Integer>> res=new ArrayList<>();
+        if(s.length()<=2) return res;
+//        char lastChar =n
+        int start=0;
+        s=s+"?";
+        char startChar=s.charAt(0);
+        for(int i=1;i<s.length();i++){
+            if(s.charAt(i)==startChar){
+                continue;
+            }else{
+                if(i-start>=3){
+                    ArrayList<Integer> oneRes =new ArrayList<>();
+                    oneRes.add(start);
+                    oneRes.add(i-1);
+                    res.add(oneRes);
+                }
+
+                start=i;
+                startChar=s.charAt(i);
+
+
+
+            }
+
+        }
+        return res;
+
+   }
     public ListNode partition(ListNode head, int x) {
         ListNode small =new ListNode(-1);
         ListNode smallHead =small;
