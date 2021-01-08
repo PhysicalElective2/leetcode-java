@@ -19,6 +19,35 @@ public class S1 {
         s.findCircleNum(city);
 //        System.out.println(s.maxProfit(new int[]{2, 1, 4}));
     }
+    public void rotate(int[] nums, int k) {
+        k %= nums.length;
+        reverse(nums,0,nums.length-1);
+        reverse(nums,0,k-1);
+        reverse(nums,k,nums.length-1);
+
+
+
+    }
+
+    private void reverse(int[] nums, int start, int end) {
+        int temp;
+        while (start < end) {
+            temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start += 1;
+            end -= 1;
+        }
+
+
+    }
+
+    public int numIslands(char[][] grid) {
+        int res=0;
+        return res;
+
+
+    }
     public int findCircleNum(int[][] isConnected) {
         int size =isConnected.length;
         if(size<=1)  return size;
