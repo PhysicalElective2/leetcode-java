@@ -10,15 +10,51 @@ public class S1 {
     //    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
 //
 //    }
+    public int numTrees(int n) {
+        int[] dp =new int[n+1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for(int i=2;i<=n;i++){
+            for(int j=1;j<=i;j++){
+                dp[i]+=dp[j-1]*dp[i-j];
+            }
+        }
+        return dp[n];
+    }
     public static void main(String[] args) {
         S1 s = new S1();
-        int[][] city=new int[][]{
-                {1,0,0,1},{0,1,1,0},{0,1,1,1},{1,0,1,1}
-
-        };
-        s.findCircleNum(city);
+        int[] nums =new int[]{3,1,3,4,2};
+        System.out.println(s.findDuplicate(nums));
 //        System.out.println(s.maxProfit(new int[]{2, 1, 4}));
     }
+    public int findDuplicate(int[] nums) {
+        for(int i=0;i<nums.length;i++){
+            if(nums[Math.abs(nums[i])]<0){
+                return Math.abs(nums[i]);
+            }else {
+                nums[Math.abs(nums[i])]=-nums[Math.abs(nums[i])];
+            }
+        }
+        return 0;
+    }
+    public int maxProfit(int[] prices) {
+        int n=prices.length;
+        int buy1=-prices[0];
+        int sell1=0;
+        int buy2=-prices[0];
+        int sell2=0;
+        for(int i=1;i<n;i++){
+            buy1=Math.max(buy1,-prices[i]);
+            sell1=Math.max(sell1,buy1+prices[i]);
+            buy2=Math.max(buy2,sell1-prices[i]);
+            sell2=Math.max(sell2,buy2+prices[i]);
+        }
+        return sell2;
+
+    }
+
+
+
     public void rotate(int[] nums, int k) {
         k %= nums.length;
         reverse(nums,0,nums.length-1);
@@ -408,7 +444,7 @@ public class S1 {
 
     }
 
-    public int maxProfit(int[] prices) {
+    public int maxProfit2(int[] prices) {
         int n = prices.length;
         if (n == 0) return 0;
         int[] have = new int[n];
