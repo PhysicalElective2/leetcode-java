@@ -21,6 +21,47 @@ public class S1 {
         }
         return dp[n];
     }
+    public int[] dailyTemperatures(int[] T) {
+        return null;
+
+
+    }
+    public List<String> summaryRanges(int[] nums) {
+        List<String> res=new ArrayList<>();
+        if(nums.length==0) return res;
+        int stat =0;
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]==nums[i-1]+1){
+                continue;
+
+            }else{
+                if(i-stat==1){
+                    res.add(String.valueOf(nums[stat]));
+                }else {
+                    StringBuilder oneRes =new StringBuilder();
+                    oneRes.append(String.valueOf(nums[stat]));
+                    oneRes.append("->");
+                    oneRes.append(String.valueOf(nums[i-1]));
+                    res.add(oneRes.toString());
+                }
+                stat=i;
+            }
+
+        }
+        if(nums.length-stat==1){
+            res.add(String.valueOf(nums[stat]));
+        }else {
+            StringBuilder oneRes =new StringBuilder();
+            oneRes.append(String.valueOf(nums[stat]));
+            oneRes.append("->");
+            oneRes.append(String.valueOf(nums[nums.length-1]));
+            res.add(oneRes.toString());
+        }
+
+        return res;
+
+
+    }
     public static void main(String[] args) {
         S1 s = new S1();
         int[] nums =new int[]{3,1,3,4,2};
