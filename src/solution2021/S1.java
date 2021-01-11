@@ -10,6 +10,60 @@ public class S1 {
     //    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
 //
 //    }
+    public int minPathSum(int[][] grid) {
+        if(grid.length==0||grid[0].length==0) return 0;
+        int m =grid.length;
+        int n =grid[0].length;
+        int[][] dp =new int[grid.length][grid[0].length];
+        dp[0][0]=grid[0][0];
+        for(int i =1;i<m;i++){
+            dp[i][0]=dp[i-1][0]+grid[i][0];
+        }
+        for(int i =1;i<n;i++){
+            dp[0][i]=dp[0][i-1]+grid[0][i];
+        }
+        for(int i=1;i<m;i++){
+            for(int j=1;j<n;j++){
+                dp[i][j]=Math.min(dp[i-1][j],dp[i][j-1])+grid[i][j];
+            }
+        }
+        return dp[m-1][n-1];
+    }
+    int parents[];
+    private int find2(int index) {
+        while (parents[index]!=index){
+            parents[index]=find2(parents[index]);
+            index= parents[index];
+        }
+        return index;
+    }
+    public String smallestStringWithSwaps(String s, List<List<Integer>> pairs) {
+        parents =new int[s.length()];
+        for(int i=0;i<s.length();i++){
+            parents[i]=i;
+        }
+        for(int i=0;i<pairs.size();i++){
+            int pa =find2(pairs.get(i).get(0));
+            int pb =find2(pairs.get(i).get(1));
+            parents[pa] =pb;
+        }
+        //get all circle
+        Map<Integer,Queue> map=new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            Queue oneQueue =map.getOrDefault(find2(i),new PriorityQueue());
+            oneQueue.add(s.charAt(i));
+            map.put(find2(i),oneQueue);
+        }
+        StringBuilder res=new StringBuilder();
+        for(int i=0;i<s.length();i++){
+            res.append(map.get(find2(i)).poll());
+        }
+        return res.toString();
+
+
+
+    }
+
     public int numTrees(int n) {
         int[] dp =new int[n+1];
         dp[0] = 1;
