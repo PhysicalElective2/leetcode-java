@@ -10,6 +10,51 @@ public class S1 {
     //    public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
 //
 //    }
+    public int countSubstrings(String s) {
+        int n=s.length();
+        int res=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<=1;j++){
+                int l=i;
+                int m=i+j;
+                while (l>=0&&m<n&&s.charAt(l--)==s.charAt(m++)) res++;
+
+            }
+        }
+
+
+        return res;
+
+
+    }
+    public void sortColors(int[] nums) {
+        int i=0;
+        int j=nums.length-1;
+        for(int h=0;h<nums.length;h++){
+            if(nums[h]==0){
+                if(i!=h){
+                    swap(nums,i,h);
+                }
+                i++;
+            }
+        }
+        for(int h=nums.length-1;h>=0;h--){
+            if(nums[h]==2){
+                if(j!=h){
+                    swap(nums,j,h);
+                }
+                j--;
+            }
+        }
+
+    }
+
+    private void swap(int[] nums, int i, int h) {
+        int temp=nums[i];
+        nums[i]=nums[h];
+        nums[h]=temp;
+    }
+
     public int minPathSum(int[][] grid) {
         if(grid.length==0||grid[0].length==0) return 0;
         int m =grid.length;
