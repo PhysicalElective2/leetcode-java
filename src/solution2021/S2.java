@@ -11,10 +11,84 @@ import java.util.*;
 
 public class S2 {
     public int[] sortItems(int n, int m, int[] group, List<List<Integer>> beforeItems) {
+        Stack s=new Stack();
+//        s.add();
         return null;
 
 
     }
+    int resDiameter;
+    public int diameterOfBinaryTree(TreeNode root) {
+        resDiameter=1;
+        dfs(root);
+        // nodeNum -1 is res ;
+        return resDiameter-1;
+
+
+
+
+    }
+
+    private int  dfs(TreeNode root) {
+        if(root==null) return 0;
+        int L =dfs(root.left);
+        int R =dfs(root.right);
+        resDiameter=Math.max(resDiameter,L+R+1);
+        return Math.max(L,R)+1;
+
+    }
+
+    public int leastInterval(char[] tasks, int n) {
+        int res=0;
+        volatile  int ss =10;
+        Queue<Character> queue=new LinkedList();
+        int index =0;
+        while (index<tasks.length){
+            while (queue.size()<n&&queue.contains(tasks[index])){
+                queue.add('?');
+                res++;
+            }
+            if(queue.size()==n){
+
+            }
+
+
+        }
+
+    }
+    public int[] findRedundantConnection(int[][] edges) {
+         int n = edges.length;
+         int[] p=new int[n+1];
+        for (int i = 1; i <n+1 ; i++) {
+            p[i]=i;
+
+        }
+        for(int i=0;i<n;i++){
+            int[] edge =edges[i];
+            int node1=edge[0];
+            int node2=edge[1];
+            int f1=find(p,node1);
+            int f2=find(p,node2);
+            if(f1!=f2){
+                p[f1]=f2;
+            }else{
+                return edge;
+            }
+        }
+        return new int[0];
+
+
+    }
+
+    private int find(int[] p, int node) {
+        while (p[node]!=node){
+            p[node]=find(p,p[node]);
+            node=p[node];
+
+        }
+        return node;
+    }
+
     public int[] dailyTemperatures(int[] T) {
         int n=T.length;
         Deque<Integer> deque =new LinkedList<>();
@@ -54,6 +128,33 @@ public class S2 {
         }
         return root;
 
+
+    }
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList();
+        Queue<TreeNode> queue = new LinkedList();
+        if(root==null) return res;
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> oneLine = new ArrayList<>();
+
+
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                oneLine.add(node.val);
+                if(node.left!=null){
+                    queue.add(node.left);
+
+                }
+                if(node.right!=null){
+                    queue.add(node.right);
+
+                }
+            }
+            res.add(oneLine);
+        }
+        return res;
 
     }
 
