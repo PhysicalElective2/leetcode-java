@@ -13,10 +13,23 @@ public class S2 {
     public int[] sortItems(int n, int m, int[] group, List<List<Integer>> beforeItems) {
         Stack s=new Stack();
 //        s.add();
-        return null;
+        return new int[0];
 
 
     }
+    public List<Boolean> prefixesDivBy5(int[] A) {
+        List<Boolean> res =new ArrayList<>();
+        int num=0;
+        for (int i = 0; i < A.length; i++) {
+            num=num*2+A[i];
+            res.add(num%5==0);
+
+
+        }
+        return res;
+
+    }
+
     int resDiameter;
     public int diameterOfBinaryTree(TreeNode root) {
         resDiameter=1;
@@ -39,21 +52,7 @@ public class S2 {
     }
 
     public int leastInterval(char[] tasks, int n) {
-        int res=0;
-        volatile  int ss =10;
-        Queue<Character> queue=new LinkedList();
-        int index =0;
-        while (index<tasks.length){
-            while (queue.size()<n&&queue.contains(tasks[index])){
-                queue.add('?');
-                res++;
-            }
-            if(queue.size()==n){
-
-            }
-
-
-        }
+        return 0;
 
     }
     public int[] findRedundantConnection(int[][] edges) {
