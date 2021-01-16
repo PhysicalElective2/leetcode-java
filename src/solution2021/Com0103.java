@@ -1,5 +1,6 @@
 package solution2021;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -8,17 +9,20 @@ import java.util.Map;
 
 public class Com0103 {
     public static void main(String[] args) {
+        System.out.println("哈哈");
+        JOptionPane.showConfirmDialog(JOptionPane.getRootFrame(),"嘿嘿");
         Com0103 c = new Com0103();
         System.out.println(c.countPairs(new int[]{2, 14, 11, 5, 1744, 2352, 0, 1, 1300, 2796, 0, 4, 376, 1672, 73, 55, 2006, 42, 10, 6, 0, 2, 2, 0, 0, 1, 0, 1, 0, 2, 271, 241, 1, 63, 1117, 931, 3, 5, 378, 646, 2, 0, 2, 0, 15, 1}));
         //   System.out.println(c.countPairs(new int[]{2,14,11,5,1744,2352,0,1,1300,2796,0,4,376,1672,73,55,2006,42,10,6,0,2,2,0,0,1,0,1,0,2,271,241,1,63,1117,931,3,5,378,646,2,0,2,0,15,1}));
     }
+    public int getSum(int a,int b){
+        while (b!=0){
 
-    //    public int minOperations(int[] target, int[] arr) {
-//
-//    }
-//    public int waysToSplit(int[] nums) {
-//
-//    }
+        }
+        return 0;
+    }
+
+
     public int countPairs(int[] deliciousness){
         Map<Integer, Long> map = new HashMap<>();
         int res = 0;
