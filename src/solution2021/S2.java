@@ -18,6 +18,123 @@ public class S2 {
 
 
     }
+    public int minCostConnectPoints2(int[][] points) {
+        int[][] graph = new int[points.length][points.length];
+        int[] weights = new int[points.length];
+        for (int i = 0; i < points.length; i++) {
+            weights[i] = Math.abs(points[i][0] - points[0][0]) + Math.abs(points[i][1] - points[0][1]);
+            for (int j = 0; j < points.length; j++) {
+                graph[i][j] = Math.abs(points[i][0] - points[j][0]) + Math.abs(points[i][1] - points[j][1]);
+            }
+
+        }
+        int result = 0;
+        for (int i = 1; i < points.length; i++) {
+            int k = 0, min = Integer.MAX_VALUE;
+            for (int j = 0; j < points.length; j++) {
+                if(weights[j] != 0 && weights[j] < min){
+                    min = weights[j];
+                    k = j;
+                }
+            }
+            result += weights[k];
+            weights[k] = 0;
+            for (int j = 0; j < points.length; j++) {
+                if(weights[j] != 0 && graph[k][j] < weights[j]){
+                    weights[j] = graph[k][j];
+                }
+            }
+        }
+        return result;
+    }
+    public int minCostConnectPoints(int[][] points) {
+        int n= points.length;
+
+        Dunion union =new Dunion(n);
+        List<Edge> edges =new ArrayList<>();
+        for (int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                edges.add(new Edge(dist(points,i,j),i,j));
+            }
+        }
+        Collections.sort(edges, new Comparator<Edge>() {
+            @Override
+            public int compare(Edge o1, Edge o2) {
+                return o1.len-o2.len;
+            }
+        });
+        int res=0;
+        int num=0;
+        for(Edge edge:edges){
+            int len= edge.len;
+            int x= edge.x;
+            int y= edge.y;
+            if(union.unionSet(x,y)){
+                res+=len;
+                num++;
+                if(num==n){
+                    break;
+                }
+            }
+        }
+
+
+
+        return res;
+
+    }
+
+    private int dist(int[][] points, int x, int y) {
+        return Math.abs(points[x][0] - points[y][0]) + Math.abs(points[x][1] - points[y][1]);
+
+
+    }
+
+    class Edge{
+        int len, x, y;
+
+        public Edge(int len, int x, int y) {
+            this.len = len;
+            this.x = x;
+            this.y = y;
+        }
+
+    }
+    class Dunion{
+        int[] f;
+        int[] rank;
+        int n;
+
+
+        public Dunion(int n) {
+            this.n=n;
+            this.rank=new int[n];
+            Arrays.fill(this.rank,1);
+            this.f=new int[n];
+            for(int i=0;i<n;i++){
+                this.f[i]=i;
+            }
+        }
+        public int find(int x) {
+            return f[x] == x ? x : (f[x] = find(f[x]));
+        }
+        public boolean unionSet(int x, int y) {
+            int fx = find(x), fy = find(y);
+            if (fx == fy) {
+                return false;
+            }
+            if (rank[fx] < rank[fy]) {
+                int temp = fx;
+                fx = fy;
+                fy = temp;
+            }
+            rank[fx] += rank[fy];
+            f[fy] = fx;
+            return true;
+        }
+
+
+    }
     public List<List<Integer>> threeSum(int[] nums) {
         List res=new ArrayList();
 
