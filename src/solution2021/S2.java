@@ -11,6 +11,213 @@ import java.util.*;
  **/
 
 public class S2 {
+    public boolean isValidBST(TreeNode root) {
+        return heper(root,null,null);
+
+    }
+
+    private boolean heper(TreeNode root, Integer  lower, Integer upper) {
+        if(root==null) return true;
+        int val=root.val;
+        if(lower!=null&& val<=lower)return false;
+        if(upper!=null&& val>=upper)return false;
+        if(!heper(root.left,lower,val)) return false;
+        if(!heper(root.right,val,upper)) return false;
+        return true;
+
+    }
+
+    public boolean canJump(int[] nums) {
+        if(nums.length==0) return true;
+        boolean[] can =new boolean[nums.length];
+        can[0] =true;
+        for(int i=0;i<nums.length;i++){
+            int start=i+1;
+            int len=nums[i];
+            if(can[i]){
+                while (start<nums.length&&len>0){
+                    can[start]=true;
+                    start++;
+                    len--;
+                }
+
+            }
+        }
+        return can[nums.length-1];
+
+
+
+    }
+
+    public int maxProduct(int[] nums) {
+        int min =nums[0];
+        int max =nums[0];
+        int ans =nums[0];
+        for(int i=1;i<nums.length;i++){
+            int tmin=min;
+            int tmax =max;
+            max=Math.max(tmax*nums[i],Math.max(tmin*nums[i],nums[i]));
+            min=Math.min(tmax*nums[i],Math.min(tmin*nums[i],nums[i]));
+            ans=Math.max(max,ans);
+        }
+        return ans;
+
+
+    }
+    public int minimumEffortPath(int[][] heights) {
+        List<int[]> edges=new ArrayList<>();
+        int m=heights.length;
+        int n=heights[0].length;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                int id = i * n + j;
+                if(i>0){
+                    edges.add(new int[]{id-n,id,Math.abs(heights[i][j] - heights[i - 1][j])});
+
+                }
+                if(j>0){
+                    edges.add(new int[]{id-1,id,Math.abs(heights[i][j] - heights[i][j-1])});
+
+
+                }
+            }
+        }
+        Collections.sort(edges, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[2]-o2[2];
+            }
+        });
+        UnionFind uf = new UnionFind(m * n);
+        int ans = 0;
+        for (int[] edge : edges) {
+            int x = edge[0], y = edge[1], v = edge[2];
+            uf.unite(x, y);
+            if (uf.connected(0, m * n - 1)) {
+                ans = v;
+                break;
+            }
+        }
+        return ans;
+
+
+    }
+    public  class UnionFind{
+        int[] parent;
+        int[] size;
+        int n;
+        // 当前连通分量数目
+        int setCount;
+        public UnionFind(int n) {
+            this.n = n;
+            this.setCount = n;
+            this.parent = new int[n];
+            this.size = new int[n];
+            Arrays.fill(size, 1);
+            for (int i = 0; i < n; ++i) {
+                parent[i] = i;
+            }
+        }
+        public int findset(int x) {
+            return parent[x] == x ? x : (parent[x] = findset(parent[x]));
+        }
+
+        public boolean unite(int x, int y) {
+            x = findset(x);
+            y = findset(y);
+            if (x == y) {
+                return false;
+            }
+            if (size[x] < size[y]) {
+                int temp = x;
+                x = y;
+                y = temp;
+            }
+            parent[y] = x;
+            size[x] += size[y];
+            --setCount;
+            return true;
+        }
+
+        public boolean connected(int x, int y) {
+            x = findset(x);
+            y = findset(y);
+            return x == y;
+        }
+
+
+
+    }
+
+    int resFind;
+    public int findTargetSumWays(int[] nums, int S) {
+        resFind=0;
+        int n=nums.length;
+        dfs(nums,S,0,0);
+        return resFind;
+
+
+    }
+
+    private void dfs(int[] nums, int s, int i,int sum) {
+        if(i==nums.length){
+            if(sum==s){
+                resFind++;
+
+            }
+            return;
+
+        }
+        dfs(nums,s,i+1,sum+nums[i]);
+        dfs(nums,s,i+1,sum-nums[i]);
+    }
+
+    public int maximalSquare(char[][] matrix) {
+        int res = 0;
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return res;
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[][] dp = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == '1') {
+                    if (i == 0 || j == 0) {
+                        dp[i][j] = 1;
+                    } else {
+                        dp[i][j] = Math.min(Math.min(dp[i - 1][j], dp[i][j - 1]), dp[i - 1][j - 1]) + 1;
+                    }
+                    res = Math.max(res, dp[i][j]);
+
+                }
+
+            }
+        }
+        return res * res;
+
+
+    }
+
+    public int pivotIndex(int[] nums) {
+        int sum = 0;
+        for (int i : nums) {
+            sum += i;
+        }
+        int left = 0;
+        int right = sum;
+        if (nums.length == 0) return -1;
+        if (left == right) return 0;
+        right -= nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            left += nums[i - 1];
+            right -= nums[i];
+            if (left == right) return i;
+
+        }
+        return -1;
+
+
+    }
+
     public int[] sortItems(int n, int m, int[] group, List<List<Integer>> beforeItems) {
         Stack s = new Stack();
 //        s.add();
@@ -18,24 +225,26 @@ public class S2 {
 
 
     }
-// wrong, because have negative number
+
+    // wrong, because have negative number
     public int subarraySum2(int[] nums, int k) {
-        Map<Integer,Integer> map =new HashMap<>();
-        map.put(0,1);
-        int res=0;
-        int pre =0;
-        for(int i=0;i<nums.length;i++){
-            pre+=nums[i];
-            if(map.containsKey(pre-k)){
-                res+=map.get(pre-k);
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        int res = 0;
+        int pre = 0;
+        for (int i = 0; i < nums.length; i++) {
+            pre += nums[i];
+            if (map.containsKey(pre - k)) {
+                res += map.get(pre - k);
             }
-            map.put(pre,map.getOrDefault(pre,0)+1);
+            map.put(pre, map.getOrDefault(pre, 0) + 1);
 
         }
         return res;
 
 
     }
+
     public int subarraySum(int[] nums, int k) {
         int res = 0;
         int n = nums.length;
@@ -43,15 +252,15 @@ public class S2 {
         int tempSum = 0;
         int startI = 0;
         tempSum += nums[startI];
-        if(tempSum==k) res++;
+        if (tempSum == k) res++;
         for (int i = 1; i < nums.length; i++) {
             // i as end
-            tempSum+=nums[i];
+            tempSum += nums[i];
             if (tempSum < k) {
                 continue;
             }
 
-            while (tempSum>k){
+            while (tempSum > k) {
                 tempSum -= nums[startI];
                 startI++;
 
