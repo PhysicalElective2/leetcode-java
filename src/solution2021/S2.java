@@ -11,6 +11,58 @@ import java.util.*;
  **/
 
 public class S2 {
+    public int swimInWater(int[][] grid) {
+        int n=grid.length;
+        int left =0;
+        int right=n*n-1;
+        while (left<right){
+            int mid =(left+right)/2;
+            if(can2end(grid,mid)){
+                right=mid;
+
+            }else {
+                left=mid+1;
+
+            }
+
+
+
+        }
+        return left;
+
+
+
+    }
+    public boolean can2end(int[][] grid,int k){
+        if (grid[0][0] > k) {
+            return false;
+        }
+        int n = grid.length;
+        boolean[][] visited = new boolean[n][n];
+        visited[0][0] = true;
+        Queue<int[]> queue = new LinkedList<int[]>();
+        queue.offer(new int[]{0, 0});
+
+        int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        while (!queue.isEmpty()){
+            int[] square = queue.poll();
+            int i = square[0], j = square[1];
+            for(int[] d:directions){
+                int ni = i + d[0], nj = j + d[1];
+                if (ni >= 0 && ni < n && nj >= 0 && nj < n&&!visited[ni][nj] && grid[ni][nj] <= k) {
+                        queue.offer(new int[]{ni, nj});
+                        visited[ni][nj] = true;
+
+                }
+
+            }
+
+        }
+
+
+        return visited[n - 1][n - 1];
+
+    }
     public boolean isValidBST(TreeNode root) {
         return heper(root,null,null);
 
