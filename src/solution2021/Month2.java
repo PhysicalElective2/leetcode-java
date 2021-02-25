@@ -3,6 +3,103 @@ package solution2021;
 import java.util.*;
 
 public class Month2 {
+    public boolean exist(char[][] board, String word) {
+        if(word.length()==0) return true;
+        int h=board.length;
+        int w=board[0].length;
+        boolean[][] visited =new boolean[h][w];
+        for(int i=0;i<board.length;i++){
+            for(int j=0;j<board[i].length;j++){
+                if(board[i][j]==word.charAt(0)){
+                    if(find(board,visited,word,i,j,0)){
+                        return true;
+
+                    };
+
+                }
+
+            }
+        }
+        return false;
+
+
+
+
+    }
+
+    private boolean find(char[][] board, boolean[][] visited, String word, int i, int j, int k) {
+        if(board[i][j]!=word.charAt(k)){
+            return false;
+        }
+        if(k==word.length()-1) return true;
+        visited[i][j] =true;
+        int[][] directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        boolean result = false;
+        for (int[] dir : directions) {
+            int newi=i+dir[0],newj= j+dir[1];
+            if(newi>=0&&newi<board.length&&newj>=0&&newj<board[0].length&&!visited[newi][newj]){
+                boolean flag = find(board, visited,word, newi, newj, k + 1);
+                if (flag) {
+                    result = true;
+                    break;
+                }
+
+
+
+
+
+
+            }
+
+        }
+        visited[i][j] =false;
+        return  result;
+
+
+
+    }
+
+
+    private boolean find() {
+        return false;
+
+
+    }
+
+    public int[][] transpose(int[][] matrix) {
+        int m=matrix.length;
+        if(m==0) return matrix;
+        int n=matrix[0].length;
+        if(n==0) return matrix;
+        int[][] res=new int[n][m];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                res[j][i]=matrix[i][j];
+            }
+        }
+        return res;
+
+    }
+
+    public int[][] flipAndInvertImage(int[][] A) {
+        for(int[] line:A){
+            int temp;
+            for(int i=0;i<line.length/2;i++){
+                temp=line[line.length-i-1];
+                line[line.length-i-1]=line[i];
+                line[i]=temp;
+
+            }
+            if(line.length%2==1){
+                line[line.length/2]=1-line[line.length/2];
+            }
+
+
+
+        }
+        return A;
+
+    }
     public int maxSatisfied(int[] customers, int[] grumpy, int X) {
         int total =0;
         int n=customers.length;
