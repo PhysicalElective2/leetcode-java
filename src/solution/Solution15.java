@@ -6,9 +6,29 @@ import java.util.*;
 
 public class Solution15 {
     public static void main(String[] args) {
-        Solution s =new Solution();
+        Solution15 s =new Solution15();
         int[] stones =new int[]{2,2};
+        System.out.println(s.a(new int[]{1, 2, 3, 4, 5, 6, 7,7}));
 
+    }
+    public int a(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>(); //存数字，以及数字出现过最近一次的下标
+        int l = 0, r = 0, res = 0;
+        while (r < nums.length) {
+            if (!map.containsKey(nums[r])) { // 如果不含nums[r]直接加入hashmap
+                map.put(nums[r], r);
+            }else{
+                //因为每次都取了最大的值，如果nums[r]在hashmap中出现了，那么就把l更新位置就可以了。
+                //我们每次只需要比较r-l的最大值。
+                //如果遇到已经出现当前nums[r]已经出现过了，那么把l变为上次nums[r]出现的位置+1
+                l = map.get(nums[r]) + 1;
+                //更新nums[r]出现的位置为r
+                map.put(nums[r], r);
+            }
+            r++;
+            res = Math.max(res, r - l);
+        }
+        return res;
     }
     public int eraseOverlapIntervals(int[][] intervals) {
         if(intervals.length==0) return 0;
