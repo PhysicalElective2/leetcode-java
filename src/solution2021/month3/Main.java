@@ -7,6 +7,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Object o=new Object();
+        o.hashCode();
+        o.equals(new Object());
+//        new String().equals();
+        StringBuilder s=new StringBuilder();
+        s.equals(new Object());
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
 

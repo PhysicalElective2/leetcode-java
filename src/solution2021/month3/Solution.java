@@ -12,6 +12,8 @@ import java.util.*;
 public class Solution{
     public static void main(String[] args) {
         LRUCache l =new LRUCache(2);
+        Integer i =10;
+        i.hashCode();
         l.put(1,1);
         l.put(2,2);
         l.get(1);
