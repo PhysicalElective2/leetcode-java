@@ -14,11 +14,21 @@ public class Solution {
     public static void main(String[] args) {
         Solution s=new Solution();
         //System.out.println(s.massage(new int[]{1,2,3,4}));
-        String[] strings =new String[]{""};
-        int[][] res =s.multiSearch("abc",strings);
-        for(int[] i:res){
-            System.out.println(Arrays.toString(i));
+        int[] ints =new int[]{1,1,2};
+        System.out.println(s.removeDuplicates(ints));
+    }
+    public int removeDuplicates(int[] nums) {
+        if(nums.length<=1) return nums.length;
+        int res=0;
+        for(int i=1;i<nums.length;i++)
+        {
+            if(nums[i]==nums[res]){
+                continue;
+            }else{
+                nums[++res]=nums[i];
+            }
         }
+        return res+1;
     }
     public int[][] multiSearch(String big, String[] smalls) {
         int n=smalls.length;
