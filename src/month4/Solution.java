@@ -3,6 +3,7 @@ package month4;
 import tools.TreeNode;
 
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
 /**
@@ -15,7 +16,23 @@ public class Solution {
         Solution s=new Solution();
         //System.out.println(s.massage(new int[]{1,2,3,4}));
         int[] ints =new int[]{1,1,2};
+        ReentrantLock lock=new ReentrantLock(true);
+        lock.tryLock();
+        lock.lock();
         System.out.println(s.removeDuplicates(ints));
+    }
+    public int strStr(String haystack, String needle){
+        int n=haystack.length();
+        int m=needle.length();
+        if(m==0) return 0;
+        int[] pi =new int[m];
+//        for()
+        return 0;
+    }
+    public int numDecodings(String s) {
+        int res=0;
+        return res;
+
     }
     public int removeDuplicates(int[] nums) {
         if(nums.length<=1) return nums.length;

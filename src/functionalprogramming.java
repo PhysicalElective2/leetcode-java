@@ -1,8 +1,9 @@
+import solution2021.design.Node;
+
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class functionalprogramming {
     public static void main(String[] args) {
@@ -26,6 +27,22 @@ public class functionalprogramming {
         System.out.println(new ArrayList<Integer>().stream().filter(a -> a > 0).count());
 
 
+    }
+    public void maptoInt(){
+        IntSummaryStatistics i=new ArrayList<Integer>().stream().mapToInt(e->e).summaryStatistics();
+        i.getCount();
+    }
+    public void map(){
+        // map can return different struct but can not no return
+        List<Node> reslist=new ArrayList<>();
+        List<Integer> list =reslist.stream().map(e->{
+            return e.val;
+        }).collect(Collectors.toList());
+        int a=20;
+        a=10;
+        int finalA = a;
+        a+=10;
+        list.stream().map(e-> finalA).collect(Collectors.toList());
     }
     public  void useMap(HashMap<String,String> map){
         return;

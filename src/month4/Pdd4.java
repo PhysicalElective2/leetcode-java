@@ -1,5 +1,7 @@
 package month4;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Pdd4 {
@@ -7,9 +9,13 @@ public class Pdd4 {
         Scanner sc = new Scanner(System.in);
 //        int n = sc.nextInt();
 //        int m = sc.nextInt();
+
+        ArrayList<? extends Number> aa=new ArrayList<>();
+
         int n=10;
         int m=10;
         System.out.println(zeroNum(n, m));
+
 
     }
 
