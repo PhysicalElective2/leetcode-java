@@ -1,7 +1,5 @@
 package month4;
 
-import org.omg.PortableServer.LIFESPAN_POLICY_ID;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

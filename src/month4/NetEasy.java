@@ -1,6 +1,5 @@
 package month4;
 
-import solution2021.design.Node;
 import tools.ListNode;
 
 public class NetEasy {

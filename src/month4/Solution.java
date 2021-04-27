@@ -2,10 +2,7 @@ package month4;
 
 import tools.TreeNode;
 
-import java.net.InetAddress;
 import java.util.*;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.stream.Collectors;
 
 /**
  * @author shaoxi
@@ -28,6 +25,30 @@ public class Solution {
             t=t.right;
         }
     }
+    int res;
+    public int rangeSumBST(TreeNode root, int low, int high) {
+        if(root==null) return 0;
+        int res=0;
+        if(root.val>=low&&root.val<=high){
+            res+=root.val;
+        }
+        res+=rangeSumBST(root.left,low,high);
+        res+=rangeSumBST(root.right,low,high);
+        return res;
+
+    }
+
+    private int dfs(TreeNode root, int low, int high) {
+        if(root==null) return 0;
+        int res=0;
+        if(root.val>=low&&root.val<=high){
+            res+=root.val;
+        }
+        res+=dfs(root.left,low,high);
+        res+=dfs(root.right,low,high);
+        return res;
+    }
+
     public int findUnsortedSubarray(int[] nums) {
         int res=0;
         if(nums.length<=1) return res;

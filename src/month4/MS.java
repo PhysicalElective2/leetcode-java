@@ -1,7 +1,5 @@
 package month4;
 
-import jdk.nashorn.internal.ir.LiteralNode;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
