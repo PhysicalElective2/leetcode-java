@@ -10,8 +10,52 @@ import java.io.InputStreamReader;
  * @create 2021-04-18 10:09
  **/
 public class Meituan2 {
+    public static void main(String[] args) {
+        Boolean a=true;
+        System.out.println(System.identityHashCode(Boolean.TRUE));
+        Boolean b=false;
+        Boolean c=new Boolean(true);
+        Boolean d=new Boolean(false);
+        System.out.println(System.identityHashCode(a));
+        System.out.println(System.identityHashCode(b));
+        System.out.println(System.identityHashCode(c));
+        System.out.println(System.identityHashCode(d));
+        System.out.println();
+        a=!a;
+        b=!b;
+        c=!c;
+        d=!d;
+        System.out.println(System.identityHashCode(a));
+        System.out.println(System.identityHashCode(b));
+        System.out.println(System.identityHashCode(c));
+        System.out.println(System.identityHashCode(d));
+    }
+    // 回溯
+    int res;
+    public  int res(int[] nums,int n){
+        //求和 为sum
+        // 找到最长的 连续序列使得 和为 sum-n
 
-    public static void main(String[] args) throws IOException {
+        int sum =0;
+        for(int i:nums){
+            sum+=i;
+        }
+        int toSum =sum-n;
+        int i=0;
+        int j=1;
+        int nowSum=nums[0];
+        return sum;
+    }
+    public void dfs(int i,int j,int[] num,int n){
+        if(i>j){
+
+        }
+
+
+    }
+
+    public static void maidn(String[] args) throws IOException {
+        //this.hashCode();
         BufferedReader buf =new BufferedReader(new InputStreamReader(System.in));
         String s=buf.readLine();
         String[] s1=s.split(" ");

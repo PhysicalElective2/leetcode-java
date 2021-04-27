@@ -2,6 +2,7 @@ package month4;
 
 import tools.TreeNode;
 
+import java.net.InetAddress;
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
@@ -14,12 +15,79 @@ import java.util.stream.Collectors;
 public class Solution {
     public static void main(String[] args) {
         Solution s=new Solution();
-        //System.out.println(s.massage(new int[]{1,2,3,4}));
-        int[] ints =new int[]{1,1,2};
-        ReentrantLock lock=new ReentrantLock(true);
-        lock.tryLock();
-        lock.lock();
-        System.out.println(s.removeDuplicates(ints));
+        TreeNode t1 =new TreeNode(2);
+        TreeNode t2 =new TreeNode(1);
+        TreeNode t3 =new TreeNode(4);
+        TreeNode t4 =new TreeNode(3);
+        t1.left=t2;
+        t1.right=t3;
+        t3.left=t4;
+        TreeNode t=s.increasingBST(t1);
+        while (t.right!=null){
+            System.out.println(t.val);
+            t=t.right;
+        }
+    }
+    public int findUnsortedSubarray(int[] nums) {
+        int res=0;
+        if(nums.length<=1) return res;
+        return res;
+
+
+    }
+    public int shipWithinDays(int[] weights, int D) {
+        int left =Arrays.stream(weights).max().getAsInt();
+        int right =Arrays.stream(weights).sum();
+        while (left<right){
+            int mid =(left+right)/2;
+            int need =1;
+            int cur=0;
+            for(int w:weights){
+                if(cur+w>mid){
+                    ++need;
+                    cur=0;
+                }
+                cur+=w;
+            }
+            if(need<=D){
+                right=mid;
+            }else {
+                left=mid+1;
+            }
+        }
+        return left;
+
+    }
+
+
+    public int combinationSum4(int[] nums, int target) {
+        int[] dp=new int[target+1];
+        dp[0]=1;
+        for(int i=1;i<=target;i++){
+            for(int num:nums){
+                if(num<=i){
+                    dp[i] +=dp[i-num];
+                }
+            }
+        }
+        return dp[target];
+    }
+    private TreeNode resNode;
+    public TreeNode increasingBST(TreeNode root) {
+        TreeNode dummpyNode =new TreeNode(-1);
+        resNode =dummpyNode;
+        inOrder(root);
+        return dummpyNode.right;
+    }
+    public void inOrder(TreeNode treeNode){
+        if(treeNode==null) return;
+        inOrder(treeNode.left);
+
+        resNode.right=treeNode;
+        treeNode.left=null;
+        resNode=treeNode;
+
+        inOrder(treeNode.right);
     }
     public int strStr(String haystack, String needle){
         int n=haystack.length();

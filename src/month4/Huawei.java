@@ -89,9 +89,7 @@ public class Huawei {
                     res[i]+=num;
 
                 }
-
             }
-
         }
         for(int i=0;i<res.length;i++){
             System.out.print(res[i]);

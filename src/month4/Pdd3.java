@@ -3,22 +3,24 @@ package month4;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Date;
 
 // 第一题
 public class Pdd3 {
     public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        Pdd3 main3 = new Pdd3();
-        String s = bufferedReader.readLine();
-        int num = Integer.parseInt(s);
-        String s2 = bufferedReader.readLine();
-        String[] s1 = s2.split(" ");
-        int[] nums = new int[s1.length];
-        for (int i = 0; i < s1.length; i++) {
-            nums[i] = Integer.parseInt(s1[i]);
-        }
-        int res = main3.test3(nums);
-        System.out.println(res);
+        System.out.println(new Date());
+//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//        Pdd3 main3 = new Pdd3();
+//        String s = bufferedReader.readLine();
+//        int num = Integer.parseInt(s);
+//        String s2 = bufferedReader.readLine();
+//        String[] s1 = s2.split(" ");
+//        int[] nums = new int[s1.length];
+//        for (int i = 0; i < s1.length; i++) {
+//            nums[i] = Integer.parseInt(s1[i]);
+//        }
+//        int res = main3.test3(nums);
+//        System.out.println(res);
     }
 
     private int test3(int[] nums) {

@@ -2,6 +2,9 @@ package month4;
 
 import tools.ListNode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Test {
 
     public static void main(String[] args) {
@@ -17,6 +20,8 @@ public class Test {
         d.next=e;
         e.next=f;
         System.out.println(new Test().minusList(a,d));
+        HashMap<Integer,Integer> hash =new HashMap<>();
+        hash.put(1,0);
     }
 
     public ListNode minusList(ListNode minuendList, ListNode subtrahenList){
