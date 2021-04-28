@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Meituan {
+    public String val;
     public static void main(String[] args) {
         List<String> list = Stream.of("ffssf","ff","fff").filter(new Predicate<String>() {
             @Override

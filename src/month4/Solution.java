@@ -11,19 +11,9 @@ import java.util.*;
  **/
 public class Solution {
     public static void main(String[] args) {
-        Solution s=new Solution();
-        TreeNode t1 =new TreeNode(2);
-        TreeNode t2 =new TreeNode(1);
-        TreeNode t3 =new TreeNode(4);
-        TreeNode t4 =new TreeNode(3);
-        t1.left=t2;
-        t1.right=t3;
-        t3.left=t4;
-        TreeNode t=s.increasingBST(t1);
-        while (t.right!=null){
-            System.out.println(t.val);
-            t=t.right;
-        }
+        Meituan m=new Meituan();
+        System.out.println(m.val);
+
     }
     int res;
     public int rangeSumBST(TreeNode root, int low, int high) {
@@ -36,6 +26,22 @@ public class Solution {
         res+=rangeSumBST(root.right,low,high);
         return res;
 
+    }
+    public boolean judgeSquareSum(int c) {
+       long left =0;
+       long right =(long) Math.sqrt(c);
+       while (left<=right){
+           long sum =left*left+right*right;
+           if(sum==c){
+               return true;
+           }else if(sum>c){
+               right--;
+           }else {
+               left++;
+           }
+
+       }
+       return false;
     }
 
     private int dfs(TreeNode root, int low, int high) {
