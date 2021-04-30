@@ -10,10 +10,29 @@ import java.util.*;
  * @create 2021-04-15 21:05
  **/
 public class Solution {
+    public boolean canCross(int[] stones) {
+        boolean res=true;
+        return res;
+    }
+    public int singleNumber(int[] nums) {
+        int res=0;
+        for(int i=0;i<32;i++){
+            int total =0;
+            for(int num:nums){
+                total+=((num>>i)&1);
+            }
+            if(total%3!=0){
+                res|=(1<<i);
+            }
+        }
+        return  res;
+    }
+
+
+
     public static void main(String[] args) {
         Meituan m=new Meituan();
         System.out.println(m.val);
-
     }
     int res;
     public int rangeSumBST(TreeNode root, int low, int high) {
