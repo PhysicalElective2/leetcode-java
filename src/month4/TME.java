@@ -11,23 +11,11 @@ import java.util.Set;
  **/
 public class TME {
     public static void main(String[] args) {
-        Scanner sc =new Scanner(System.in);
-        int n=Integer.valueOf(sc.nextLine());
-        String[] nums =sc.nextLine().split("");
-
-        int index=0;
-        while (n-->0){
-            nums[index++]=sc.nextInt();
-        }
-        int res=getRes(nums);
-
-    }
-
-    private static int getRes(int[] nums) {
-        Set<Integer> set=new HashSet<>();
 
 
     }
+
+
 
 
 }

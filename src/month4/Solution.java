@@ -10,9 +10,102 @@ import java.util.*;
  * @create 2021-04-15 21:05
  **/
 public class Solution {
+    class Employee {
+        public int id;
+        public int importance;
+        public List<Integer> subordinates;
+    };
+    Map<Integer, Employee> map = new HashMap<Integer, Employee>();
+    public int getImportance(List<Employee> employees, int id) {
+        for (Employee employee : employees) {
+            map.put(employee.id, employee);
+        }
+        return dfs(id);
+    }
+    public void  dfs(char[][] grid,int r,int c){
+        int nr = grid.length;
+        int nc =grid[0].length;
+        if(r<0||r>=nr||c<0||c>=nc||grid[r][c]=='0'){
+            return;
+        }
+        grid[r][c]='0';
+        dfs(grid,r-1,c);
+        dfs(grid,r,c-1);
+        dfs(grid,r+1,c);
+        dfs(grid,r,c+1);
+    }
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+       List<Integer> list = new ArrayList<>();
+       return false;
+
+
+
+    }
+    public int numIslands(char[][] grid) {
+        if (grid == null||grid.length==0||grid[0].length==0) {
+            return 0;
+        }
+        int res=0;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[i].length;j++){
+                if(grid[i][j]=='1'){
+                    res++;
+                    dfs(grid,i,j);
+                }
+            }
+        }
+        return res;
+
+
+
+    }
+    public int dfs(int id) {
+        Employee employee = map.get(id);
+        int total = employee.importance;
+        List<Integer> subordinates = employee.subordinates;
+        for (int subId : subordinates) {
+            total += dfs(subId);
+        }
+        return total;
+    }
+
+    public int reverse(int x) {
+        int res=0;
+        while (x!=0){
+            if((res*10)/10 !=res){
+                res=0;
+                break;
+            }
+            res =res*10 + x%10;
+            x/=10;
+        }
+        return res;
+
+    }
+
+
+    public int leastBricks(List<List<Integer>> wall) {
+        Map<Integer,Integer> map =new HashMap();
+        for(List<Integer> w:wall){
+            int sum=0;
+            for(int i=0;i<w.size()-1;i++){
+                sum+=w.get(i);
+                map.put(sum,map.getOrDefault(sum,0)+1);
+            }
+        }
+        int max=0;
+        for(Integer i:map.values()){
+            max=Math.max(max,i);
+        }
+        return wall.size()-max;
+
+    }
     public boolean canCross(int[] stones) {
         boolean res=true;
+        boolean[] river=new boolean[stones.length];
+        river[0]=true;
         return res;
+
     }
     public int singleNumber(int[] nums) {
         int res=0;
