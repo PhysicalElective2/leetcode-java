@@ -8,33 +8,21 @@ package basic;
 public class QuickSort {
 
     public static void quickSort(int[] arr,int low,int high){
-
         int i,j,temp,t;
-
         if(low>high){
-
             return;
-
-        }                                                                                                                                                  i=low;
-
+        }
+        i=low;
         j=high;
 
         //temp就是基准位
-
         temp = arr[low];
-
         while (i<j){
-
             //先看右边，依次往左递减
-
             while (temp<=arr[j]&&i<j){
-
                 j--;
-
             }
-
             //再看左边，依次往右递增
-
             while (temp>=arr[i]&&i<j){
 
                 i++;

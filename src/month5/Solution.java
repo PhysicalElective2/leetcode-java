@@ -2,9 +2,7 @@ package month5;
 
 import tools.TreeNode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author shaoxi
@@ -12,6 +10,128 @@ import java.util.List;
  * @create 2021-05-06 10:02
  **/
 public class Solution {
+    class Trie {
+        static final int L =30;
+        Trie[] children =new Trie[2];
+        public void insert(int val){
+            Trie node =this;
+            for(int i=L-1;i>=0;--i){
+                int bit =(val>>i) & 1;
+                if(node.children[bit]==null){
+                    node.children[bit]=new Trie();
+                }
+                node =node.children[bit];
+            }
+        }
+        public int getMaxXor(int val){
+            int ans =0;
+            Trie node =this;
+            for(int i=L-1;i>=0;--i){
+                int bit =(val>>i)& 1;
+                if(node.children[bit^1]!=null){
+                    ans|=1<<i;
+                    bit ^=1;
+                }
+                node =node.children[bit];
+            }
+            return ans;
+        }
+
+    }
+    public int[] maximizeXor(int[] nums, int[][] queries) {
+        Arrays.sort(nums);
+        int numQ=queries.length;
+        int[][] newQ =new int[numQ][3];
+        for(int i=0;i<numQ;i++){
+            newQ[i][0] =queries[i][0];
+            newQ[i][1] =queries[i][1];
+            newQ[i][2] =i;
+        }
+        Arrays.sort(newQ, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[1]-o2[1];
+            }
+        });
+        int[] ans =new int[numQ];
+        Trie trie =new Trie();
+        int idx =0,n=nums.length;
+        for(int[] query:newQ){
+            int x =query[0], m=query[1],qid =query[2];
+            while (idx<n&&nums[idx]<=m){
+                trie.insert(nums[idx]);
+                ++idx;
+            }
+            if(idx==0){
+                ans[qid]=-1;
+            }else {
+                ans[qid]=trie.getMaxXor(x);
+            }
+        }
+        return ans;
+
+
+
+    }
+
+    public int maxUncrossedLines(int[] nums1, int[] nums2) {
+        int m=nums1.length;
+        int n=nums2.length;
+        int[][] dp =new int[m][n];
+        for(int i=1;i<=m;i++){
+            int num1=nums1[i-1];
+            for(int j=1;j<=n;j++){
+                int num2=nums2[j-1];
+                if(num1==num2){
+                    dp[i][j]=dp[i-1][j-1]+1;
+                }else {
+                    dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+    public int kthLargestValue(int[][] matrix, int k) {
+        int m= matrix.length;
+        int n= matrix[0].length;
+        int[][] pre =new int[m+1][n+1];
+        List<Integer> results =new ArrayList<>();
+        for(int i=1;i<=m;++i){
+            for(int j=1;j<=n;++j){
+                pre[i][j]=pre[i-1][j]^pre[i][j-1]^pre[i-1][j-1] ^ matrix[i-1][j-1];
+                results.add(pre[i][j]);
+            }
+        }
+        Collections.sort(results, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2-o1;
+            }
+        });
+        return results.get(k-1);
+
+    }
+    public List<String> topKFrequent(String[] words, int k) {
+        List<String> res=new ArrayList<>();
+        Map<String,Integer> cnt =new HashMap<>();
+        for(String word:words){
+            cnt.put(word,cnt.getOrDefault(word,0)+1);
+        }
+        for(Map.Entry<String,Integer> entry:cnt.entrySet()){
+            res.add(entry.getKey());
+        }
+        Collections.sort(res, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return  cnt.get(o1)==cnt.get(o2)?  o1.compareTo(o2):cnt.get(o2)-cnt.get(o1);
+            }
+        });
+        return  res.subList(0,k);
+
+
+
+    }
+
     public int[] xorQueries(int[] arr, int[][] queries) {
         int n= arr.length;
         int[] xors =new int[n+1];
