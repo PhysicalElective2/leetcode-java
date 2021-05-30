@@ -4,6 +4,26 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Solution {
+    public boolean isPowerOfTwo(int n) {
+        while (n%2==0&&n>0){
+            n >>= 1;
+        }
+        return n==1;
+    }
+    public int totalHammingDistance(int[] nums) {
+        int ans =0;
+        int n=nums.length;
+        for(int i=0;i<30;++i){
+            int c =0;
+            for(int val:nums){
+                c+=(val>>i) &1;
+            }
+            ans+=c *(n-c);
+        }
+        return ans;
+
+    }
+
     public List<Integer> largestDivisibleSubset(int[] nums) {
         int len = nums.length;
          Arrays.sort(nums);

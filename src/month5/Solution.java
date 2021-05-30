@@ -10,6 +10,53 @@ import java.util.*;
  * @create 2021-05-06 10:02
  **/
 public class Solution {
+    public int strangePrinter(String s) {
+        return 0;
+
+
+
+    }
+    public String get(String s){
+        Character[] characters=new Character[s.length()];
+        int i=0;
+        int j=characters.length-1;
+        while (i<=j){
+
+        }
+        return null;
+
+    }
+    public String reverseParentheses(String s) {
+        int n =s.length();
+        int[] pair = new int[n];
+        Deque<Integer> stack =new LinkedList<>();
+        for(int i=0;i<n;i++){
+            if(s.charAt(i)=='('){
+                stack.push(i);
+            }else if(s.charAt(i)==')'){
+                int j=stack.pop();
+                pair[i]=j;
+                pair[j]=i;
+
+            }
+
+        }
+        StringBuffer sb =new StringBuffer();
+        int index =0;
+        int step =1;
+        while (index<n){
+            if(s.charAt(index)=='('||s.charAt(index)==')'){
+                index=pair[index];
+                step=-step;
+            }else {
+                sb.append(s.charAt(index));
+            }
+            index+=step;
+
+        }
+        return sb.toString();
+
+    }
     class Trie {
         static final int L =30;
         Trie[] children =new Trie[2];
