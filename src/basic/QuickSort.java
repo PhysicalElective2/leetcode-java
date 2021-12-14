@@ -43,9 +43,11 @@ public class QuickSort {
 
         }
         //最后将基准为与i和j相等位置的数字交换
-
+        // arr[i] 就是小于等于temp 的
         arr[low] = arr[i];
-
+        System.out.println("low:"+arr[low]);
+        System.out.println("temp:"+temp);
+        System.out.println();
         arr[i] = temp;
 
         //递归调用左半数组
